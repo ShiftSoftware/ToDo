@@ -9,6 +9,7 @@
   <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly" Version="7.0.4" />
     <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly.DevServer" Version="7.0.4" PrivateAssets="all" />
+    <PackageReference Include="ShiftSoftware.ShiftBlazor" Version="1.0.18-alpha" />
   </ItemGroup>
 
   <ItemGroup>
@@ -17,7 +18,11 @@
 
   <ItemGroup>
     <Folder Include="Services\" />
-    <Folder Include="Shared\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="Pages\_ToDo\ToDoForm.razor" />
+    <None Include="Pages\_ToDo\ToDoList.razor" />
   </ItemGroup>
 
 </Project>

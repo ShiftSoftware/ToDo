@@ -1,0 +1,8 @@
+﻿@using ToDo.Web.Pages._ToDo;
+<MudNavMenu>
+    <MudNavLink Href="@($"/{nameof(ToDoList)}")" Match="NavLinkMatch.All" Icon="@Icons.Material.Outlined.Task">To Do</MudNavLink>
+</MudNavMenu>
+
+@code {
+    [Parameter] public bool isDrawerOpen { get; set; }
+}

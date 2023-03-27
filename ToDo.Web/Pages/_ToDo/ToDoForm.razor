@@ -1,0 +1,43 @@
+﻿@attribute [Route($"/{nameof(ToDoForm)}/{{Key?}}")]
+
+@inherits ShiftForm<ToDoForm, ToDo.Shared.DTOs.ToDo.ToDoDTO>
+
+<ShiftEntityForm @bind-Mode="Mode"
+                 @bind-Value="TheItem"
+                 @ref="FormContainer"
+                 Action="ToDo"
+                 Title="ToDo"
+                 Settings="@FormSetting"
+                 @bind-Key="@Key"
+                 T="ToDo.Shared.DTOs.ToDo.ToDoDTO">
+
+    <MudTextField ReadOnly="@ReadOnly"
+                  Disabled="@Disabled"
+                  OnlyValidateIfDirty="true"
+                  Label="Title"
+                  @bind-Value="TheItem.Title"
+                  For="@(() => TheItem.Title)"
+                  Immediate="true" />
+
+    <MudTextField ReadOnly="@ReadOnly"
+                  Disabled="@Disabled"
+                  OnlyValidateIfDirty="true"
+                  Immediate="true"
+                  Label="Description"
+                  @bind-Value="TheItem.Description"
+                  For="@(() => TheItem.Description)" />
+
+    <MudSelect ReadOnly="@ReadOnly"
+               Disabled="@Disabled"
+               OnlyValidateIfDirty="true"
+               T="ToDo.Shared.Enums.ToDoStatus"
+               Label="Status"
+               AnchorOrigin="Origin.BottomCenter"
+               @bind-Value="TheItem.Status"
+               For="@(() => TheItem.Status)">
+        <MudSelectItem Value="@(ToDo.Shared.Enums.ToDoStatus.New)" />
+        <MudSelectItem Value="@(ToDo.Shared.Enums.ToDoStatus.InProgress)" />
+        <MudSelectItem Value="@(ToDo.Shared.Enums.ToDoStatus.Completed)" />
+    </MudSelect>
+</ShiftEntityForm>
+

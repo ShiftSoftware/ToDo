@@ -1,0 +1,17 @@
+﻿@attribute [Route($"/{nameof(ToDoList)}")]
+
+@using Syncfusion.Blazor.Grids
+@using ToDo.Shared.DTOs.ToDo
+
+<ShiftList Action="/ToDo"
+           Title="ToDo List"
+           T="ToDoListDTO"
+           ComponentType="typeof(ToDoForm)"
+           EnablePdfExport
+           AutoGenerateColumns="false"
+           EnableCsvExcelExport>
+    <ColumnTemplate>
+        <GridColumn HeaderText="Title" Field="@nameof(ToDoListDTO.Title)" />
+        <GridColumn HeaderText="Description" Field="@nameof(ToDoListDTO.Description)" />
+    </ColumnTemplate>
+</ShiftList>
