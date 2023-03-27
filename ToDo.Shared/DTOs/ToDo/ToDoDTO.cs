@@ -1,0 +1,14 @@
+﻿using ShiftSoftware.ShiftEntity.Model.Dtos;
+using System.Text.Json.Serialization;
+using ToDo.Shared.Enums;
+
+namespace ToDo.Shared.DTOs.ToDo;
+
+public class ToDoDTO : ShiftEntityDTO
+{
+    public string Title { get; set; } = default!;
+    public string Description { get; set; } = default!;
+
+    [JsonConverter(typeof(JsonStringEnumConverter))]
+    public ToDoStatus Status { get; set; }
+}
