@@ -1,4 +1,5 @@
-﻿using ToDo.Shared.DTOs.ToDo;
+﻿using ShiftFrameworkTestingTools;
+using ToDo.Shared.DTOs.ToDo;
 using ToDo.Shared.Enums;
 
 namespace ToDo.Test.Tests.ToDo;
@@ -18,29 +19,16 @@ public class Basic : BasicTest<ToDoDTO, ToDoListDTO>
 
     }
 
-    public async Task<ToDoDTO> PostOrPut(long? ID, string title, string description, ToDoStatus status)
-    {
-        var dto = new ToDoDTO
-        {
-            Title = title,
-            Description = description,
-            Status = status
-        };
-
-        if (ID == null)
-            return await base.Post(dto);
-        else
-            return await base.Put(ID.Value, dto);
-    }
-
     [Fact(DisplayName = "01. Create"), TestPriority(1)]
     public async Task _01_Create()
     {
-        var item = await PostOrPut(
-            ID: null,
-            title: title,
-            description: description,
-            status: status
+        var item = await PostOrPut(null,
+            new ToDoDTO
+            {
+                Title = title,
+                Description = description,
+                Status = status
+            }
         );
 
         CreatedItemId = item.ID;
@@ -83,11 +71,13 @@ public class Basic : BasicTest<ToDoDTO, ToDoListDTO>
         var updatedDescription = $"{description} - Updated";
         var updatedStatus = ToDoStatus.InProgress;
 
-        var item = await PostOrPut(
-            ID: CreatedItemId,
-            title: updatedTitle,
-            description: updatedDescription,
-            status: updatedStatus
+        var item = await PostOrPut(CreatedItemId,
+            new ToDoDTO
+            {
+                Title = updatedTitle,
+                Description = updatedDescription,
+                Status = updatedStatus
+            }
         );
 
         CreatedItemId = item.ID;
