@@ -8,7 +8,7 @@ namespace ToDo.Test.Tests.ToDo;
 [Collection("API Collection")]
 public class Basic : BasicTest<ToDoDTO, ToDoListDTO>
 {
-    static long CreatedItemId;
+    static string CreatedItemId;
 
     static string title = "ToDo 1";
     static string description = "ToDo Item 1";
@@ -31,7 +31,7 @@ public class Basic : BasicTest<ToDoDTO, ToDoListDTO>
             }
         );
 
-        CreatedItemId = item.ID;
+        CreatedItemId = item.ID!;
 
         Assert.Multiple(
             () => Assert.Equal(title, item.Title),
@@ -79,8 +79,6 @@ public class Basic : BasicTest<ToDoDTO, ToDoListDTO>
                 Status = updatedStatus
             }
         );
-
-        CreatedItemId = item.ID;
 
         Assert.Multiple(
             () => Assert.Equal(updatedTitle, item.Title),

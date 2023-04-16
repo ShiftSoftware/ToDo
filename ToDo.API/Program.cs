@@ -2,6 +2,7 @@ using Microsoft.AspNetCore.OData;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.OData.Edm;
 using Microsoft.OData.ModelBuilder;
+using ShiftSoftware.ShiftEntity.Model.HashId;
 using ShiftSoftware.ShiftEntity.Web.Services;
 using ToDo.API.Data;
 using ToDo.API.Data.Repositories;
@@ -28,7 +29,10 @@ builder.Services
 .AddOData(opt =>
 {
     opt.Count().Filter().Expand().Select().OrderBy().SetMaxTop(1000)
-    .AddRouteComponents("odata", GetEdmModel());
+    .AddRouteComponents("odata", GetEdmModel(), services =>
+    {
+        services.RegisterOdataHashIdConverter("odata", GetEdmModel());
+    });
 });
 
 builder.Services.AddScoped<ToDoRepository>();
@@ -60,6 +64,8 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI();
 }
+
+HashId.RegisterHashId(app.Environment.IsDevelopment(), "kD2)@$9DBc,49$(92ghasld4", 5);
 
 #if DEBUG
 

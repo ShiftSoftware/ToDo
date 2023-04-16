@@ -1,6 +1,7 @@
 using Microsoft.AspNetCore.Components.Web;
 using Microsoft.AspNetCore.Components.WebAssembly.Hosting;
 using ShiftSoftware.ShiftBlazor.Extensions;
+using ShiftSoftware.ShiftEntity.Model.HashId;
 using ToDo.Web;
 
 var builder = WebAssemblyHostBuilder.CreateDefault(args);
@@ -11,6 +12,8 @@ var httpClient = new HttpClient
 {
     BaseAddress = new Uri(builder.Configuration!.GetValue<string>("BaseURL")!),
 };
+
+//HashId.RegisterHashId(true, "kD2)@$9DBc,49$(92ghasld4", 5);
 
 builder.Services.AddScoped(sp => httpClient);
 

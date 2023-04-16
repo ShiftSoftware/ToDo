@@ -1,6 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using MudBlazor.Extensions;
 using ShiftSoftware.ShiftEntity.Web;
 using ShiftSoftware.ShiftEntity.Web.Services;
 using ToDo.API.Data;
@@ -29,7 +28,7 @@ namespace ToDo.API.Controllers
                 ID = task.ID,
                 Title = task.Title,
                 Description = task.Description,
-                Status = task.Status.ToDescriptionString(),
+                Status = task.Status.ToString(),
             };
 
             var allTasks = (await this.db
@@ -41,7 +40,7 @@ namespace ToDo.API.Controllers
                     ID = x.ID,
                     Title = x.Title,
                     Description = x.Description,
-                    Status = x.Status.ToDescriptionString(),
+                    Status = x.Status.ToString(),
                 })
                 .ToList();
 
