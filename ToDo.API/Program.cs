@@ -65,7 +65,8 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 
-HashId.RegisterHashId(app.Environment.IsDevelopment(), "kD2)@$9DBc,49$(92ghasld4", 5);
+HashId.RegisterHashId(app.Environment.IsDevelopment());
+HashId.RegisterUserIdsHasher("onetwothree", 5);
 
 #if DEBUG
 

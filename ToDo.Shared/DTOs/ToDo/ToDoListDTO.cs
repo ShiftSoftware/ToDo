@@ -6,6 +6,8 @@ namespace ToDo.Shared.DTOs.ToDo;
 
 public class ToDoListDTO : ShiftEntityListDTO
 {
+    [_ToDoHashId]
+    public override string? ID { get; set; }
     public string Title { get; set; } = default!;
     public string Description { get; set; } = default!;
 
