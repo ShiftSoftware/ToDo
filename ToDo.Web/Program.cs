@@ -24,7 +24,7 @@ builder.Services.AddShiftServices(config =>
         options.BaseAddress = builder.Configuration!.GetValue<string>("BaseURL")!;
         options.ApiPath = "/api";
         options.ODataPath = "/odata";
-        options.UserListEndpoint = "http://localhost"; //ToDo: this parameter should be optional.
+        options.UserListEndpoint = "http://localhost:5088".AddUrlPath("odata/PublicUser"); //ToDo: this parameter should be optional.
     };
     config.SyncfusionLicense = builder.Configuration.GetValue<string>("SyncfusionLicense");
 });
