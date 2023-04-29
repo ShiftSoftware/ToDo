@@ -7,7 +7,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\ShiftEntity\ShiftEntityWeb\ShiftEntityWeb.csproj" />
     <ProjectReference Include="..\ToDo.Shared\ToDo.Shared.csproj" />
     <ProjectReference Include="..\ToDo.Web\ToDo.Web.csproj" />
   </ItemGroup>
