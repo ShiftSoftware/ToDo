@@ -66,7 +66,7 @@ if (app.Environment.IsDevelopment())
 }
 
 HashId.RegisterHashId(app.Environment.IsDevelopment());
-HashId.RegisterUserIdsHasher("onetwothree", 5);
+HashId.RegisterUserIdsHasher("k02iUHSb2ier9fiui02349AbfJEI", 5);
 
 #if DEBUG
 
