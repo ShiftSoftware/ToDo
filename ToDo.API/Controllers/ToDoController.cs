@@ -52,6 +52,9 @@ namespace ToDo.API.Controllers
                 .AddDataList("AllTasks", "AllTasksDataBand", allTasks.ToList<object>())
                 .AddDataList("Statuses", "StatusDataBand", statuses.ToList<object>())
                 .AddDataList("AllTasks", "AllTasksByStatusDataBand", allTasks.ToList<object>(), 3, "[Statuses.Name] == [AllTasks.Status]")
+                .HideDataBandIfEmpty("AllTasksDataBand", "AllTasksHeaderBand")
+                .HideDataBandIfEmpty("StatusDataBand", "StatusHeaderBand")
+                .HideDataBandIfEmpty("AllTasksByStatusDataBand")
                 .GetPDFFile(report =>
                 {
                     (report.FindObject("Cell1") as FastReport.Table.TableCell)!.FillColor = System.Drawing.Color.FromArgb(255, 255, 0, 0);
