@@ -47,6 +47,8 @@ namespace ToDo.Test
 
         protected override void ConfigureClient(HttpClient client)
         {
+            client.DefaultRequestHeaders.Add("timezone-offset", TimeZoneInfo.Local.BaseUtcOffset.ToString("c"));
+
             base.ConfigureClient(client);
         }
 

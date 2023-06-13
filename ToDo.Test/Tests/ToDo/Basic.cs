@@ -4,11 +4,11 @@ using ToDo.Shared.Enums;
 
 namespace ToDo.Test.Tests.ToDo;
 
-[TestCaseOrderer("ToDo.Test.PriorityOrderer", "ToDo.Test")]
+[TestCaseOrderer(nameof(ShiftFrameworkTestingTools) + "." + nameof(PriorityOrderer), nameof(ShiftFrameworkTestingTools))]
 [Collection("API Collection")]
 public class Basic : BasicTest<ToDoDTO, ToDoListDTO>
 {
-    static string CreatedItemId;
+    static ToDoDTO CreatedItem = default!;
 
     static string title = "ToDo 1";
     static string description = "ToDo Item 1";
@@ -19,19 +19,27 @@ public class Basic : BasicTest<ToDoDTO, ToDoListDTO>
 
     }
 
+    public static ToDoDTO GenerateSampleDTO(DateTime? lastSaveDate = null)
+    {
+        var dto = new ToDoDTO
+        {
+            Title = title,
+            Description = description,
+            Status = status
+        };
+
+        if (lastSaveDate is not null)
+            dto.LastSaveDate = lastSaveDate.Value;
+
+        return dto;
+    }
+
     [Fact(DisplayName = "01. Create"), TestPriority(1)]
     public async Task _01_Create()
     {
-        var item = await PostOrPut(null,
-            new ToDoDTO
-            {
-                Title = title,
-                Description = description,
-                Status = status
-            }
-        );
+        var item = await PostOrPut(null, GenerateSampleDTO());
 
-        CreatedItemId = item.ID!;
+        CreatedItem = item!;
 
         Assert.Multiple(
             () => Assert.Equal(title, item.Title),
@@ -59,7 +67,7 @@ public class Basic : BasicTest<ToDoDTO, ToDoListDTO>
     [Fact(DisplayName = "04. Get"), TestPriority(4)]
     public async Task _04_Get()
     {
-        var item = await base.Get(CreatedItemId);
+        var item = await base.Get(CreatedItem.ID!);
 
         Assert.Equal(title, item.Title);
     }
@@ -67,30 +75,25 @@ public class Basic : BasicTest<ToDoDTO, ToDoListDTO>
     [Fact(DisplayName = "05. Put"), TestPriority(5)]
     public async Task _05_Put()
     {
-        var updatedTitle = $"{title} - Updated";
-        var updatedDescription = $"{description} - Updated";
-        var updatedStatus = ToDoStatus.InProgress;
+        var dto = GenerateSampleDTO(CreatedItem.LastSaveDate);
 
-        var item = await PostOrPut(CreatedItemId,
-            new ToDoDTO
-            {
-                Title = updatedTitle,
-                Description = updatedDescription,
-                Status = updatedStatus
-            }
-        );
+        dto.Title = $"{title} - Updated";
+        dto.Description = $"{description} - Updated";
+        dto.Status = ToDoStatus.InProgress;
+
+        var item = await PostOrPut(CreatedItem.ID!, dto);
 
         Assert.Multiple(
-            () => Assert.Equal(updatedTitle, item.Title),
-            () => Assert.Equal(updatedDescription, item.Description),
-            () => Assert.Equal(updatedStatus, item.Status)
+            () => Assert.Equal(dto.Title, item.Title),
+            () => Assert.Equal(dto.Description, item.Description),
+            () => Assert.Equal(dto.Status, item.Status)
         );
     }
 
     [Fact(DisplayName = "07. Get Revisions"), TestPriority(6)]
     public async Task _07_GetRevisions()
     {
-        var revisions = await base.RevisionList(CreatedItemId);
+        var revisions = await base.RevisionList(CreatedItem.ID!);
 
         Assert.True(revisions.Count > 0);
     }
@@ -98,7 +101,7 @@ public class Basic : BasicTest<ToDoDTO, ToDoListDTO>
     [Fact(DisplayName = "07. Delete"), TestPriority(7)]
     public async Task _07_Delete()
     {
-        var item = await base.Delete(CreatedItemId);
+        var item = await base.Delete(CreatedItem.ID!);
 
         Assert.True(item.IsDeleted);
     }

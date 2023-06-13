@@ -1,52 +1,71 @@
-using Microsoft.AspNetCore.OData;
+using Microsoft.AspNetCore.Localization;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.OData.Edm;
-using Microsoft.OData.ModelBuilder;
-using ShiftSoftware.ShiftEntity.Model.HashId;
+using ShiftSoftware.ShiftEntity.Web.Extensions;
 using ShiftSoftware.ShiftEntity.Web.Services;
+using System.Globalization;
 using ToDo.API.Data;
 using ToDo.API.Data.Repositories;
 using ToDo.Shared.DTOs.ToDo;
 
-static IEdmModel GetEdmModel()
-{
-    var builder = new ODataConventionModelBuilder();
-
-    builder.EntitySet<ToDoListDTO>("ToDo");
-
-    return builder.GetEdmModel();
-}
-
 var builder = WebApplication.CreateBuilder(args);
 
 builder.Services
+    .AddLocalization()
+    .AddHttpContextAccessor()
     .AddDbContext<DB>(x => x.UseSqlServer(builder.Configuration.GetConnectionString("SQLServer")))
     .AddControllers()
-    .AddJsonOptions(options =>
+    .AddShiftEntity(o =>
     {
-        options.JsonSerializerOptions.PropertyNamingPolicy = null;
-    })
-.AddOData(opt =>
-{
-    opt.Count().Filter().Expand().Select().OrderBy().SetMaxTop(1000)
-    .AddRouteComponents("odata", GetEdmModel(), services =>
-    {
-        services.RegisterOdataHashIdConverter("odata", GetEdmModel());
-    });
-});
+        o.WrapValidationErrorResponseWithShiftEntityResponse(true);
 
-builder.Services.AddScoped<ToDoRepository>();
+        o.ODatat.DefaultOptions();
+        var b = o.ODatat.ODataConvention;
+
+        b.EntitySet<ToDoListDTO>("ToDo");
+        
+        o.HashId.RegisterHashId(builder.Configuration.GetValue<bool>("Settings:HashIdSettings:AcceptUnencodedIds"));
+
+        //b.EntitySet<CustomerAttributeListDTO>("Occupation");
+        //b.EntitySet<CustomerAttributeListDTO>("JobTitle");
+        //b.EntitySet<CustomerAttributeListDTO>("MaritalStatus");
+
+        //o.HashId.RegisterUserIdsHasher(
+        //    builder.Configuration.GetValue<string?>("Settings:UserHashId:Salt")!, 
+        //    builder.Configuration.GetValue<int>("Settings:UserHashId:MinHashLength"),
+        //    builder.Configuration.GetValue<string>("Settings:UserHashId:Alphabet") is string alphabet ? (string.IsNullOrWhiteSpace(alphabet) ? null : alphabet) : null
+        //);
+    });
+
 
 builder.Services.AddSwaggerGen(c =>
 {
     c.DocInclusionPredicate(SwaggerService.DocInclusionPredicate);
 });
 
+builder.Services.AddScoped<ToDoRepository>();
+
+
 #if DEBUG
 builder.Services.AddRazorPages();
 #endif
 
 var app = builder.Build();
+
+var supportedCultures = new List<CultureInfo>
+{
+    new CultureInfo("en-US"),
+    new CultureInfo("ar-IQ"),
+    new CultureInfo("ku-IQ"),
+};
+
+app.UseRequestLocalization(options =>
+{
+    options.SetDefaultCulture("en-US");
+    options.SupportedCultures = supportedCultures;
+    options.SupportedUICultures = supportedCultures;
+    options.RequestCultureProviders = new List<IRequestCultureProvider> { new AcceptLanguageHeaderRequestCultureProvider() };
+    options.ApplyCurrentCultureToResponseHeaders = true;
+});
 
 #if DEBUG
 
@@ -64,9 +83,6 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI();
 }
-
-HashId.RegisterHashId(app.Environment.IsDevelopment());
-HashId.RegisterUserIdsHasher("k02iUHSb2ier9fiui02349AbfJEI", 5);
 
 #if DEBUG
 

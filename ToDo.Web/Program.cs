@@ -1,7 +1,9 @@
 using Microsoft.AspNetCore.Components.Web;
 using Microsoft.AspNetCore.Components.WebAssembly.Hosting;
 using ShiftSoftware.ShiftBlazor.Extensions;
+using ShiftSoftware.ShiftBlazor.Services;
 using ShiftSoftware.ShiftEntity.Model.HashId;
+using System.Globalization;
 using ToDo.Web;
 
 var builder = WebAssemblyHostBuilder.CreateDefault(args);
@@ -14,6 +16,8 @@ var httpClient = new HttpClient
 };
 
 //HashId.RegisterHashId(false);
+
+httpClient.DefaultRequestHeaders.Add("timezone-offset", TimeZoneInfo.Local.BaseUtcOffset.ToString("c"));
 
 builder.Services.AddScoped(sp => httpClient);
 
@@ -29,4 +33,17 @@ builder.Services.AddShiftServices(config =>
     config.SyncfusionLicense = builder.Configuration.GetValue<string>("SyncfusionLicense");
 });
 
-await builder.Build().RunAsync();
+var host = builder.Build();
+
+
+var setMan = host.Services.GetRequiredService<SettingManager>();
+
+var culture = setMan.GetCulture();
+
+CultureInfo.DefaultThreadCurrentCulture = culture;
+CultureInfo.DefaultThreadCurrentUICulture = culture;
+
+//await host.RefreshTokenAsync(50);
+
+await host.RunAsync();
+

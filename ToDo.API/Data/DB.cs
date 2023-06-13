@@ -1,5 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using ShiftSoftware.ShiftEntity.Core;
+using ShiftSoftware.EFCore.SqlServer;
 
 namespace ToDo.API.Data
 {
