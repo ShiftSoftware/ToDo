@@ -1,28 +1,50 @@
-﻿@inherits ShiftMainLayout
+﻿@using ShiftSoftware.ShiftBlazor.Services
+@using ShiftSoftware.ShiftIdentity.Blazor.Services
+
+@inherits ShiftMainLayout
 @inject NavigationManager navigationManager
+@inject SettingManager SettingManager
+@inject IIdentityStore tokenStore
 
-<AddMudProviders/>
+<MudRTLProvider RightToLeft="SettingManager.Settings.CurrentLanguage?.RTL ?? false">
 
-<MudLayout>
+    <AddMudProviders />
 
-    <MudAppBar>
-        <MudIconButton Icon="@Icons.Material.Filled.Menu" Color="Color.Inherit" Edge="Edge.Start" OnClick="@((e) => DrawerToggle())" />
-        <MudLink Href="/"><MudText Style="color: #fff;">ToDo App</MudText></MudLink>
+    <MudLayout>
 
-        <MudSpacer />
-    </MudAppBar>
+        <MudAppBar>
+            <MudIconButton Icon="@Icons.Material.Filled.Menu" Color="Color.Inherit" Edge="Edge.Start" OnClick="@((e) => DrawerToggle())" />
+            <MudLink Href="/"><MudText Style="color: #fff;">K Energy</MudText></MudLink>
 
-    <MudDrawer @bind-Open="@_drawerOpen" ClipMode="DrawerClipMode.Docked" Elevation="1" Variant="@DrawerVariant.Mini" Breakpoint="Breakpoint.Lg" OpenMiniOnHover="true">
-        <NavMenu isDrawerOpen="_drawerOpen" />
-    </MudDrawer>
+            <MudSpacer />
 
-    <MudMainContent>
-        <MudContainer MaxWidth="MaxWidth.ExtraLarge" Style="padding-block: 24px;">
-            @Body
-        </MudContainer>
-    </MudMainContent>
+            <LanguageSwitcher />
 
-</MudLayout>
+            <AuthorizeView>
+                <MudButton OnClick="Logout"
+                           Variant="Variant.Text"
+                           StartIcon="@Icons.Material.Filled.Logout"
+                           Color="Color.Inherit">
+                    @*@localizer["Logout"]*@
+                    Logout
+                </MudButton>
+            </AuthorizeView>
+
+        </MudAppBar>
+
+        <MudDrawer @bind-Open="@_drawerOpen" ClipMode="DrawerClipMode.Docked" Elevation="1" Variant="@DrawerVariant.Mini" Breakpoint="Breakpoint.Lg" OpenMiniOnHover="true">
+            <NavMenu isDrawerOpen="_drawerOpen" />
+        </MudDrawer>
+
+        <MudMainContent>
+            <MudContainer MaxWidth="MaxWidth.ExtraLarge" Style="padding-block: 24px;">
+                @Body
+            </MudContainer>
+        </MudMainContent>
+
+    </MudLayout>
+
+</MudRTLProvider>
 
 @code {
     bool _drawerOpen = false;
@@ -30,5 +52,12 @@
     void DrawerToggle()
     {
         _drawerOpen = !_drawerOpen;
+    }
+
+    private async Task Logout()
+    {
+        await tokenStore.RemoveTokenAsync();
+
+        navigationManager.NavigateTo("/", true);
     }
 }

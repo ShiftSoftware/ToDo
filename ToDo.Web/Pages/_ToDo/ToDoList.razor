@@ -1,4 +1,6 @@
-﻿@attribute [Route($"/{nameof(ToDoList)}")]
+﻿@attribute [Authorize]
+
+@attribute [Route($"/{nameof(ToDoList)}")]
 
 @using Syncfusion.Blazor.Grids
 @using ToDo.Shared.DTOs.ToDo

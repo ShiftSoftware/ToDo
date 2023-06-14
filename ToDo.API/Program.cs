@@ -6,8 +6,18 @@ using System.Globalization;
 using ToDo.API.Data;
 using ToDo.API.Data.Repositories;
 using ToDo.Shared.DTOs.ToDo;
+using ShiftSoftware.ShiftIdentity.AspNetCore.Extensions;
+using ShiftSoftware.ShiftIdentity.Core.Models;
+using ShiftSoftware.ShiftIdentity.Core.DTOs;
 
 var builder = WebApplication.CreateBuilder(args);
+
+var fakeUser = new TokenUserDataDTO
+{
+    FullName = "Fake User",
+    ID = 1,
+    Username = "fake-user"
+};
 
 builder.Services
     .AddLocalization()
@@ -22,20 +32,35 @@ builder.Services
         var b = o.ODatat.ODataConvention;
 
         b.EntitySet<ToDoListDTO>("ToDo");
-        
+
         o.HashId.RegisterHashId(builder.Configuration.GetValue<bool>("Settings:HashIdSettings:AcceptUnencodedIds"));
 
-        //b.EntitySet<CustomerAttributeListDTO>("Occupation");
-        //b.EntitySet<CustomerAttributeListDTO>("JobTitle");
-        //b.EntitySet<CustomerAttributeListDTO>("MaritalStatus");
-
-        //o.HashId.RegisterUserIdsHasher(
-        //    builder.Configuration.GetValue<string?>("Settings:UserHashId:Salt")!, 
-        //    builder.Configuration.GetValue<int>("Settings:UserHashId:MinHashLength"),
-        //    builder.Configuration.GetValue<string>("Settings:UserHashId:Alphabet") is string alphabet ? (string.IsNullOrWhiteSpace(alphabet) ? null : alphabet) : null
-        //);
-    });
-
+        o.HashId.RegisterUserIdsHasher();
+    })
+    .AddShiftIdentity("ToDo", "one-two-three-four-five-six-seven-eight.one-two-three-four-five-six-seven-eight")
+    .AddFakeIdentityEndPoints(
+        new TokenSettingsModel
+        {
+            Issuer = "ToDo",
+            Key = "one-two-three-four-five-six-seven-eight.one-two-three-four-five-six-seven-eight",
+            ExpireSeconds = 60
+        },
+        fakeUser,
+        new ShiftSoftware.ShiftIdentity.Core.DTOs.App.AppDTO
+        {
+            AppId = "to-do-dev",
+            DisplayName = "ToDo Dev",
+            RedirectUri = "http://localhost:5028/Auth/Token"
+        },
+        "123a",
+        new string[] {
+            """
+                {
+                    "ToDo": [1,2,3,4]
+                }
+            """
+        }
+    );
 
 builder.Services.AddSwaggerGen(c =>
 {
@@ -50,6 +75,8 @@ builder.Services.AddRazorPages();
 #endif
 
 var app = builder.Build();
+
+app.AddFakeIdentityEndPoints();
 
 var supportedCultures = new List<CultureInfo>
 {
