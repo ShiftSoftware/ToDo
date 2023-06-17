@@ -5,6 +5,8 @@ using ShiftSoftware.ShiftBlazor.Extensions;
 using ShiftSoftware.ShiftBlazor.Services;
 using ShiftSoftware.ShiftIdentity.Blazor.Extensions;
 using ShiftSoftware.ShiftIdentity.Blazor.Handlers;
+using ShiftSoftware.ShiftIdentity.Dashboard.Blazor.Extensions;
+using ShiftSoftware.TypeAuth.Blazor.Extensions;
 using System.Globalization;
 using ToDo.Web;
 
@@ -42,6 +44,16 @@ builder.Services.AddShiftServices(config =>
 });
 
 builder.Services.AddShiftIdentity("to-do-dev", baseUrl, baseUrl);
+
+builder.Services.AddShiftIdentityDashboardBlazor(x =>
+{
+    x.LogoPath = "/img/shift-full.png";
+    x.Title = "ToDo";
+});
+
+builder.Services.AddTypeAuth(x =>
+    x.AddActionTree<ShiftSoftware.ShiftIdentity.Core.ShiftIdentityActions>()
+);
 
 var host = builder.Build();
 

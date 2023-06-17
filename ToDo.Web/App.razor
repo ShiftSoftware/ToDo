@@ -1,8 +1,9 @@
 ﻿﻿@using ShiftSoftware.ShiftIdentity.Blazor
 @using ShiftSoftware.ShiftIdentity.Blazor.Components
+@using ShiftSoftware.ShiftIdentity.Dashboard.Blazor;
 
 <CascadingAuthenticationState>
-    <Router AppAssembly="@typeof(App).Assembly" AdditionalAssemblies="new[] {typeof(ShiftIdentityBlazorMaker).Assembly}">
+    <Router AppAssembly="@typeof(App).Assembly" AdditionalAssemblies="new[] {typeof(ShiftIdentityBlazorMaker).Assembly, typeof(ShiftIdentityDashboarBlazorMaker).Assembly}">
         <Found Context="routeData">
             <AuthorizeRouteView RouteData="@routeData" DefaultLayout="@typeof(MainLayout)">
                 <NotAuthorized>

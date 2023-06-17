@@ -1,9 +1,9 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using ShiftSoftware.EFCore.SqlServer;
+using ShiftSoftware.ShiftIdentity.Dashboard.AspNetCore.Data;
 
 namespace ToDo.API.Data
 {
-    public class DB : ShiftDbContext
+    public class DB : ShiftIdentityDB
     {
         public DB(DbContextOptions option) : base(option)
         {

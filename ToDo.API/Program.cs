@@ -9,6 +9,9 @@ using ToDo.Shared.DTOs.ToDo;
 using ShiftSoftware.ShiftIdentity.AspNetCore.Extensions;
 using ShiftSoftware.ShiftIdentity.Core.Models;
 using ShiftSoftware.ShiftIdentity.Core.DTOs;
+using ShiftSoftware.ShiftIdentity.Dashboard.AspNetCore.Extentsions;
+using ShiftSoftware.TypeAuth.AspNetCore.Extensions;
+using ShiftSoftware.ShiftIdentity.Core;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -24,43 +27,73 @@ builder.Services
     .AddHttpContextAccessor()
     .AddDbContext<DB>(x => x.UseSqlServer(builder.Configuration.GetConnectionString("SQLServer")))
     .AddControllers()
-    .AddShiftEntity(o =>
+    .AddShiftEntity(x =>
     {
-        o.WrapValidationErrorResponseWithShiftEntityResponse(true);
-
-        o.ODatat.DefaultOptions();
-        var b = o.ODatat.ODataConvention;
-
-        b.EntitySet<ToDoListDTO>("ToDo");
-
-        o.HashId.RegisterHashId(builder.Configuration.GetValue<bool>("Settings:HashIdSettings:AcceptUnencodedIds"));
-
-        o.HashId.RegisterUserIdsHasher();
+        x.WrapValidationErrorResponseWithShiftEntityResponse(true);
+        x.HashId.RegisterHashId(builder.Configuration.GetValue<bool>("Settings:HashIdSettings:AcceptUnencodedIds"));
+        x.HashId.RegisterUserIdsHasher();
     })
     .AddShiftIdentity("ToDo", "one-two-three-four-five-six-seven-eight.one-two-three-four-five-six-seven-eight")
-    .AddFakeIdentityEndPoints(
-        new TokenSettingsModel
+    .AddShiftIdentityDashboard<DB>(
+        new ShiftIdentityConfiguration
         {
-            Issuer = "ToDo",
-            Key = "one-two-three-four-five-six-seven-eight.one-two-three-four-five-six-seven-eight",
-            ExpireSeconds = 60
-        },
-        fakeUser,
-        new ShiftSoftware.ShiftIdentity.Core.DTOs.App.AppDTO
-        {
-            AppId = "to-do-dev",
-            DisplayName = "ToDo Dev",
-            RedirectUri = "http://localhost:5028/Auth/Token"
-        },
-        "123a",
-        new string[] {
-            """
-                {
-                    "ToDo": [1,2,3,4]
-                }
-            """
+            Token = new TokenSettingsModel
+            {
+                Audience = "ToDo",
+                ExpireSeconds = 600,
+                Issuer = "ToDo",
+                Key = "one-two-three-four-five-six-seven-eight.one-two-three-four-five-six-seven-eight",
+            },
+            Security = new SecuritySettingsModel
+            {
+                LockDownInMinutes = 0,
+                LoginAttemptsForLockDown = 1000000,
+                RequirePasswordChange = false
+            },
+            RefreshToken = new TokenSettingsModel
+            {
+                Audience = "ToDo",
+                ExpireSeconds = 600000,
+                Issuer = "ToDo",
+                Key = "one-two-three-four-five-six-seven-eight.one-two-three-four-five-six-seven-eight",
+            },
+            HashIdSettings = new HashIdSettings
+            {
+                AcceptUnencodedIds = true,
+                UserIdsSalt = "k02iUHSb2ier9fiui02349AbfJEI",
+                UserIdsMinHashLength = 5
+            },
         }
-    );
+    )
+    .AddOdata(x =>
+    {
+        x.DefaultOptions();
+        x.OdataEntitySet<ToDoListDTO>("ToDo");
+        x.RegisterShiftIdentityDashboardEntitySets();
+    });
+    //.AddFakeIdentityEndPoints(
+    //    new TokenSettingsModel
+    //    {
+    //        Issuer = "ToDo",
+    //        Key = "one-two-three-four-five-six-seven-eight.one-two-three-four-five-six-seven-eight",
+    //        ExpireSeconds = 60
+    //    },
+    //    fakeUser,
+    //    new ShiftSoftware.ShiftIdentity.Core.DTOs.App.AppDTO
+    //    {
+    //        AppId = "to-do-dev",
+    //        DisplayName = "ToDo Dev",
+    //        RedirectUri = "http://localhost:5028/Auth/Token"
+    //    },
+    //    "123a",
+    //    new string[] {
+    //        """
+    //            {
+    //                "ToDo": [1,2,3,4]
+    //            }
+    //        """
+    //    }
+    //);
 
 builder.Services.AddSwaggerGen(c =>
 {
@@ -69,6 +102,10 @@ builder.Services.AddSwaggerGen(c =>
 
 builder.Services.AddScoped<ToDoRepository>();
 
+builder.Services.AddTypeAuth((o) =>
+{
+    o.AddActionTree<ShiftIdentityActions>();
+});
 
 #if DEBUG
 builder.Services.AddRazorPages();
@@ -76,7 +113,9 @@ builder.Services.AddRazorPages();
 
 var app = builder.Build();
 
-app.AddFakeIdentityEndPoints();
+//app.AddFakeIdentityEndPoints();
+
+await app.SeedDBAsync(null, "OneTwo");
 
 var supportedCultures = new List<CultureInfo>
 {
