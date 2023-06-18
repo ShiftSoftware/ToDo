@@ -25,10 +25,6 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ShiftIdentity.Dashboard.Asp
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ShiftIdentity.Dashboard.Blazor", "..\ShiftIdentity\ShiftIdentity.Dashboard.Blazor\ShiftIdentity.Dashboard.Blazor.csproj", "{3CF4C562-6EB8-434D-8328-E6AF965219C4}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TypeAuth.Blazor", "..\TypeAuth\TypeAuth.Blazor\TypeAuth.Blazor.csproj", "{B35858CB-9F34-4C1B-B4D3-F0277DEE5E5F}"
-EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TypeAuth.Core", "..\TypeAuth\TypeAuth.Core\TypeAuth.Core.csproj", "{526A2E4D-4234-4C46-B98D-76E698D31A85}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -75,14 +71,6 @@ Global
 		{3CF4C562-6EB8-434D-8328-E6AF965219C4}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{3CF4C562-6EB8-434D-8328-E6AF965219C4}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{3CF4C562-6EB8-434D-8328-E6AF965219C4}.Release|Any CPU.Build.0 = Release|Any CPU
-		{B35858CB-9F34-4C1B-B4D3-F0277DEE5E5F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{B35858CB-9F34-4C1B-B4D3-F0277DEE5E5F}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{B35858CB-9F34-4C1B-B4D3-F0277DEE5E5F}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{B35858CB-9F34-4C1B-B4D3-F0277DEE5E5F}.Release|Any CPU.Build.0 = Release|Any CPU
-		{526A2E4D-4234-4C46-B98D-76E698D31A85}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{526A2E4D-4234-4C46-B98D-76E698D31A85}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{526A2E4D-4234-4C46-B98D-76E698D31A85}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{526A2E4D-4234-4C46-B98D-76E698D31A85}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
