@@ -6,7 +6,7 @@
 @inject SettingManager SettingManager
 @inject IIdentityStore tokenStore
 
-<MudRTLProvider RightToLeft="SettingManager.Settings.CurrentLanguage?.RTL ?? false">
+<MudRTLProvider RightToLeft="SettingManager.GetLanguage().RTL">
 
     <AddMudProviders />
 
