@@ -65,7 +65,7 @@ builder.Services
             },
         }
     )
-    .AddOdata(x =>
+    .AddShiftEntityOdata(x =>
     {
         x.DefaultOptions();
         x.OdataEntitySet<ToDoListDTO>("ToDo");

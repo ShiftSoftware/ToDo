@@ -12,15 +12,17 @@ namespace ToDo.API.Controllers
     public class ToDoController : ShiftEntityControllerAsync<ToDoRepository, Data.Entities.ToDo, ToDoListDTO, ToDoDTO>
     {
         private DB db;
-        public ToDoController(ToDoRepository repository, DB db) : base(repository)
+        ToDoRepository repository;
+        public ToDoController(ToDoRepository repository, DB db) : base()
         {
             this.db = db;
+            this.repository = repository;
         }
 
         [HttpGet("print/{ID}")]
         public async Task<ActionResult> Print(long ID)
         {
-            var task = await base.repository.FindAsync(ID);
+            var task = await repository.FindAsync(ID);
 
             //Data source fo Fast Report
             var data = new
