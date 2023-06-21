@@ -27,8 +27,4 @@
 	<ItemGroup>
 		<Folder Include="Reports\" />
 	</ItemGroup>
-
-	<Target Name="CopyPreCommitHook" BeforeTargets="Build" Condition="'$(IsCrossTargetingBuild)' != 'true' And '$(OS)' != 'Unix'">
-		<Exec Command="xcopy /Y /I pre-commit ..\.git\hooks\" />
-	</Target>
 </Project>
