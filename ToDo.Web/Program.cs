@@ -31,7 +31,7 @@ builder.Services.AddScoped(sp =>
 
 var baseUrl = builder.Configuration!.GetValue<string>("BaseURL")!;
 
-builder.Services.AddShiftServices(config =>
+builder.Services.AddShiftBlazor(config =>
 {
     config.ShiftConfiguration = options =>
     {
