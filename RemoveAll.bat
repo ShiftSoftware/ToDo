@@ -7,6 +7,7 @@ dotnet remove ToDo.Shared\ToDo.Shared.csproj reference ..\ShiftEntity\ShiftEntit
 
 dotnet remove ToDo.API\ToDo.API.csproj reference ..\ShiftEntity\ShiftEntity.Web\ShiftEntity.Web.csproj
 dotnet remove ToDo.API\ToDo.API.csproj reference ..\ShiftEntity\ShiftEntity.EFCore.SqlServer\ShiftEntity.EFCore.SqlServer.csproj
+dotnet remove ToDo.API\ToDo.API.csproj reference ..\ShiftIdentity\ShiftIdentity.Dashboard.AspNetCore\ShiftIdentity.Dashboard.AspNetCore.csproj
 
 dotnet sln remove ..\ShiftEntity\ShiftEntity.Model\ShiftEntity.Model.csproj
 dotnet sln remove ..\ShiftEntity\ShiftEntity.Core\ShiftEntity.Core.csproj
