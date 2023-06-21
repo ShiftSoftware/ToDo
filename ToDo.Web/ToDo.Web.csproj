@@ -23,9 +23,6 @@
 
   <ItemGroup>
     <ProjectReference Include="..\ToDo.Shared\ToDo.Shared.csproj" />
-    <ProjectReference Include="..\..\ShiftIdentity\ShiftIdentity.Dashboard.Blazor\ShiftIdentity.Dashboard.Blazor.csproj" />
-    <ProjectReference Include="..\..\ShiftIdentity\ShiftIdentity.Blazor\ShiftIdentity.Blazor.csproj" />
-    <ProjectReference Include="..\..\ShiftBlazor\ShiftBlazor\ShiftBlazor.csproj" />
   </ItemGroup>
 
   <ItemGroup>
