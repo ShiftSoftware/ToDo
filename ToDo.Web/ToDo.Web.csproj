@@ -17,11 +17,11 @@
     <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly" Version="7.0.7" />
     <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly.DevServer" Version="7.0.7" PrivateAssets="all" />
     <PackageReference Include="ShiftSoftware.ShiftBlazor" Version="1.5.0" />
+    <PackageReference Include="ShiftSoftware.ShiftIdentity.Blazor" Version="1.6.0" />
+    <PackageReference Include="ShiftSoftware.ShiftIdentity.Dashboard.Blazor" Version="1.6.0" />
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\ShiftIdentity\ShiftIdentity.Blazor\ShiftIdentity.Blazor.csproj" />
-    <ProjectReference Include="..\..\ShiftIdentity\ShiftIdentity.Dashboard.Blazor\ShiftIdentity.Dashboard.Blazor.csproj" />
     <ProjectReference Include="..\ToDo.Shared\ToDo.Shared.csproj" />
   </ItemGroup>
 

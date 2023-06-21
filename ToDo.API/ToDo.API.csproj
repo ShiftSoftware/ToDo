@@ -7,7 +7,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\ShiftIdentity\ShiftIdentity.Dashboard.AspNetCore\ShiftIdentity.Dashboard.AspNetCore.csproj" />
     <ProjectReference Include="..\ToDo.Shared\ToDo.Shared.csproj" />
     <ProjectReference Include="..\ToDo.Web\ToDo.Web.csproj" />
   </ItemGroup>
@@ -20,6 +19,7 @@
     </PackageReference>
     <PackageReference Include="ShiftSoftware.ShiftEntity.EFCore.SqlServer" Version="1.6.0.11" />
     <PackageReference Include="ShiftSoftware.ShiftEntity.Web" Version="1.6.0.11" />
+    <PackageReference Include="ShiftSoftware.ShiftIdentity.Dashboard.AspNetCore" Version="1.6.0" />
     <PackageReference Include="Swashbuckle.AspNetCore" Version="6.5.0" />
   </ItemGroup>
 
