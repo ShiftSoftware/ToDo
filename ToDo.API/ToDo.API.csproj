@@ -7,6 +7,7 @@
 	</PropertyGroup>
 
 	<ItemGroup>
+		<!--Shift Framework References will be removed by pre-commit-->
 		<ProjectReference Include="..\ToDo.Shared\ToDo.Shared.csproj" />
 		<ProjectReference Include="..\ToDo.Web\ToDo.Web.csproj" />
 		<ProjectReference Include="..\..\ShiftEntity\ShiftEntity.Web\ShiftEntity.Web.csproj" />
