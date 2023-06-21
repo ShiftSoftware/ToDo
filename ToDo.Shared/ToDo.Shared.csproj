@@ -10,4 +10,8 @@
     <PackageReference Include="ShiftSoftware.ShiftEntity.Model" Version="1.6.0.11" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\..\ShiftEntity\ShiftEntity.Model\ShiftEntity.Model.csproj" />
+  </ItemGroup>
+
 </Project>

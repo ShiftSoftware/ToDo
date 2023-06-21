@@ -1,0 +1,53 @@
+#!/bin/sh
+
+
+# -------------------------------------------ToDo.API-----------------------------------------------------------------------------------------------
+
+# Temporarily modify the project file to remove shift framework references. Linux
+sed -i '/<ProjectReference Include="..\\..\\ShiftEntity\\ShiftEntity.Web\\ShiftEntity.Web.csproj" \\/d' ToDo.API
+sed -i '/<ProjectReference Include="..\\..\\ShiftEntity\\ShiftEntity.EFCore.SqlServer\\ShiftEntity.EFCore.SqlServer.csproj" \\/d' ToDo.API
+sed -i '/<ProjectReference Include="..\\..\\ShiftIdentity\\ShiftIdentity.Dashboard.AspNetCore\\ShiftIdentity.Dashboard.AspNetCore.csproj" \\/d' ToDo.API
+
+# Temporarily modify the project file to remove shift framework references. Windows
+sed -i "/<ProjectReference Include=\"..\\\\..\\\\ShiftEntity\\\\ShiftEntity.Web\\\\ShiftEntity.Web.csproj\" \\/>/d" ToDo.API
+sed -i "/<ProjectReference Include=\"..\\\\..\\\\ShiftEntity\\\\ShiftEntity.EFCore.SqlServer\\\\ShiftEntity.EFCore.SqlServer.csproj\" \\/>/d" ToDo.API
+sed -i "/<ProjectReference Include=\"..\\\\..\\\\ShiftIdentity\\\\ShiftIdentity.Dashboard.AspNetCore\\\\ShiftIdentity.Dashboard.AspNetCore.csproj\" \\/>/d" ToDo.API
+
+# Stage the modified file
+git add ToDo.API
+
+# ---------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+
+# -------------------------------------------ToDo.Shared-----------------------------------------------------------------------------------------------
+
+# Temporarily modify the project file to remove shift framework references. Linux
+sed -i '/<ProjectReference Include="..\\..\\ShiftEntity\\ShiftEntity.Model\\ShiftEntity.Model.csproj" \\/d' ToDo.Shared
+
+# Temporarily modify the project file to remove shift framework references. Windows
+sed -i "/<ProjectReference Include=\"..\\\\..\\\\ShiftEntity\\\\ShiftEntity.Model\\\\ShiftEntity.Model.csproj\" \\/>/d" ToDo.Shared
+
+# Stage the modified file
+git add ToDo.Shared
+
+# ---------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+
+
+
+# -------------------------------------------ToDo.Web-----------------------------------------------------------------------------------------------
+
+# Temporarily modify the project file to remove shift framework references. Linux
+sed -i '/<ProjectReference Include="..\\..\\ShiftBlazor\\ShiftBlazor\\ShiftBlazor.csproj" \\/d' ToDo.Web
+sed -i '/<ProjectReference Include="..\\..\\ShiftIdentity\\ShiftIdentity.Blazor\\ShiftIdentity.Blazor.csproj" \\/d' ToDo.Web
+sed -i '/<ProjectReference Include="..\\..\\ShiftIdentity\\ShiftIdentity.Dashboard.Blazor\\ShiftIdentity.Dashboard.Blazor.csproj" \\/d' ToDo.Web
+
+# Temporarily modify the project file to remove shift framework references. Windows
+sed -i "/<ProjectReference Include=\"..\\\\..\\\\ShiftBlazor\\\\ShiftBlazor\\\\ShiftBlazor.csproj\" \\/>/d" ToDo.Web
+sed -i "/<ProjectReference Include=\"..\\\\..\\\\ShiftIdentity\\\\ShiftIdentity.Blazor\\\\ShiftIdentity.Blazor.csproj\" \\/>/d" ToDo.Web
+sed -i "/<ProjectReference Include=\"..\\\\..\\\\ShiftIdentity\\\\ShiftIdentity.Dashboard.Blazor\\\\ShiftIdentity.Dashboard.Blazor.csproj\" \\/>/d" ToDo.Web
+
+# Stage the modified file
+git add ToDo.Web
+
+# ---------------------------------------------------------------------------------------------------------------------------------------------------------------------
