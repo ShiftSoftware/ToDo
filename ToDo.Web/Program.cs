@@ -30,7 +30,7 @@ builder.Services.AddScoped(sp =>
 });
 
 var baseUrl = builder.Configuration!.GetValue<string>("BaseURL")!;
-
+var identityUrl = builder.Configuration!.GetValue<string>("IdentityURL")!;
 builder.Services.AddShiftBlazor(config =>
 {
     config.ShiftConfiguration = options =>
@@ -43,13 +43,8 @@ builder.Services.AddShiftBlazor(config =>
     config.SyncfusionLicense = builder.Configuration.GetValue<string>("SyncfusionLicense");
 });
 
-builder.Services.AddShiftIdentity("to-do-dev", baseUrl, baseUrl);
+builder.Services.AddShiftIdentity("to-do-dev", identityUrl, identityUrl);
 
-builder.Services.AddShiftIdentityDashboardBlazor(x =>
-{
-    x.LogoPath = "/img/shift-full.png";
-    x.Title = "ToDo";
-});
 
 builder.Services.AddTypeAuth(x =>
     x.AddActionTree<ShiftSoftware.ShiftIdentity.Core.ShiftIdentityActions>()

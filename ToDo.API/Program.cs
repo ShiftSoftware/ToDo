@@ -34,42 +34,10 @@ builder.Services
         x.HashId.RegisterUserIdsHasher();
     })
     .AddShiftIdentity("ToDo", "one-two-three-four-five-six-seven-eight.one-two-three-four-five-six-seven-eight")
-    .AddShiftIdentityDashboard<DB>(
-        new ShiftIdentityConfiguration
-        {
-            Token = new TokenSettingsModel
-            {
-                Audience = "ToDo",
-                ExpireSeconds = 600,
-                Issuer = "ToDo",
-                Key = "one-two-three-four-five-six-seven-eight.one-two-three-four-five-six-seven-eight",
-            },
-            Security = new SecuritySettingsModel
-            {
-                LockDownInMinutes = 0,
-                LoginAttemptsForLockDown = 1000000,
-                RequirePasswordChange = false
-            },
-            RefreshToken = new TokenSettingsModel
-            {
-                Audience = "ToDo",
-                ExpireSeconds = 600000,
-                Issuer = "ToDo",
-                Key = "one-two-three-four-five-six-seven-eight.one-two-three-four-five-six-seven-eight",
-            },
-            HashIdSettings = new HashIdSettings
-            {
-                AcceptUnencodedIds = true,
-                UserIdsSalt = "k02iUHSb2ier9fiui02349AbfJEI",
-                UserIdsMinHashLength = 5
-            },
-        }
-    )
     .AddShiftEntityOdata(x =>
     {
         x.DefaultOptions();
         x.OdataEntitySet<ToDoListDTO>("ToDo");
-        x.RegisterShiftIdentityDashboardEntitySets();
     });
     //.AddFakeIdentityEndPoints(
     //    new TokenSettingsModel
@@ -115,7 +83,6 @@ var app = builder.Build();
 
 //app.AddFakeIdentityEndPoints();
 
-await app.SeedDBAsync(null, "OneTwo");
 
 var supportedCultures = new List<CultureInfo>
 {
