@@ -1,10 +1,10 @@
-﻿using ShiftFrameworkTestingTools;
+﻿using ShiftSoftware.ShiftFrameworkTestingTools;
 using ToDo.Shared.DTOs.ToDo;
 using ToDo.Shared.Enums;
 
 namespace ToDo.Test.Tests.ToDo;
 
-[TestCaseOrderer(nameof(ShiftFrameworkTestingTools) + "." + nameof(PriorityOrderer), nameof(ShiftFrameworkTestingTools))]
+[TestCaseOrderer(nameof(ShiftSoftware.ShiftFrameworkTestingTools) + "." + nameof(PriorityOrderer), nameof(ShiftSoftware.ShiftFrameworkTestingTools))]
 [Collection("API Collection")]
 public class Basic : BasicTest<ToDoDTO, ToDoListDTO>
 {
