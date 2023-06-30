@@ -1,10 +1,10 @@
-﻿using ShiftFrameworkTestingTools;
+﻿using ShiftSoftware.ShiftFrameworkTestingTools;
 using ToDo.Shared.DTOs.ToDo;
 using ToDo.Shared.Enums;
 
 namespace ToDo.Test.Tests.ToDo;
 
-[TestCaseOrderer(nameof(ShiftFrameworkTestingTools) + "." + nameof(PriorityOrderer), nameof(ShiftFrameworkTestingTools))]
+[TestCaseOrderer(nameof(ShiftSoftware.ShiftFrameworkTestingTools) + "." + nameof(PriorityOrderer), nameof(ShiftSoftware.ShiftFrameworkTestingTools))]
 [Collection("API Collection")]
 public class Basic : BasicTest<ToDoDTO, ToDoListDTO>
 {
@@ -37,7 +37,7 @@ public class Basic : BasicTest<ToDoDTO, ToDoListDTO>
     [Fact(DisplayName = "01. Create"), TestPriority(1)]
     public async Task _01_Create()
     {
-        var item = await PostOrPut(null, GenerateSampleDTO());
+        var item = await PostOrPut(null, GenerateSampleDTO(), true, true);
 
         CreatedItem = item!;
 

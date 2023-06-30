@@ -16,6 +16,8 @@ dotnet sln add --solution-folder ShiftFramework\ShiftIdentity ..\ShiftIdentity\S
 dotnet sln add --solution-folder ShiftFramework\ShiftIdentity ..\ShiftIdentity\ShiftIdentity.Dashboard.AspNetCore\ShiftIdentity.Dashboard.AspNetCore.csproj
 dotnet sln add --solution-folder ShiftFramework\ShiftIdentity ..\ShiftIdentity\ShiftIdentity.Dashboard.Blazor\ShiftIdentity.Dashboard.Blazor.csproj
 
+dotnet sln add --solution-folder ShiftFramework\TestingTools ..\ShiftFrameworkTestingTools\ShiftFrameworkTestingTools\ShiftFrameworkTestingTools.csproj
+
 dotnet add ToDo.Web\ToDo.Web.csproj reference ..\ShiftIdentity\ShiftIdentity.Dashboard.Blazor\ShiftIdentity.Dashboard.Blazor.csproj
 dotnet add ToDo.Web\ToDo.Web.csproj reference ..\ShiftIdentity\ShiftIdentity.Blazor\ShiftIdentity.Blazor.csproj
 dotnet add ToDo.Web\ToDo.Web.csproj reference ..\ShiftBlazor\ShiftBlazor\ShiftBlazor.csproj
@@ -26,4 +28,7 @@ dotnet add ToDo.Shared\ToDo.Shared.csproj reference ..\ShiftEntity\ShiftEntity.M
 dotnet add ToDo.API\ToDo.API.csproj reference ..\ShiftEntity\ShiftEntity.Web\ShiftEntity.Web.csproj
 dotnet add ToDo.API\ToDo.API.csproj reference ..\ShiftEntity\ShiftEntity.EFCore.SqlServer\ShiftEntity.EFCore.SqlServer.csproj
 dotnet add ToDo.API\ToDo.API.csproj reference ..\ShiftIdentity\ShiftIdentity.Dashboard.AspNetCore\ShiftIdentity.Dashboard.AspNetCore.csproj
+
+
+dotnet add ToDo.Test\ToDo.Test.csproj reference ..\ShiftFrameworkTestingTools\ShiftFrameworkTestingTools\ShiftFrameworkTestingTools.csproj
 
