@@ -1,5 +1,6 @@
 ﻿@using ShiftSoftware.ShiftBlazor.Services
 @using ShiftSoftware.ShiftIdentity.Blazor.Services
+@using ShiftSoftware.ShiftIdentity.Blazor;
 
 @inherits ShiftMainLayout
 @inject NavigationManager navigationManager
@@ -21,13 +22,6 @@
             <LanguageSwitcher />
 
             <AuthorizeView>
-                <MudButton Href="/Identity/UserDataForm"
-                           Variant="Variant.Text"
-                           StartIcon="@Icons.Material.Filled.People"
-                           Color="Color.Inherit">
-                    Identity
-                </MudButton>
-
                 <MudButton OnClick="Logout"
                            Variant="Variant.Text"
                            StartIcon="@Icons.Material.Filled.Logout"
