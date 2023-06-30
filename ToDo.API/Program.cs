@@ -7,11 +7,12 @@ using ToDo.API.Data;
 using ToDo.API.Data.Repositories;
 using ToDo.Shared.DTOs.ToDo;
 using ShiftSoftware.ShiftIdentity.AspNetCore.Extensions;
-using ShiftSoftware.ShiftIdentity.Core.Models;
 using ShiftSoftware.ShiftIdentity.Core.DTOs;
 using ShiftSoftware.ShiftIdentity.Dashboard.AspNetCore.Extentsions;
 using ShiftSoftware.TypeAuth.AspNetCore.Extensions;
 using ShiftSoftware.ShiftIdentity.Core;
+using ShiftSoftware.ShiftIdentity.AspNetCore;
+using ShiftSoftware.ShiftIdentity.AspNetCore.Models;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -37,6 +38,7 @@ builder.Services
     .AddShiftIdentityDashboard<DB>(
         new ShiftIdentityConfiguration
         {
+            ShiftIdentityHostingType = ShiftIdentityHostingTypes.Internal,
             Token = new TokenSettingsModel
             {
                 Audience = "ToDo",

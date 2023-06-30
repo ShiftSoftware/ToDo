@@ -47,6 +47,7 @@ builder.Services.AddShiftIdentity("to-do-dev", baseUrl, baseUrl);
 
 builder.Services.AddShiftIdentityDashboardBlazor(x =>
 {
+    x.ShiftIdentityHostingType = ShiftSoftware.ShiftIdentity.Core.ShiftIdentityHostingTypes.Internal;
     x.LogoPath = "/img/shift-full.png";
     x.Title = "ToDo";
 });
