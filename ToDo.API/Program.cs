@@ -118,7 +118,7 @@ var app = builder.Build();
 
 //app.AddFakeIdentityEndPoints();
 
-await app.SeedDBAsync(null, "OneTwo");
+await app.SeedDBAsync("OneTwo");
 
 var supportedCultures = new List<CultureInfo>
 {
