@@ -4,6 +4,7 @@ dotnet remove ToDo.Web\ToDo.Web.csproj reference ..\ShiftBlazor\ShiftBlazor\Shif
 
 
 dotnet remove ToDo.Shared\ToDo.Shared.csproj reference ..\ShiftEntity\ShiftEntity.Model\ShiftEntity.Model.csproj
+dotnet remove ToDo.Shared\ToDo.Shared.csproj reference ..\TypeAuth\TypeAuth.Core\TypeAuth.Core.csproj
 
 dotnet remove ToDo.API\ToDo.API.csproj reference ..\ShiftEntity\ShiftEntity.Web\ShiftEntity.Web.csproj
 dotnet remove ToDo.API\ToDo.API.csproj reference ..\ShiftEntity\ShiftEntity.EFCore.SqlServer\ShiftEntity.EFCore.SqlServer.csproj

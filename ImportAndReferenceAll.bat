@@ -24,6 +24,7 @@ dotnet add ToDo.Web\ToDo.Web.csproj reference ..\ShiftBlazor\ShiftBlazor\ShiftBl
 
 
 dotnet add ToDo.Shared\ToDo.Shared.csproj reference ..\ShiftEntity\ShiftEntity.Model\ShiftEntity.Model.csproj
+dotnet add ToDo.Shared\ToDo.Shared.csproj reference ..\TypeAuth\TypeAuth.Core\TypeAuth.Core.csproj
 
 dotnet add ToDo.API\ToDo.API.csproj reference ..\ShiftEntity\ShiftEntity.Web\ShiftEntity.Web.csproj
 dotnet add ToDo.API\ToDo.API.csproj reference ..\ShiftEntity\ShiftEntity.EFCore.SqlServer\ShiftEntity.EFCore.SqlServer.csproj

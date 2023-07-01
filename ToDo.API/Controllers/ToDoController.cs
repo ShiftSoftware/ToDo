@@ -4,16 +4,17 @@ using ShiftSoftware.ShiftEntity.Web;
 using ShiftSoftware.ShiftEntity.Web.Services;
 using ToDo.API.Data;
 using ToDo.API.Data.Repositories;
+using ToDo.Shared;
 using ToDo.Shared.DTOs.ToDo;
 
 namespace ToDo.API.Controllers
 {
     [Route("api/[controller]")]
-    public class ToDoController : ShiftEntityControllerAsync<ToDoRepository, Data.Entities.ToDo, ToDoListDTO, ToDoDTO>
+    public class ToDoController : ShiftEntitySecureControllerAsync<ToDoRepository, Data.Entities.ToDo, ToDoListDTO, ToDoDTO>
     {
         private DB db;
         ToDoRepository repository;
-        public ToDoController(ToDoRepository repository, DB db) : base()
+        public ToDoController(ToDoRepository repository, DB db) : base(ToDoActions.ToDo)
         {
             this.db = db;
             this.repository = repository;

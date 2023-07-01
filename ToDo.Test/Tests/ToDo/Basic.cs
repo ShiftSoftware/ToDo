@@ -1,10 +1,11 @@
 ﻿using ShiftSoftware.ShiftFrameworkTestingTools;
+using ToDo.API.Data;
 using ToDo.Shared.DTOs.ToDo;
 using ToDo.Shared.Enums;
 
 namespace ToDo.Test.Tests.ToDo;
 
-[TestCaseOrderer(nameof(ShiftSoftware.ShiftFrameworkTestingTools) + "." + nameof(PriorityOrderer), nameof(ShiftSoftware.ShiftFrameworkTestingTools))]
+[TestCaseOrderer(Constants.OrdererTypeName, Constants.OrdererAssemblyName)]
 [Collection("API Collection")]
 public class Basic : BasicTest<ToDoDTO, ToDoListDTO>
 {
@@ -14,7 +15,7 @@ public class Basic : BasicTest<ToDoDTO, ToDoListDTO>
     static string description = "ToDo Item 1";
     static ToDoStatus status = ToDoStatus.New;
 
-    public Basic(CustomWebApplicationFactory<WebMarker> factory, ITestOutputHelper output) : base("ToDo", "ToDo", factory.CreateClient(), output)
+    public Basic(CustomWebApplicationFactory factory, ITestOutputHelper output) : base("ToDo", "ToDo", factory.CreateClient(), output)
     {
 
     }

@@ -13,6 +13,7 @@ using ShiftSoftware.TypeAuth.AspNetCore.Extensions;
 using ShiftSoftware.ShiftIdentity.Core;
 using ShiftSoftware.ShiftIdentity.AspNetCore;
 using ShiftSoftware.ShiftIdentity.AspNetCore.Models;
+using ToDo.Shared;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -34,17 +35,16 @@ builder.Services
         x.HashId.RegisterHashId(builder.Configuration.GetValue<bool>("Settings:HashIdSettings:AcceptUnencodedIds"));
         x.HashId.RegisterUserIdsHasher();
     })
-    .AddShiftIdentity("ToDo", "one-two-three-four-five-six-seven-eight.one-two-three-four-five-six-seven-eight")
+    .AddShiftIdentity(builder.Configuration.GetValue<string>("Settings:TokenSettings:Issuer")!, builder.Configuration.GetValue<string>("Settings:TokenSettings:Key")!)
     .AddShiftIdentityDashboard<DB>(
         new ShiftIdentityConfiguration
         {
             ShiftIdentityHostingType = ShiftIdentityHostingTypes.Internal,
             Token = new TokenSettingsModel
             {
-                Audience = "ToDo",
                 ExpireSeconds = 600,
-                Issuer = "ToDo",
-                Key = "one-two-three-four-five-six-seven-eight.one-two-three-four-five-six-seven-eight",
+                Issuer = builder.Configuration.GetValue<string>("Settings:TokenSettings:Issuer")!,
+                Key = builder.Configuration.GetValue<string>("Settings:TokenSettings:Key")!,
             },
             Security = new SecuritySettingsModel
             {
@@ -56,8 +56,8 @@ builder.Services
             {
                 Audience = "ToDo",
                 ExpireSeconds = 600000,
-                Issuer = "ToDo",
-                Key = "one-two-three-four-five-six-seven-eight.one-two-three-four-five-six-seven-eight",
+                Issuer = builder.Configuration.GetValue<string>("Settings:TokenSettings:Issuer")!,
+                Key = builder.Configuration.GetValue<string>("Settings:TokenSettings:Key")!,
             },
             HashIdSettings = new HashIdSettings
             {
@@ -107,6 +107,7 @@ builder.Services.AddScoped<ToDoRepository>();
 builder.Services.AddTypeAuth((o) =>
 {
     o.AddActionTree<ShiftIdentityActions>();
+    o.AddActionTree<ToDoActions>();
 });
 
 #if DEBUG
