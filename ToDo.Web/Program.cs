@@ -38,7 +38,7 @@ builder.Services.AddShiftBlazor(config =>
         options.BaseAddress = baseUrl!;
         options.ApiPath = "/api";
         options.ODataPath = "/odata";
-        options.UserListEndpoint = baseUrl.AddUrlPath("odata/PublicUser"); //ToDo: this parameter should be optional.
+        options.UserListEndpoint = baseUrl.AddUrlPath("odata/IdentityPublicUser"); //ToDo: this parameter should be optional.
     };
     config.SyncfusionLicense = builder.Configuration.GetValue<string>("SyncfusionLicense");
 });
