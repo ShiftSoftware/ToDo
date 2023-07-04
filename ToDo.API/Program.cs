@@ -33,7 +33,7 @@ builder.Services
     {
         x.WrapValidationErrorResponseWithShiftEntityResponse(true);
         x.HashId.RegisterHashId(builder.Configuration.GetValue<bool>("Settings:HashIdSettings:AcceptUnencodedIds"));
-        x.HashId.RegisterUserIdsHasher();
+        x.HashId.RegisterIdentityHashId("one-two", 5);
     })
     .AddShiftIdentity(builder.Configuration.GetValue<string>("Settings:TokenSettings:Issuer")!, builder.Configuration.GetValue<string>("Settings:TokenSettings:Key")!)
     .AddShiftIdentityDashboard<DB>(
