@@ -11,13 +11,17 @@ public class ToDo : ShiftEntity<ToDo>
     public string Description { get; set; } = default!;
     public ToDoStatus Status { get; set; }
 
+    public long? ProjectID { get; set; }
+
+    public virtual Project? Project { get; set; }
 
     public static implicit operator ToDoDTO(ToDo entity)
     {
         if (entity == null)
             return default!;
 
-        return new ToDoDTO {
+        return new ToDoDTO
+        {
             CreateDate = entity.CreateDate,
             CreatedByUserID = entity.CreatedByUserID?.ToString(),
             IsDeleted = entity.IsDeleted,
@@ -28,6 +32,10 @@ public class ToDo : ShiftEntity<ToDo>
             Description = entity.Description,
             Status = entity.Status,
             Title = entity.Title,
+            Project = !entity.ProjectID.HasValue ? null : new ShiftSoftware.ShiftEntity.Model.Dtos.ShiftEntitySelectDTO { 
+                Text = entity.Project!.Name,
+                Value = entity.Project!.ID.ToString()
+            }
         };
     }
 
@@ -43,6 +51,7 @@ public class ToDo : ShiftEntity<ToDo>
             Description = entity.Description,
             Status = entity.Status,
             Title = entity.Title,
+            Project = !entity.ProjectID.HasValue ? null : entity.Project!.Name
         };
     }
 }

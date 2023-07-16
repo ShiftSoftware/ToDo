@@ -14,6 +14,7 @@ using ShiftSoftware.ShiftIdentity.Core;
 using ShiftSoftware.ShiftIdentity.AspNetCore;
 using ShiftSoftware.ShiftIdentity.AspNetCore.Models;
 using ToDo.Shared;
+using ToDo.Shared.DTOs.Project;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -71,6 +72,7 @@ builder.Services
     {
         x.DefaultOptions();
         x.OdataEntitySet<ToDoListDTO>("ToDo");
+        x.OdataEntitySet<ProjectListDTO>("Project");
         x.RegisterShiftIdentityDashboardEntitySets();
     });
     //.AddFakeIdentityEndPoints(
@@ -103,6 +105,7 @@ builder.Services.AddSwaggerGen(c =>
 });
 
 builder.Services.AddScoped<ToDoRepository>();
+builder.Services.AddScoped<ProjectRepository>();
 
 builder.Services.AddTypeAuth((o) =>
 {

@@ -1,4 +1,5 @@
-﻿using ShiftSoftware.EFCore.SqlServer;
+﻿using Microsoft.EntityFrameworkCore;
+using ShiftSoftware.EFCore.SqlServer;
 using ShiftSoftware.ShiftEntity.Core;
 using ToDo.Shared.DTOs.ToDo;
 
@@ -33,12 +34,12 @@ namespace ToDo.API.Data.Repositories
 
         public async Task<Entities.ToDo> FindAsync(long id, DateTime? asOf = null, bool ignoreGlobalFilters = false)
         {
-            return await base.FindAsync(id, asOf, ignoreGlobalFilters);
+            return await base.FindAsync(id, asOf, ignoreGlobalFilters, x => x.Include(y => y.Project));
         }
 
         public IQueryable<ToDoListDTO> OdataList(bool ignoreGlobalFilters = false)
         {
-            return this.db.ToDos.Select(x => (ToDoListDTO)x);
+            return this.db.ToDos.Include(x => x.Project).AsNoTracking().Select(x => (ToDoListDTO)x);
         }
 
         public ValueTask<Entities.ToDo> UpdateAsync(Entities.ToDo entity, ToDoDTO dto, long? userId = null)
@@ -60,6 +61,14 @@ namespace ToDo.API.Data.Repositories
             entity.Title = dto.Title;
             entity.Description = dto.Description;
             entity.Status = dto.Status;
+
+            entity.ProjectID = null;
+
+            if (dto.Project is not null)
+            {
+                entity.ProjectID = dto.Project.Value.ToLong();
+                entity.ReloadAfterSave = true;
+            }
         }
     }
 }

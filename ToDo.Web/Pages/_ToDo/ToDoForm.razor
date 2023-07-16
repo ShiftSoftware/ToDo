@@ -37,6 +37,17 @@
         <MudSelectItem Value="@(ToDo.Shared.Enums.ToDoStatus.New)" />
         <MudSelectItem Value="@(ToDo.Shared.Enums.ToDoStatus.InProgress)" />
         <MudSelectItem Value="@(ToDo.Shared.Enums.ToDoStatus.Completed)" />
+
+        <ShiftAutocomplete Label="Project"
+                           T="ShiftSoftware.ShiftEntity.Model.Dtos.ShiftEntitySelectDTO"
+                           @bind-Value="TheItem.Project"
+                           ToStringFunc="@(e=> e==null ? null : $"{e.Text}")"
+                           EntitySet="Project"
+                           TEntitySet="ToDo.Shared.DTOs.Project.ProjectListDTO"
+                           Where="@(q => x => x.Name!.Contains(q))"
+                           DataValueField="@nameof(ToDo.Shared.DTOs.Project.ProjectListDTO.ID)"
+                           DataTextField="@nameof(ToDo.Shared.DTOs.Project.ProjectListDTO.Name)" />
+
     </MudSelect>
 </ShiftEntityForm>
 
