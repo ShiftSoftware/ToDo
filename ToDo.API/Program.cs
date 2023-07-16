@@ -33,6 +33,8 @@ builder.Services
     .AddShiftEntity(x =>
     {
         x.WrapValidationErrorResponseWithShiftEntityResponse(true);
+        x.AddAutoMapper(typeof(ToDo.API.WebMarker).Assembly);
+
         x.HashId.RegisterHashId(builder.Configuration.GetValue<bool>("Settings:HashIdSettings:AcceptUnencodedIds"));
         x.HashId.RegisterIdentityHashId("one-two", 5);
     })
