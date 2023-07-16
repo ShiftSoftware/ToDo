@@ -1,18 +1,17 @@
-﻿using ShiftSoftware.EFCore.SqlServer;
+﻿using AutoMapper;
+using Microsoft.EntityFrameworkCore;
+using ShiftSoftware.EFCore.SqlServer;
 using ShiftSoftware.ShiftEntity.Core;
 using ToDo.Shared.DTOs.Project;
 
 namespace ToDo.API.Data.Repositories
 {
     public class ProjectRepository :
-        ShiftRepository<Entities.Project>,
+        ShiftRepository<DB, Entities.Project>,
         IShiftRepositoryAsync<Entities.Project, ProjectListDTO, ProjectDTO>
     {
-        private DB db;
-
-        public ProjectRepository(DB db) : base(db, db.Projects)
+        public ProjectRepository(DB db, IMapper mapper) : base(db, db.Projects, mapper)
         {
-            this.db = db;
         }
 
         public ValueTask<Entities.Project> CreateAsync(ProjectDTO dto, long? userId = null)
@@ -38,7 +37,7 @@ namespace ToDo.API.Data.Repositories
 
         public IQueryable<ProjectListDTO> OdataList(bool ignoreGlobalFilters = false)
         {
-            return this.db.Projects.Select(x => (ProjectListDTO)x);
+            return mapper.ProjectTo<ProjectListDTO>(this.db.Projects.AsNoTracking());
         }
 
         public ValueTask<Entities.Project> UpdateAsync(Entities.Project entity, ProjectDTO dto, long? userId = null)
@@ -52,7 +51,7 @@ namespace ToDo.API.Data.Repositories
 
         public ValueTask<ProjectDTO> ViewAsync(Entities.Project entity)
         {
-            return new ValueTask<ProjectDTO>(entity);
+            return new ValueTask<ProjectDTO>(mapper.Map<ProjectDTO>(entity));
         }
 
         public void AssignValue(Entities.Project entity, ProjectDTO dto)

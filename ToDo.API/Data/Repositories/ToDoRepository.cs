@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using AutoMapper;
+using Microsoft.EntityFrameworkCore;
 using ShiftSoftware.EFCore.SqlServer;
 using ShiftSoftware.ShiftEntity.Core;
 using ToDo.Shared.DTOs.ToDo;
@@ -6,14 +7,11 @@ using ToDo.Shared.DTOs.ToDo;
 namespace ToDo.API.Data.Repositories
 {
     public class ToDoRepository :
-        ShiftRepository<Entities.ToDo>,
+        ShiftRepository<DB, Entities.ToDo>,
         IShiftRepositoryAsync<Entities.ToDo, ToDoListDTO, ToDoDTO>
     {
-        private DB db;
-
-        public ToDoRepository(DB db) : base(db, db.ToDos)
+        public ToDoRepository(DB db, IMapper mapper) : base(db, db.ToDos, mapper)
         {
-            this.db = db;
         }
 
         public ValueTask<Entities.ToDo> CreateAsync(ToDoDTO dto, long? userId = null)
@@ -39,7 +37,7 @@ namespace ToDo.API.Data.Repositories
 
         public IQueryable<ToDoListDTO> OdataList(bool ignoreGlobalFilters = false)
         {
-            return this.db.ToDos.Include(x => x.Project).AsNoTracking().Select(x => (ToDoListDTO)x);
+            return mapper.ProjectTo<ToDoListDTO>(db.ToDos.AsNoTracking());
         }
 
         public ValueTask<Entities.ToDo> UpdateAsync(Entities.ToDo entity, ToDoDTO dto, long? userId = null)
@@ -53,7 +51,7 @@ namespace ToDo.API.Data.Repositories
 
         public ValueTask<ToDoDTO> ViewAsync(Entities.ToDo entity)
         {
-            return new ValueTask<ToDoDTO>(entity);
+            return new ValueTask<ToDoDTO>(mapper.Map<ToDoDTO>(entity));
         }
 
         public void AssignValue(Entities.ToDo entity, ToDoDTO dto)
