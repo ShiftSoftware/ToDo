@@ -37,6 +37,8 @@ builder.Services
 
         x.HashId.RegisterHashId(builder.Configuration.GetValue<bool>("Settings:HashIdSettings:AcceptUnencodedIds"));
         x.HashId.RegisterIdentityHashId("one-two", 5);
+
+        x.AddShiftIdentityAutoMapper();
     })
     .AddShiftIdentity(builder.Configuration.GetValue<string>("Settings:TokenSettings:Issuer")!, builder.Configuration.GetValue<string>("Settings:TokenSettings:Key")!)
     .AddShiftIdentityDashboard<DB>(
@@ -95,7 +97,7 @@ builder.Services
     //    new string[] {
     //        """
     //            {
-    //                "ToDo": [1,2,3,4]
+    //                "ToDoActions": [1,2,3,4]
     //            }
     //        """
     //    }
