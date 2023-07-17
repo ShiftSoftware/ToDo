@@ -13,4 +13,6 @@ public class ToDoDTO : ShiftEntityDTO
 
     [JsonConverter(typeof(JsonStringEnumConverter))]
     public ToDoStatus Status { get; set; } = ToDoStatus.New;
+
+    public ShiftEntitySelectDTO? Project { get; set; }
 }

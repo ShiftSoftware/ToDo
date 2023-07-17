@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using ToDo.API.Data;
 
@@ -11,9 +12,11 @@ using ToDo.API.Data;
 namespace ToDo.API.Migrations
 {
     [DbContext(typeof(DB))]
-    partial class DBModelSnapshot : ModelSnapshot
+    [Migration("20230716073542_projects")]
+    partial class projects
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -774,77 +777,6 @@ namespace ToDo.API.Migrations
                             }));
                 });
 
-            modelBuilder.Entity("ToDo.API.Data.Entities.Task", b =>
-                {
-                    b.Property<long>("ID")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("bigint");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<long>("ID"));
-
-                    b.Property<DateTime>("CreateDate")
-                        .HasColumnType("datetime2");
-
-                    b.Property<long?>("CreatedByUserID")
-                        .HasColumnType("bigint");
-
-                    b.Property<string>("Description")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<DateTime?>("DueDate")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("Files")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<bool>("IsDeleted")
-                        .HasColumnType("bit");
-
-                    b.Property<DateTime>("LastSaveDate")
-                        .HasColumnType("datetime2");
-
-                    b.Property<long?>("LastSavedByUserID")
-                        .HasColumnType("bigint");
-
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<long?>("ParentTaskId")
-                        .HasColumnType("bigint");
-
-                    b.Property<DateTime>("PeriodEnd")
-                        .ValueGeneratedOnAddOrUpdate()
-                        .HasColumnType("datetime2")
-                        .HasColumnName("PeriodEnd");
-
-                    b.Property<DateTime>("PeriodStart")
-                        .ValueGeneratedOnAddOrUpdate()
-                        .HasColumnType("datetime2")
-                        .HasColumnName("PeriodStart");
-
-                    b.Property<int>("Status")
-                        .HasColumnType("int");
-
-                    b.HasKey("ID");
-
-                    b.HasIndex("ParentTaskId");
-
-                    b.ToTable("Tasks");
-
-                    b.ToTable(tb => tb.IsTemporal(ttb =>
-                            {
-                                ttb.UseHistoryTable("TasksHistory");
-                                ttb
-                                    .HasPeriodStart("PeriodStart")
-                                    .HasColumnName("PeriodStart");
-                                ttb
-                                    .HasPeriodEnd("PeriodEnd")
-                                    .HasColumnName("PeriodEnd");
-                            }));
-                });
-
             modelBuilder.Entity("ToDo.API.Data.Entities.ToDo", b =>
                 {
                     b.Property<long>("ID")
@@ -986,15 +918,6 @@ namespace ToDo.API.Migrations
                     b.Navigation("User");
                 });
 
-            modelBuilder.Entity("ToDo.API.Data.Entities.Task", b =>
-                {
-                    b.HasOne("ToDo.API.Data.Entities.Task", "ParentTask")
-                        .WithMany("ChildTasks")
-                        .HasForeignKey("ParentTaskId");
-
-                    b.Navigation("ParentTask");
-                });
-
             modelBuilder.Entity("ToDo.API.Data.Entities.ToDo", b =>
                 {
                     b.HasOne("ToDo.API.Data.Entities.Project", "Project")
@@ -1024,11 +947,6 @@ namespace ToDo.API.Migrations
             modelBuilder.Entity("ShiftSoftware.ShiftIdentity.AspNetCore.Entities.User", b =>
                 {
                     b.Navigation("AccessTrees");
-                });
-
-            modelBuilder.Entity("ToDo.API.Data.Entities.Task", b =>
-                {
-                    b.Navigation("ChildTasks");
                 });
 #pragma warning restore 612, 618
         }

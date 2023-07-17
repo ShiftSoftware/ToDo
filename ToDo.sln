@@ -11,10 +11,6 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ToDo.Test", "ToDo.Test\ToDo
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ToDo.Web", "ToDo.Web\ToDo.Web.csproj", "{6BA126C1-2308-4E8C-AFE4-D6D03BB09B45}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Submodules", "Submodules", "{CBAC93D6-05CA-4856-9757-1834850DD84E}"
-EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ShiftFrameworkTestingTools", "ShiftFrameworkTestingTools\ShiftFrameworkTestingTools\ShiftFrameworkTestingTools.csproj", "{B0FF9ACF-85D3-4014-AECC-6F0DFC2E7C77}"
-EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "ShiftFramework", "ShiftFramework", "{50743F3B-2BEF-4AF5-AEFB-BE1BD1B65EB5}"
 	ProjectSection(SolutionItems) = preProject
 		ImportAndReferenceAll.bat = ImportAndReferenceAll.bat
@@ -43,16 +39,9 @@ Global
 		{6BA126C1-2308-4E8C-AFE4-D6D03BB09B45}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{6BA126C1-2308-4E8C-AFE4-D6D03BB09B45}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{6BA126C1-2308-4E8C-AFE4-D6D03BB09B45}.Release|Any CPU.Build.0 = Release|Any CPU
-		{B0FF9ACF-85D3-4014-AECC-6F0DFC2E7C77}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{B0FF9ACF-85D3-4014-AECC-6F0DFC2E7C77}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{B0FF9ACF-85D3-4014-AECC-6F0DFC2E7C77}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{B0FF9ACF-85D3-4014-AECC-6F0DFC2E7C77}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
-	EndGlobalSection
-	GlobalSection(NestedProjects) = preSolution
-		{B0FF9ACF-85D3-4014-AECC-6F0DFC2E7C77} = {CBAC93D6-05CA-4856-9757-1834850DD84E}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {547274AF-5DE3-4E97-AA97-38AD0AE81C22}

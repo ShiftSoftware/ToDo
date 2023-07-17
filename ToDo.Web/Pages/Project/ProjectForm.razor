@@ -1,0 +1,20 @@
+﻿@attribute [Route($"/{nameof(ProjectForm)}/{{Key?}}")]
+
+@inherits ShiftForm<ProjectForm, ToDo.Shared.DTOs.Project.ProjectDTO>
+
+<ShiftEntityForm @bind-Mode="Mode"
+                 @bind-Value="TheItem"
+                 @ref="FormContainer"
+                 Action="Project"
+                 Title="Project"
+                 @bind-Key="@Key"
+                 T="ToDo.Shared.DTOs.Project.ProjectDTO">
+
+    <MudTextField ReadOnly="@ReadOnly"
+                  Disabled="@Disabled"
+                  OnlyValidateIfDirty="true"
+                  Label="Name"
+                  @bind-Value="TheItem.Name"
+                  For="@(() => TheItem.Name)" />
+</ShiftEntityForm>
+

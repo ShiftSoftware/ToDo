@@ -1,4 +1,6 @@
-﻿using ShiftSoftware.ShiftEntity.Core;
+﻿using AutoMapper;
+using ShiftSoftware.ShiftEntity.Core;
+using ShiftSoftware.ShiftEntity.Model.Dtos;
 using ToDo.Shared.DTOs.ToDo;
 using ToDo.Shared.Enums;
 
@@ -11,38 +13,7 @@ public class ToDo : ShiftEntity<ToDo>
     public string Description { get; set; } = default!;
     public ToDoStatus Status { get; set; }
 
+    public long? ProjectID { get; set; }
 
-    public static implicit operator ToDoDTO(ToDo entity)
-    {
-        if (entity == null)
-            return default!;
-
-        return new ToDoDTO {
-            CreateDate = entity.CreateDate,
-            CreatedByUserID = entity.CreatedByUserID?.ToString(),
-            IsDeleted = entity.IsDeleted,
-            LastSaveDate = entity.LastSaveDate,
-            LastSavedByUserID = entity.LastSavedByUserID?.ToString(),
-            ID = entity.ID.ToString(),
-
-            Description = entity.Description,
-            Status = entity.Status,
-            Title = entity.Title,
-        };
-    }
-
-    public static implicit operator ToDoListDTO(ToDo entity)
-    {
-        if (entity == null)
-            return default!;
-
-        return new ToDoListDTO
-        {
-            ID = entity.ID.ToString(),
-
-            Description = entity.Description,
-            Status = entity.Status,
-            Title = entity.Title,
-        };
-    }
+    public virtual Project? Project { get; set; }
 }

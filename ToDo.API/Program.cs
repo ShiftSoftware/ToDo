@@ -7,7 +7,6 @@ using ToDo.API.Data;
 using ToDo.API.Data.Repositories;
 using ToDo.Shared.DTOs.ToDo;
 using ShiftSoftware.ShiftIdentity.AspNetCore.Extensions;
-using ShiftSoftware.ShiftIdentity.Core.Models;
 using ShiftSoftware.ShiftIdentity.Core.DTOs;
 using ShiftSoftware.ShiftIdentity.Dashboard.AspNetCore.Extentsions;
 using ShiftSoftware.TypeAuth.AspNetCore.Extensions;
@@ -17,6 +16,7 @@ using Microsoft.Extensions.Azure;
 using ShiftSoftware.ShiftIdentity.AspNetCore;
 using ShiftSoftware.ShiftIdentity.AspNetCore.Models;
 using ToDo.Shared;
+using ToDo.Shared.DTOs.Project;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -35,16 +35,20 @@ builder.Services
     .AddShiftEntity(x =>
     {
         x.WrapValidationErrorResponseWithShiftEntityResponse(true);
+        x.AddAutoMapper(typeof(ToDo.API.WebMarker).Assembly);
+
         x.HashId.RegisterHashId(builder.Configuration.GetValue<bool>("Settings:HashIdSettings:AcceptUnencodedIds"));
         x.HashId.RegisterIdentityHashId("one-two", 5);
+
+        x.AddShiftIdentityAutoMapper();
     })
     .AddShiftIdentity(builder.Configuration.GetValue<string>("Settings:TokenSettings:Issuer")!, builder.Configuration.GetValue<string>("Settings:TokenSettings:Key")!)
     .AddShiftIdentityDashboard<DB>(
         new ShiftIdentityConfiguration
         {
+            ShiftIdentityHostingType = ShiftIdentityHostingTypes.Internal,
             Token = new TokenSettingsModel
             {
-                Audience = "ToDo",
                 ExpireSeconds = 600,
                 Issuer = builder.Configuration.GetValue<string>("Settings:TokenSettings:Issuer")!,
                 Key = builder.Configuration.GetValue<string>("Settings:TokenSettings:Key")!,
@@ -75,6 +79,7 @@ builder.Services
         x.DefaultOptions();
         x.OdataEntitySet<ToDoListDTO>("ToDo");
         x.OdataEntitySet<TaskListDTO>("Task");
+        x.OdataEntitySet<ProjectListDTO>("Project");
         x.RegisterShiftIdentityDashboardEntitySets();
     });
     //.AddFakeIdentityEndPoints(
@@ -95,7 +100,7 @@ builder.Services
     //    new string[] {
     //        """
     //            {
-    //                "ToDo": [1,2,3,4]
+    //                "ToDoActions": [1,2,3,4]
     //            }
     //        """
     //    }
@@ -108,6 +113,7 @@ builder.Services.AddSwaggerGen(c =>
 
 builder.Services.AddScoped<ToDoRepository>();
 builder.Services.AddScoped<TaskRepository>();
+builder.Services.AddScoped<ProjectRepository>();
 
 builder.Services.AddScoped<AzureStorageService>();
 
