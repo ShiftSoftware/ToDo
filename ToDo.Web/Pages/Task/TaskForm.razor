@@ -1,0 +1,88 @@
+﻿@attribute [Route($"/{nameof(TaskForm)}/{{Key?}}")]
+@using System.Text.RegularExpressions;
+@using ToDo.Shared.DTOs.Task
+@using ToDo.Shared.Enums
+@inherits ShiftForm<TaskForm, TaskDTO>
+@inject SettingManager SettingManager
+
+<ShiftEntityForm @bind-Mode="Mode"
+                 @bind-Value="TheItem"
+                 @ref="FormContainer"
+                 Action="Task"
+                 Title="Task"
+                 @bind-Key="@Key">
+
+    <MudTextField ReadOnly="@ReadOnly"
+                  Disabled="@Disabled"
+                  OnlyValidateIfDirty="true"
+                  Label="Name"
+                  @bind-Value="TheItem.Name"
+                  For="@(() => TheItem.Name)"/>
+
+    <MudTextField ReadOnly="@ReadOnly"
+                  Disabled="@Disabled"
+                  OnlyValidateIfDirty="true"
+                  Label="Description"
+                  @bind-Value="TheItem.Description"
+                  For="@(() => TheItem.Description)" />
+
+    <MudSelect ReadOnly="@ReadOnly"
+               Disabled="@Disabled"
+               OnlyValidateIfDirty="true"
+               T="_TaskStatus"
+               Label="Status"
+               AnchorOrigin="Origin.BottomCenter"
+               @bind-Value="TheItem.Status"
+               For="@(() => TheItem.Status)">
+        @foreach (var status in Enum.GetValues<_TaskStatus>())
+        {
+            <MudSelectItem Value="@status">@Regex.Replace(status.ToString(), "([A-Z])", " $1").TrimStart()</MudSelectItem>
+        }
+    </MudSelect>
+
+    <MudSelect ReadOnly="@ReadOnly"
+               Disabled="@Disabled"
+               OnlyValidateIfDirty="true"
+               T="_TaskStatus"
+               Label="Status"
+               AnchorOrigin="Origin.BottomCenter"
+               Value="_TaskStatus.New"
+               For="@(() => TheItem.Status)">
+        @foreach (var status in Enum.GetValues<_TaskStatus>())
+        {
+            <MudSelectItem Value="@status">@Regex.Replace(status.ToString(), "([A-Z])", " $1").TrimStart()</MudSelectItem>
+        }
+    </MudSelect>
+
+    <FileUploader Url="/file/upload" ShowThumbnail @bind-Values="TheItem.Files"></FileUploader>
+
+    <FileUploader Url="/file/upload" @bind-Values="TheItem.Files"></FileUploader>
+
+
+    @if (Mode == ShiftSoftware.ShiftBlazor.Enums.FormModes.View && !string.IsNullOrWhiteSpace(TheItem.ID))
+    {
+        <TaskList ParentTaskId="@TheItem.ID">
+
+        </TaskList>
+    }
+
+@*    @System.Text.Json.JsonSerializer.Serialize(files);
+    <br/>
+    @System.Text.Json.JsonSerializer.Serialize(files2);*@
+</ShiftEntityForm>
+
+@code {
+    [Parameter]
+    public string? ParentTaskId { get; set; }
+
+    protected override void OnInitialized()
+    {
+        Mode = ShiftSoftware.ShiftBlazor.Enums.FormModes.View;
+
+        if (!string.IsNullOrWhiteSpace(ParentTaskId))
+        {
+            TheItem.ParentTaskId = ParentTaskId;
+        }
+    }
+
+}

@@ -10,5 +10,6 @@ namespace ToDo.API.Data
         }
 
         public DbSet<Entities.ToDo> ToDos { get; set; }
+        public DbSet<Entities.Task> Tasks { get; set; }
     }
 }

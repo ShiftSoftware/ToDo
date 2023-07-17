@@ -1,0 +1,38 @@
+﻿@attribute [Authorize]
+@attribute [Route($"/{nameof(TaskList)}")]
+
+@using Syncfusion.Blazor.Data;
+@using Syncfusion.Blazor.Grids
+@using ToDo.Shared.DTOs.Task
+
+<ShiftList Action="Task"
+           Title="Tasks"
+           T="TaskListDTO"
+           ComponentType="typeof(TaskForm)"
+           EnablePdfExport
+           ShowIDColumn="true"
+           Query="Qry"
+           AddDialogParameters="AddDialogParameters"
+           EnableCsvExcelExport>
+</ShiftList>
+
+@code {
+    [Parameter]
+    public string? ParentTaskId { get; set; }
+
+    public Dictionary<string, string> AddDialogParameters = new();
+    public Query Qry = new();
+
+    protected override void OnInitialized()
+    {
+        if (!string.IsNullOrWhiteSpace(ParentTaskId))
+        {
+            AddDialogParameters = new() { { nameof(TaskForm.ParentTaskId), ParentTaskId } };
+
+            Qry = new Query()
+                .Where(nameof(TaskListDTO.ParentTaskId), "equal", ParentTaskId);
+        }
+
+        
+    }
+}

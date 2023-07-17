@@ -12,6 +12,11 @@ using ShiftSoftware.ShiftIdentity.Core.DTOs;
 using ShiftSoftware.ShiftIdentity.Dashboard.AspNetCore.Extentsions;
 using ShiftSoftware.TypeAuth.AspNetCore.Extensions;
 using ShiftSoftware.ShiftIdentity.Core;
+using ToDo.Shared.DTOs.Task;
+using Microsoft.Extensions.Azure;
+using ShiftSoftware.ShiftIdentity.AspNetCore;
+using ShiftSoftware.ShiftIdentity.AspNetCore.Models;
+using ToDo.Shared;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -31,9 +36,9 @@ builder.Services
     {
         x.WrapValidationErrorResponseWithShiftEntityResponse(true);
         x.HashId.RegisterHashId(builder.Configuration.GetValue<bool>("Settings:HashIdSettings:AcceptUnencodedIds"));
-        x.HashId.RegisterUserIdsHasher();
+        x.HashId.RegisterIdentityHashId("one-two", 5);
     })
-    .AddShiftIdentity("ToDo", "one-two-three-four-five-six-seven-eight.one-two-three-four-five-six-seven-eight")
+    .AddShiftIdentity(builder.Configuration.GetValue<string>("Settings:TokenSettings:Issuer")!, builder.Configuration.GetValue<string>("Settings:TokenSettings:Key")!)
     .AddShiftIdentityDashboard<DB>(
         new ShiftIdentityConfiguration
         {
@@ -41,8 +46,8 @@ builder.Services
             {
                 Audience = "ToDo",
                 ExpireSeconds = 600,
-                Issuer = "ToDo",
-                Key = "one-two-three-four-five-six-seven-eight.one-two-three-four-five-six-seven-eight",
+                Issuer = builder.Configuration.GetValue<string>("Settings:TokenSettings:Issuer")!,
+                Key = builder.Configuration.GetValue<string>("Settings:TokenSettings:Key")!,
             },
             Security = new SecuritySettingsModel
             {
@@ -54,8 +59,8 @@ builder.Services
             {
                 Audience = "ToDo",
                 ExpireSeconds = 600000,
-                Issuer = "ToDo",
-                Key = "one-two-three-four-five-six-seven-eight.one-two-three-four-five-six-seven-eight",
+                Issuer = builder.Configuration.GetValue<string>("Settings:TokenSettings:Issuer")!,
+                Key = builder.Configuration.GetValue<string>("Settings:TokenSettings:Key")!,
             },
             HashIdSettings = new HashIdSettings
             {
@@ -69,6 +74,7 @@ builder.Services
     {
         x.DefaultOptions();
         x.OdataEntitySet<ToDoListDTO>("ToDo");
+        x.OdataEntitySet<TaskListDTO>("Task");
         x.RegisterShiftIdentityDashboardEntitySets();
     });
     //.AddFakeIdentityEndPoints(
@@ -101,21 +107,30 @@ builder.Services.AddSwaggerGen(c =>
 });
 
 builder.Services.AddScoped<ToDoRepository>();
+builder.Services.AddScoped<TaskRepository>();
+
+builder.Services.AddScoped<AzureStorageService>();
 
 builder.Services.AddTypeAuth((o) =>
 {
     o.AddActionTree<ShiftIdentityActions>();
+    o.AddActionTree<ToDoActions>();
 });
 
 #if DEBUG
 builder.Services.AddRazorPages();
+builder.Services.AddAzureClients(clientBuilder =>
+{
+    clientBuilder.AddBlobServiceClient(builder.Configuration["StorageConnectionString:blob"], preferMsi: true);
+    clientBuilder.AddQueueServiceClient(builder.Configuration["StorageConnectionString:queue"], preferMsi: true);
+});
 #endif
 
 var app = builder.Build();
 
 //app.AddFakeIdentityEndPoints();
 
-await app.SeedDBAsync(null, "OneTwo");
+await app.SeedDBAsync("OneTwo");
 
 var supportedCultures = new List<CultureInfo>
 {

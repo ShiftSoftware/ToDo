@@ -12,5 +12,5 @@ public class ToDoDTO : ShiftEntityDTO
     public string Description { get; set; } = default!;
 
     [JsonConverter(typeof(JsonStringEnumConverter))]
-    public ToDoStatus Status { get; set; }
+    public ToDoStatus Status { get; set; } = ToDoStatus.New;
 }

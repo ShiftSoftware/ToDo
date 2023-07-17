@@ -1,6 +1,8 @@
-﻿@using ToDo.Web.Pages._ToDo;
+﻿@using ToDo.Web.Pages.Task;
+@using ToDo.Web.Pages._ToDo;
 <MudNavMenu>
     <MudNavLink Href="@($"/{nameof(ToDoList)}")" Match="NavLinkMatch.All" Icon="@Icons.Material.Outlined.Task">To Do</MudNavLink>
+    <MudNavLink Href="@($"/{nameof(TaskList)}")" Match="NavLinkMatch.All" Icon="@Icons.Material.Outlined.Task">Task</MudNavLink>
 </MudNavMenu>
 
 @code {
