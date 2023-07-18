@@ -4,6 +4,7 @@ dotnet sln add --solution-folder ShiftFramework\ShiftEntity ..\ShiftEntity\Shift
 dotnet sln add --solution-folder ShiftFramework\ShiftEntity ..\ShiftEntity\ShiftEntity.EFCore.SqlServer\ShiftEntity.EFCore.SqlServer.csproj
 
 dotnet sln add --solution-folder ShiftFramework\ShiftBlazor ..\ShiftBlazor\ShiftBlazor\ShiftBlazor.csproj
+dotnet sln add --solution-folder ShiftFramework\ShiftBlazor ..\ShiftBlazor\ShiftBlazor.Tests\ShiftBlazor.Tests.csproj
 
 dotnet sln add --solution-folder ShiftFramework\TypeAuth ..\TypeAuth\TypeAuth.Core\TypeAuth.Core.csproj
 dotnet sln add --solution-folder ShiftFramework\TypeAuth ..\TypeAuth\TypeAuth.Blazor\TypeAuth.Blazor.csproj
@@ -16,7 +17,6 @@ dotnet sln add --solution-folder ShiftFramework\ShiftIdentity ..\ShiftIdentity\S
 dotnet sln add --solution-folder ShiftFramework\ShiftIdentity ..\ShiftIdentity\ShiftIdentity.Dashboard.AspNetCore\ShiftIdentity.Dashboard.AspNetCore.csproj
 dotnet sln add --solution-folder ShiftFramework\ShiftIdentity ..\ShiftIdentity\ShiftIdentity.Dashboard.Blazor\ShiftIdentity.Dashboard.Blazor.csproj
 
-dotnet sln add --solution-folder ShiftFramework\TestingTools ..\ShiftFrameworkTestingTools\ShiftFrameworkTestingTools\ShiftFrameworkTestingTools.csproj
 
 dotnet add ToDo.Web\ToDo.Web.csproj reference ..\ShiftIdentity\ShiftIdentity.Dashboard.Blazor\ShiftIdentity.Dashboard.Blazor.csproj
 dotnet add ToDo.Web\ToDo.Web.csproj reference ..\ShiftIdentity\ShiftIdentity.Blazor\ShiftIdentity.Blazor.csproj
@@ -31,5 +31,4 @@ dotnet add ToDo.API\ToDo.API.csproj reference ..\ShiftEntity\ShiftEntity.EFCore.
 dotnet add ToDo.API\ToDo.API.csproj reference ..\ShiftIdentity\ShiftIdentity.Dashboard.AspNetCore\ShiftIdentity.Dashboard.AspNetCore.csproj
 
 
-dotnet add ToDo.Test\ToDo.Test.csproj reference ..\ShiftFrameworkTestingTools\ShiftFrameworkTestingTools\ShiftFrameworkTestingTools.csproj
 

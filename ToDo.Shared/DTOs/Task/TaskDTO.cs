@@ -16,7 +16,7 @@ namespace ToDo.Shared.DTOs.Task
         public string Name { get; set; }
         public string Description { get; set; } = string.Empty;
         public _TaskStatus Status { get; set; } = _TaskStatus.New;
-        public object? AssignedTo { get; set; }
+        public ShiftEntitySelectDTO? AssignedTo { get; set; }
         public DateTime? DueDate { get; set; }
         [_TaskHashId]
         public string? ParentTaskId { get; set; }

@@ -1,4 +1,6 @@
-﻿using ShiftSoftware.EFCore.SqlServer;
+﻿using AutoMapper;
+using Microsoft.EntityFrameworkCore;
+using ShiftSoftware.EFCore.SqlServer;
 using ShiftSoftware.ShiftEntity.Core;
 using ShiftSoftware.ShiftEntity.Web.Services;
 using System.Text.Json;
@@ -12,11 +14,13 @@ namespace ToDo.API.Data.Repositories
     {
         private DB db;
         private AzureStorageService azureStorageService;
+        public readonly IMapper mapper;
 
-        public TaskRepository(DB db, AzureStorageService azureStorageService) : base(db, db.Tasks)
+        public TaskRepository(DB db, AzureStorageService azureStorageService, IMapper mapper) : base(db, db.Tasks)
         {
             this.db = db;
             this.azureStorageService = azureStorageService;
+            this.mapper = mapper;
         }
 
         public ValueTask<Entities.Task> CreateAsync(TaskDTO dto, long? userId = null)
@@ -42,7 +46,7 @@ namespace ToDo.API.Data.Repositories
 
         public IQueryable<TaskListDTO> OdataList(bool ignoreGlobalFilters = false)
         {
-            return this.db.Tasks.Select(x => (TaskListDTO)x);
+            return mapper.ProjectTo<TaskListDTO>(db.Tasks.AsNoTracking());
         }
 
         public ValueTask<Entities.Task> UpdateAsync(Entities.Task entity, TaskDTO dto, long? userId = null)
@@ -56,12 +60,12 @@ namespace ToDo.API.Data.Repositories
 
         public ValueTask<TaskDTO> ViewAsync(Entities.Task entity)
         {
-            var dto = (TaskDTO)entity;
+            var dto = mapper.Map<TaskDTO>(entity);
             dto.Files.ForEach(f =>
             {
                 f.Url = azureStorageService.GetSignedURL(f.Blob);
             });
-            return new ValueTask<TaskDTO>(entity);
+            return new ValueTask<TaskDTO>(dto);
         }
 
         public void AssignValue(Entities.Task entity, TaskDTO dto)
@@ -75,6 +79,12 @@ namespace ToDo.API.Data.Repositories
             if (dto.ParentTaskId != null)
             {
                 entity.ParentTaskId = dto.ParentTaskId.ToLong();
+            }
+
+            if (dto.AssignedTo != null)
+            {
+                entity.AssignedToId = dto.AssignedTo.Value.ToLong();
+                entity.AssignedToName = dto.AssignedTo.Text;
             }
         }
 
