@@ -1,7 +1,7 @@
 ﻿@attribute [Route($"/{nameof(TaskForm)}/{{Key?}}")]
-@using System.Text.RegularExpressions;
-@using ShiftSoftware.ShiftEntity.Model.Dtos;
-@using ShiftSoftware.ShiftIdentity.Core.DTOs.User;
+@using System.Text.RegularExpressions
+@using ShiftSoftware.ShiftEntity.Model.Dtos
+@using ShiftSoftware.ShiftIdentity.Core.DTOs.User
 @using ToDo.Shared.DTOs.Task
 @using ToDo.Shared.Enums
 @inherits ShiftForm<TaskForm, TaskDTO>
@@ -54,9 +54,12 @@
         }
     </MudSelect>
 
-    <FileUploader Url="/file/upload" ShowThumbnail @bind-Values="TheItem.Files"></FileUploader>
+    <FileUploader Url="/file/upload"
+                  ShowThumbnail="true"
+                  Label="Attachments"
+                  @bind-Values="TheItem.Files"/>
 
-    @if (Mode == ShiftSoftware.ShiftBlazor.Enums.FormModes.View && !string.IsNullOrWhiteSpace(TheItem.ID))
+    @if (Mode == FormModes.View && !string.IsNullOrWhiteSpace(TheItem.ID))
     {
         <TaskList ParentTaskId="@TheItem.ID">
 
@@ -71,7 +74,7 @@
 
     protected override void OnInitialized()
     {
-        Mode = ShiftSoftware.ShiftBlazor.Enums.FormModes.View;
+        Mode = FormModes.View;
 
         if (!string.IsNullOrWhiteSpace(ParentTaskId))
         {
