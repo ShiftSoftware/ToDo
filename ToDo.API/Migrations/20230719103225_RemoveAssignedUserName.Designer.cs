@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using ToDo.API.Data;
 
@@ -11,9 +12,10 @@ using ToDo.API.Data;
 namespace ToDo.API.Migrations
 {
     [DbContext(typeof(DB))]
-    partial class DBModelSnapshot : ModelSnapshot
+    [Migration("20230719103225_RemoveAssignedUserName")]
+    partial class RemoveAssignedUserName
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -760,7 +762,7 @@ namespace ToDo.API.Migrations
 
                     b.HasKey("ID");
 
-                    b.ToTable("Projects", (string)null);
+                    b.ToTable("Projects");
 
                     b.ToTable(tb => tb.IsTemporal(ttb =>
                         {
@@ -834,7 +836,7 @@ namespace ToDo.API.Migrations
 
                     b.HasIndex("ParentTaskId");
 
-                    b.ToTable("Tasks", (string)null);
+                    b.ToTable("Tasks");
 
                     b.ToTable(tb => tb.IsTemporal(ttb =>
                         {
@@ -899,7 +901,7 @@ namespace ToDo.API.Migrations
 
                     b.HasIndex("ProjectID");
 
-                    b.ToTable("ToDos", (string)null);
+                    b.ToTable("ToDos");
 
                     b.ToTable(tb => tb.IsTemporal(ttb =>
                         {

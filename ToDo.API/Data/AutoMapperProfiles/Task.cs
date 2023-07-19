@@ -16,7 +16,7 @@ public class TaskProfile : Profile
                 )
             .ForMember(
                     dest => dest.AssignedTo,
-                    opt => opt.MapFrom(src => src.AssignedToId == null ? null : new ShiftEntitySelectDTO { Value = src.AssignedToId.ToString()!, Text = src.AssignedToName })
+                    opt => opt.MapFrom(src => src.AssignedToId == null ? null : new ShiftEntitySelectDTO { Value = src.AssignedToId.ToString()!, Text = null })
                 );
 
         CreateMap<Entities.Task, TaskListDTO>();
