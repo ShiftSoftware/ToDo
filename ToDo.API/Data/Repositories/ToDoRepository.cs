@@ -16,7 +16,7 @@ namespace ToDo.API.Data.Repositories
 
         public ValueTask<Entities.ToDo> CreateAsync(ToDoDTO dto, long? userId = null)
         {
-            var entity = new Entities.ToDo().CreateShiftEntity(userId);
+            var entity = new Entities.ToDo();
 
             this.AssignValue(entity, dto);
 
@@ -42,8 +42,6 @@ namespace ToDo.API.Data.Repositories
 
         public ValueTask<Entities.ToDo> UpdateAsync(Entities.ToDo entity, ToDoDTO dto, long? userId = null)
         {
-            entity.UpdateShiftEntity(userId);
-
             this.AssignValue(entity, dto);
 
             return new ValueTask<Entities.ToDo>(entity);

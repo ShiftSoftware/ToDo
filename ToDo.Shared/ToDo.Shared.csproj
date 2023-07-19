@@ -11,4 +11,9 @@
     <PackageReference Include="ShiftSoftware.TypeAuth.Core" Version="1.4.2" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\..\ShiftEntity\ShiftEntity.Model\ShiftEntity.Model.csproj" />
+    <ProjectReference Include="..\..\TypeAuth\TypeAuth.Core\TypeAuth.Core.csproj" />
+  </ItemGroup>
+
 </Project>
