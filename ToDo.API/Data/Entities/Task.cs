@@ -17,7 +17,6 @@ public class Task : ShiftEntity<Task>
     public long? ParentTaskId { get; set; }
     public string? Files { get; set; }
     public long? AssignedToId { get; set; }
-    public string? AssignedToName { get; set; }
 
     [ForeignKey("ParentTaskId")]
     public virtual Task? ParentTask { get; set; }

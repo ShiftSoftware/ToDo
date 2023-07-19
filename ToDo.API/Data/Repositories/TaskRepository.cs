@@ -84,7 +84,6 @@ namespace ToDo.API.Data.Repositories
             if (dto.AssignedTo != null)
             {
                 entity.AssignedToId = dto.AssignedTo.Value.ToLong();
-                entity.AssignedToName = dto.AssignedTo.Text;
             }
         }
 
