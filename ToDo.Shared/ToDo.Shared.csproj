@@ -8,7 +8,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="ShiftSoftware.ShiftEntity.Model" Version="1.6.9" />
+    <PackageReference Include="ShiftSoftware.ShiftEntity.Model" Version="1.6.11" />
     <PackageReference Include="ShiftSoftware.TypeAuth.Core" Version="1.4.2" />
   </ItemGroup>
 
