@@ -18,6 +18,7 @@ dotnet sln remove ..\ShiftEntity\ShiftEntity.Web\ShiftEntity.Web.csproj
 dotnet sln remove ..\ShiftEntity\ShiftEntity.EFCore.SqlServer\ShiftEntity.EFCore.SqlServer.csproj
 
 dotnet sln remove ..\ShiftBlazor\ShiftBlazor\ShiftBlazor.csproj
+dotnet sln remove ..\ShiftBlazor\ShiftBlazor.Tests\ShiftBlazor.Tests.csproj
 
 dotnet sln remove ..\TypeAuth\TypeAuth.Core\TypeAuth.Core.csproj
 dotnet sln remove ..\TypeAuth\TypeAuth.Blazor\TypeAuth.Blazor.csproj
