@@ -1,37 +1,37 @@
-<Project Sdk="Microsoft.NET.Sdk.BlazorWebAssembly">
+﻿<Project Sdk="Microsoft.NET.Sdk.BlazorWebAssembly">
+	<Import Project="..\ShiftFrameworkGlobalSettings.props" />
+	<PropertyGroup>
+		<TargetFramework>net7.0</TargetFramework>
+		<Nullable>enable</Nullable>
+		<ImplicitUsings>enable</ImplicitUsings>
+	</PropertyGroup>
 
-  <PropertyGroup>
-    <TargetFramework>net7.0</TargetFramework>
-    <Nullable>enable</Nullable>
-    <ImplicitUsings>enable</ImplicitUsings>
-  </PropertyGroup>
+	<ItemGroup>
+		<Compile Remove="Services\**" />
+		<Content Remove="Services\**" />
+		<EmbeddedResource Remove="Services\**" />
+		<None Remove="Services\**" />
+	</ItemGroup>
 
-  <ItemGroup>
-    <Compile Remove="Services\**" />
-    <Content Remove="Services\**" />
-    <EmbeddedResource Remove="Services\**" />
-    <None Remove="Services\**" />
-  </ItemGroup>
+	<ItemGroup>
+		<PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly" Version="7.0.7" />
+		<PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly.DevServer" Version="7.0.7" PrivateAssets="all" />
+		<PackageReference Include="ShiftSoftware.ShiftBlazor" Version="1.5.7" />
+		<PackageReference Include="ShiftSoftware.ShiftIdentity.Blazor" Version="1.6.8" />
+		<PackageReference Include="ShiftSoftware.ShiftIdentity.Dashboard.Blazor" Version="1.6.8" />
+	</ItemGroup>
 
-  <ItemGroup>
-    <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly" Version="7.0.7" />
-    <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly.DevServer" Version="7.0.7" PrivateAssets="all" />
-    <PackageReference Include="ShiftSoftware.ShiftBlazor" Version="1.5.7" />
-    <PackageReference Include="ShiftSoftware.ShiftIdentity.Blazor" Version="1.6.8" />
-    <PackageReference Include="ShiftSoftware.ShiftIdentity.Dashboard.Blazor" Version="1.6.8" />
-  </ItemGroup>
+	<ItemGroup>
+		<ProjectReference Include="..\ToDo.Shared\ToDo.Shared.csproj" />
 
-  <ItemGroup>
-    <ProjectReference Include="..\ToDo.Shared\ToDo.Shared.csproj" />
-	  
-    <ProjectReference Include="..\..\ShiftIdentity\ShiftIdentity.Dashboard.Blazor\ShiftIdentity.Dashboard.Blazor.csproj" Condition="Exists('..\..\ShiftIdentity\ShiftIdentity.Dashboard.Blazor\ShiftIdentity.Dashboard.Blazor.csproj')" />
-    <ProjectReference Include="..\..\ShiftIdentity\ShiftIdentity.Blazor\ShiftIdentity.Blazor.csproj" Condition="Exists('..\..\ShiftIdentity\ShiftIdentity.Blazor\ShiftIdentity.Blazor.csproj')" />
-    <ProjectReference Include="..\..\ShiftBlazor\ShiftBlazor\ShiftBlazor.csproj" Condition="Exists('..\..\ShiftBlazor\ShiftBlazor\ShiftBlazor.csproj')" />
-  </ItemGroup>
+		<ProjectReference Include="..\..\ShiftIdentity\ShiftIdentity.Dashboard.Blazor\ShiftIdentity.Dashboard.Blazor.csproj" Condition="Exists('..\..\ShiftIdentity\ShiftIdentity.Dashboard.Blazor\ShiftIdentity.Dashboard.Blazor.csproj') And '$(ImportShiftFrameworkProjects)'=='true'" />
+		<ProjectReference Include="..\..\ShiftIdentity\ShiftIdentity.Blazor\ShiftIdentity.Blazor.csproj" Condition="Exists('..\..\ShiftIdentity\ShiftIdentity.Blazor\ShiftIdentity.Blazor.csproj') And '$(ImportShiftFrameworkProjects)'=='true'" />
+		<ProjectReference Include="..\..\ShiftBlazor\ShiftBlazor\ShiftBlazor.csproj" Condition="Exists('..\..\ShiftBlazor\ShiftBlazor\ShiftBlazor.csproj') And '$(ImportShiftFrameworkProjects)'=='true'" />
+	</ItemGroup>
 
-  <ItemGroup>
-    <None Include="Pages\_ToDo\ToDoForm.razor" />
-    <None Include="Pages\_ToDo\ToDoList.razor" />
-  </ItemGroup>
+	<ItemGroup>
+		<None Include="Pages\_ToDo\ToDoForm.razor" />
+		<None Include="Pages\_ToDo\ToDoList.razor" />
+	</ItemGroup>
 
 </Project>
