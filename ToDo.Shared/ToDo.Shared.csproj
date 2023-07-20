@@ -12,8 +12,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\ShiftEntity\ShiftEntity.Model\ShiftEntity.Model.csproj" />
-    <ProjectReference Include="..\..\TypeAuth\TypeAuth.Core\TypeAuth.Core.csproj" />
+    <ProjectReference Include="..\..\ShiftEntity\ShiftEntity.Model\ShiftEntity.Model.csproj" Condition="Exists('..\..\ShiftEntity\ShiftEntity.Model\ShiftEntity.Model.csproj')" />
+    <ProjectReference Include="..\..\TypeAuth\TypeAuth.Core\TypeAuth.Core.csproj" Condition="Exists('..\..\TypeAuth\TypeAuth.Core\TypeAuth.Core.csproj')" />
   </ItemGroup>
 
 </Project>
