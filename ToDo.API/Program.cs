@@ -62,7 +62,7 @@ builder.Services
             RefreshToken = new TokenSettingsModel
             {
                 Audience = "ToDo",
-                ExpireSeconds = 600000,
+                ExpireSeconds = 600000000,
                 Issuer = builder.Configuration.GetValue<string>("Settings:TokenSettings:Issuer")!,
                 Key = builder.Configuration.GetValue<string>("Settings:TokenSettings:Key")!,
             },

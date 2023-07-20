@@ -2,6 +2,8 @@
 using Microsoft.EntityFrameworkCore;
 using ShiftSoftware.EFCore.SqlServer;
 using ShiftSoftware.ShiftEntity.Core;
+using ShiftSoftware.ShiftEntity.Model.Dtos;
+using ToDo.API.Data.Entities;
 using ToDo.Shared.DTOs.Project;
 
 namespace ToDo.API.Data.Repositories
@@ -19,13 +21,6 @@ namespace ToDo.API.Data.Repositories
             var entity = new Entities.Project();
 
             this.AssignValue(entity, dto);
-
-            return new ValueTask<Entities.Project>(entity);
-        }
-
-        public ValueTask<Entities.Project> DeleteAsync(Entities.Project entity, long? userId = null)
-        {
-            entity.DeleteShiftEntity(userId);
 
             return new ValueTask<Entities.Project>(entity);
         }

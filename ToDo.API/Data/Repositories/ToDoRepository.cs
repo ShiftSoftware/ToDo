@@ -23,13 +23,6 @@ namespace ToDo.API.Data.Repositories
             return new ValueTask<Entities.ToDo>(entity);
         }
 
-        public ValueTask<Entities.ToDo> DeleteAsync(Entities.ToDo entity, long? userId = null)
-        {
-            entity.DeleteShiftEntity(userId);
-
-            return new ValueTask<Entities.ToDo>(entity);
-        }
-
         public async Task<Entities.ToDo> FindAsync(long id, DateTime? asOf = null, bool ignoreGlobalFilters = false)
         {
             return await base.FindAsync(id, asOf, ignoreGlobalFilters, x => x.Include(y => y.Project));
