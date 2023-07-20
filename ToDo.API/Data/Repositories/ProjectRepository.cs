@@ -16,15 +16,6 @@ namespace ToDo.API.Data.Repositories
         {
         }
 
-        public ValueTask<Entities.Project> CreateAsync(ProjectDTO dto, long? userId = null)
-        {
-            var entity = new Entities.Project();
-
-            this.AssignValue(entity, dto);
-
-            return new ValueTask<Entities.Project>(entity);
-        }
-
         public async Task<Entities.Project> FindAsync(long id, DateTime? asOf = null, bool ignoreGlobalFilters = false)
         {
             return await base.FindAsync(id, asOf, ignoreGlobalFilters);
@@ -35,8 +26,11 @@ namespace ToDo.API.Data.Repositories
             return mapper.ProjectTo<ProjectListDTO>(this.db.Projects.AsNoTracking());
         }
 
-        public ValueTask<Entities.Project> UpdateAsync(Entities.Project entity, ProjectDTO dto, long? userId = null)
+        public ValueTask<Entities.Project> UpsertAsync(Entities.Project entity, ProjectDTO dto, ActionTypes actionType, long? userId = null)
         {
+            if(actionType==ActionTypes.Insert)
+                entity = new Entities.Project();
+
             this.AssignValue(entity, dto);
 
             return new ValueTask<Entities.Project>(entity);
