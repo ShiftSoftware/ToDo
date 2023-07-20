@@ -53,6 +53,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ShiftIdentity.Dashboard.Asp
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ShiftIdentity.Dashboard.Blazor", "..\ShiftIdentity\ShiftIdentity.Dashboard.Blazor\ShiftIdentity.Dashboard.Blazor.csproj", "{429C3970-E544-44A6-8394-C5CCDCDCF524}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "TestingTools", "TestingTools", "{B589E341-08B4-41C6-9E93-C6D25A101669}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ShiftFrameworkTestingTools", "..\ShiftFrameworkTestingTools\ShiftFrameworkTestingTools\ShiftFrameworkTestingTools.csproj", "{ADD8E2AB-B63B-47A8-88ED-2BBE6F82CEB9}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -131,6 +135,10 @@ Global
 		{429C3970-E544-44A6-8394-C5CCDCDCF524}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{429C3970-E544-44A6-8394-C5CCDCDCF524}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{429C3970-E544-44A6-8394-C5CCDCDCF524}.Release|Any CPU.Build.0 = Release|Any CPU
+		{ADD8E2AB-B63B-47A8-88ED-2BBE6F82CEB9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{ADD8E2AB-B63B-47A8-88ED-2BBE6F82CEB9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{ADD8E2AB-B63B-47A8-88ED-2BBE6F82CEB9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{ADD8E2AB-B63B-47A8-88ED-2BBE6F82CEB9}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -157,5 +165,7 @@ Global
 		{48AB90D2-1125-41A3-84AC-5251B3431D13} = {0C98D4EF-18BA-4AAF-AA12-D2E140F38537}
 		{E09ECA02-6559-4B70-AD22-8C93DA5ADE8A} = {0C98D4EF-18BA-4AAF-AA12-D2E140F38537}
 		{429C3970-E544-44A6-8394-C5CCDCDCF524} = {0C98D4EF-18BA-4AAF-AA12-D2E140F38537}
+		{B589E341-08B4-41C6-9E93-C6D25A101669} = {50743F3B-2BEF-4AF5-AEFB-BE1BD1B65EB5}
+		{ADD8E2AB-B63B-47A8-88ED-2BBE6F82CEB9} = {B589E341-08B4-41C6-9E93-C6D25A101669}
 	EndGlobalSection
 EndGlobal
