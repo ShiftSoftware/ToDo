@@ -39,17 +39,16 @@
         <MudSelectItem Value="@(ToDoStatus.New)" />
         <MudSelectItem Value="@(ToDoStatus.InProgress)" />
         <MudSelectItem Value="@(ToDoStatus.Completed)" />
-
-        <ShiftAutocomplete Label="Project"
-                           T="ShiftSoftware.ShiftEntity.Model.Dtos.ShiftEntitySelectDTO"
-                           @bind-Value="TheItem.Project"
-                           ToStringFunc="@(e=> e==null ? null : $"{e.Text}")"
-                           EntitySet="Project"
-                           TEntitySet="ProjectListDTO"
-                           Where="@(q => x => x.Name!.Contains(q))"
-                           DataValueField="@nameof(ProjectListDTO.ID)"
-                           DataTextField="@nameof(ProjectListDTO.Name)" />
-
     </MudSelect>
+
+    <ShiftAutocomplete Label="Project"
+                       T="ShiftSoftware.ShiftEntity.Model.Dtos.ShiftEntitySelectDTO"
+                       @bind-Value="TheItem.Project"
+                       ToStringFunc="@(e=> e==null ? null : $"{e.Text}")"
+                       EntitySet="Project"
+                       TEntitySet="ProjectListDTO"
+                       Where="@(q => x => x.Name!.Contains(q))"
+                       DataValueField="@nameof(ProjectListDTO.ID)"
+                       DataTextField="@nameof(ProjectListDTO.Name)" />
 </ShiftEntityForm>
 
