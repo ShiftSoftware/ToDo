@@ -8,7 +8,7 @@ public class ProjectProfile : Profile
 {
     public ProjectProfile()
     {
-        CreateMap<Project, ProjectDTO>();
+        CreateMap<Project, ProjectDTO>().ReverseMap().IgnoreAllPropertiesWithAnInaccessibleSetter();
         CreateMap<Project, ProjectListDTO>();
     }
 }
