@@ -8,6 +8,7 @@ using ShiftSoftware.ShiftIdentity.Blazor.Handlers;
 using ShiftSoftware.ShiftIdentity.Dashboard.Blazor.Extensions;
 using ShiftSoftware.TypeAuth.Blazor.Extensions;
 using System.Globalization;
+using ToDo.Shared;
 using ToDo.Web;
 
 
@@ -54,7 +55,9 @@ builder.Services.AddShiftIdentityDashboardBlazor(x =>
 });
 
 builder.Services.AddTypeAuth(x =>
-    x.AddActionTree<ShiftSoftware.ShiftIdentity.Core.ShiftIdentityActions>()
+    x
+    .AddActionTree<ShiftSoftware.ShiftIdentity.Core.ShiftIdentityActions>()
+    .AddActionTree<ToDoActions>()
 );
 
 var host = builder.Build();

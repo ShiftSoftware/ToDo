@@ -10,4 +10,6 @@ public class ToDoActions
     public readonly static ReadWriteDeleteAction ToDo = new ReadWriteDeleteAction("ToDo");
     public readonly static ReadWriteDeleteAction Project = new ReadWriteDeleteAction("Project");
     public readonly static ReadWriteDeleteAction Task = new ReadWriteDeleteAction("Task");
+
+    public readonly static ReadWriteDeleteAction UploadFiles = new ReadWriteDeleteAction("Upload Files");
 }
