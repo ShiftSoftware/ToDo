@@ -17,6 +17,7 @@ using ShiftSoftware.ShiftIdentity.AspNetCore;
 using ShiftSoftware.ShiftIdentity.AspNetCore.Models;
 using ToDo.Shared;
 using ToDo.Shared.DTOs.Project;
+using ShiftSoftware.ShiftEntity.CosmosDbSync.Extensions;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -28,6 +29,7 @@ var fakeUser = new TokenUserDataDTO
 };
 
 builder.Services
+    .AddShiftEntityCosmosDbSync()
     .AddLocalization()
     .AddHttpContextAccessor()
     .AddDbContext<DB>(x => x.UseSqlServer(builder.Configuration.GetConnectionString("SQLServer")))
