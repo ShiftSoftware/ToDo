@@ -1,4 +1,5 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
+	<Import Project="..\ShiftFrameworkGlobalSettings.props" />
 
   <PropertyGroup>
     <TargetFramework>net7.0</TargetFramework>
@@ -7,13 +8,13 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="ShiftSoftware.ShiftEntity.Model" Version="1.6.9" />
+    <PackageReference Include="ShiftSoftware.ShiftEntity.Model" Version="1.6.11" />
     <PackageReference Include="ShiftSoftware.TypeAuth.Core" Version="1.4.2" />
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\ShiftEntity\ShiftEntity.Model\ShiftEntity.Model.csproj" />
-    <ProjectReference Include="..\..\TypeAuth\TypeAuth.Core\TypeAuth.Core.csproj" />
+    <ProjectReference Include="..\..\ShiftEntity\ShiftEntity.Model\ShiftEntity.Model.csproj" Condition="Exists('..\..\ShiftEntity\ShiftEntity.Model\ShiftEntity.Model.csproj') And '$(ImportShiftFrameworkProjects)'=='true'" />
+    <ProjectReference Include="..\..\TypeAuth\TypeAuth.Core\TypeAuth.Core.csproj" Condition="Exists('..\..\TypeAuth\TypeAuth.Core\TypeAuth.Core.csproj') And '$(ImportShiftFrameworkProjects)'=='true'" />
   </ItemGroup>
 
 </Project>

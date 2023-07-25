@@ -15,43 +15,52 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "ShiftFramework", "ShiftFram
 	ProjectSection(SolutionItems) = preProject
 		ImportAndReferenceAll.bat = ImportAndReferenceAll.bat
 		RemoveAll.bat = RemoveAll.bat
+		ShiftFrameworkGlobalSettings.props = ShiftFrameworkGlobalSettings.props
 	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "ShiftEntity", "ShiftEntity", "{D4E58EDE-90A3-480E-AD31-5EA419BE2530}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ShiftEntity.Model", "..\ShiftEntity\ShiftEntity.Model\ShiftEntity.Model.csproj", "{8A08E4F5-DFFD-415D-94C9-077605BB3DFB}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ShiftEntity.Model", "..\ShiftEntity\ShiftEntity.Model\ShiftEntity.Model.csproj", "{8A08E4F5-DFFD-415D-94C9-077605BB3DFB}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ShiftEntity.Core", "..\ShiftEntity\ShiftEntity.Core\ShiftEntity.Core.csproj", "{E8C808DB-5E82-45B8-A56F-0C52D26299A9}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ShiftEntity.Core", "..\ShiftEntity\ShiftEntity.Core\ShiftEntity.Core.csproj", "{E8C808DB-5E82-45B8-A56F-0C52D26299A9}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ShiftEntity.Web", "..\ShiftEntity\ShiftEntity.Web\ShiftEntity.Web.csproj", "{CADF822B-84BC-4363-9B73-E54E8CB96D3F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ShiftEntity.Web", "..\ShiftEntity\ShiftEntity.Web\ShiftEntity.Web.csproj", "{CADF822B-84BC-4363-9B73-E54E8CB96D3F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ShiftEntity.EFCore.SqlServer", "..\ShiftEntity\ShiftEntity.EFCore.SqlServer\ShiftEntity.EFCore.SqlServer.csproj", "{98594D26-1FF7-4DA5-B534-81F13B30B8C6}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ShiftEntity.EFCore.SqlServer", "..\ShiftEntity\ShiftEntity.EFCore.SqlServer\ShiftEntity.EFCore.SqlServer.csproj", "{98594D26-1FF7-4DA5-B534-81F13B30B8C6}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "ShiftBlazor", "ShiftBlazor", "{BC45EE74-C01B-4CCC-84D3-7CB9B25611EA}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ShiftBlazor", "..\ShiftBlazor\ShiftBlazor\ShiftBlazor.csproj", "{CF9F6B6E-D36E-4404-97C5-5A02B6E0F56E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ShiftBlazor", "..\ShiftBlazor\ShiftBlazor\ShiftBlazor.csproj", "{CF9F6B6E-D36E-4404-97C5-5A02B6E0F56E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ShiftBlazor.Tests", "..\ShiftBlazor\ShiftBlazor.Tests\ShiftBlazor.Tests.csproj", "{2D4392AC-8A6A-46DD-AF50-B309B75DD630}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ShiftBlazor.Tests", "..\ShiftBlazor\ShiftBlazor.Tests\ShiftBlazor.Tests.csproj", "{2D4392AC-8A6A-46DD-AF50-B309B75DD630}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "TypeAuth", "TypeAuth", "{B94F8682-F83F-4B9C-9C66-D82F7BFFB806}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TypeAuth.Core", "..\TypeAuth\TypeAuth.Core\TypeAuth.Core.csproj", "{DE4BA59A-21B8-46CE-AB83-9906AB224E83}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TypeAuth.Core", "..\TypeAuth\TypeAuth.Core\TypeAuth.Core.csproj", "{DE4BA59A-21B8-46CE-AB83-9906AB224E83}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TypeAuth.Blazor", "..\TypeAuth\TypeAuth.Blazor\TypeAuth.Blazor.csproj", "{D2506A5E-489C-476E-8712-13828D7A8210}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TypeAuth.Blazor", "..\TypeAuth\TypeAuth.Blazor\TypeAuth.Blazor.csproj", "{D2506A5E-489C-476E-8712-13828D7A8210}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TypeAuth.AspNetCore", "..\TypeAuth\TypeAuth.AspNetCore\TypeAuth.AspNetCore.csproj", "{DBD2E46F-8709-4B51-9844-A6290EE35BAB}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TypeAuth.AspNetCore", "..\TypeAuth\TypeAuth.AspNetCore\TypeAuth.AspNetCore.csproj", "{DBD2E46F-8709-4B51-9844-A6290EE35BAB}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "ShiftIdentity", "ShiftIdentity", "{0C98D4EF-18BA-4AAF-AA12-D2E140F38537}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ShiftIdentity.Core", "..\ShiftIdentity\ShiftIdentity.Core\ShiftIdentity.Core.csproj", "{1270ED03-99E3-4489-8964-795355500624}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ShiftIdentity.Core", "..\ShiftIdentity\ShiftIdentity.Core\ShiftIdentity.Core.csproj", "{1270ED03-99E3-4489-8964-795355500624}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ShiftIdentity.AspNetCore", "..\ShiftIdentity\ShiftIdentity.AspNetCore\ShiftIdentity.AspNetCore.csproj", "{C672BF9E-852B-4FCE-B923-F60E6D1302A3}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ShiftIdentity.AspNetCore", "..\ShiftIdentity\ShiftIdentity.AspNetCore\ShiftIdentity.AspNetCore.csproj", "{C672BF9E-852B-4FCE-B923-F60E6D1302A3}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ShiftIdentity.Blazor", "..\ShiftIdentity\ShiftIdentity.Blazor\ShiftIdentity.Blazor.csproj", "{48AB90D2-1125-41A3-84AC-5251B3431D13}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ShiftIdentity.Blazor", "..\ShiftIdentity\ShiftIdentity.Blazor\ShiftIdentity.Blazor.csproj", "{48AB90D2-1125-41A3-84AC-5251B3431D13}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ShiftIdentity.Dashboard.AspNetCore", "..\ShiftIdentity\ShiftIdentity.Dashboard.AspNetCore\ShiftIdentity.Dashboard.AspNetCore.csproj", "{E09ECA02-6559-4B70-AD22-8C93DA5ADE8A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ShiftIdentity.Dashboard.AspNetCore", "..\ShiftIdentity\ShiftIdentity.Dashboard.AspNetCore\ShiftIdentity.Dashboard.AspNetCore.csproj", "{E09ECA02-6559-4B70-AD22-8C93DA5ADE8A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ShiftIdentity.Dashboard.Blazor", "..\ShiftIdentity\ShiftIdentity.Dashboard.Blazor\ShiftIdentity.Dashboard.Blazor.csproj", "{429C3970-E544-44A6-8394-C5CCDCDCF524}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ShiftIdentity.Dashboard.Blazor", "..\ShiftIdentity\ShiftIdentity.Dashboard.Blazor\ShiftIdentity.Dashboard.Blazor.csproj", "{429C3970-E544-44A6-8394-C5CCDCDCF524}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "TestingTools", "TestingTools", "{B589E341-08B4-41C6-9E93-C6D25A101669}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ShiftFrameworkTestingTools", "..\ShiftFrameworkTestingTools\ShiftFrameworkTestingTools\ShiftFrameworkTestingTools.csproj", "{ADD8E2AB-B63B-47A8-88ED-2BBE6F82CEB9}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ToDo.Functions", "ToDo.Functions\ToDo.Functions.csproj", "{81A14F9A-F817-4942-B91A-0A9590464B3F}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ShiftEntity.CosmosDbSync", "..\ShiftEntity\ShiftEntity.CosmosDbSync\ShiftEntity.CosmosDbSync.csproj", "{37DAB5D2-FFC3-4333-9F70-72ECF862ACED}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -131,12 +140,21 @@ Global
 		{429C3970-E544-44A6-8394-C5CCDCDCF524}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{429C3970-E544-44A6-8394-C5CCDCDCF524}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{429C3970-E544-44A6-8394-C5CCDCDCF524}.Release|Any CPU.Build.0 = Release|Any CPU
+		{ADD8E2AB-B63B-47A8-88ED-2BBE6F82CEB9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{ADD8E2AB-B63B-47A8-88ED-2BBE6F82CEB9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{ADD8E2AB-B63B-47A8-88ED-2BBE6F82CEB9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{ADD8E2AB-B63B-47A8-88ED-2BBE6F82CEB9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{81A14F9A-F817-4942-B91A-0A9590464B3F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{81A14F9A-F817-4942-B91A-0A9590464B3F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{81A14F9A-F817-4942-B91A-0A9590464B3F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{81A14F9A-F817-4942-B91A-0A9590464B3F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{37DAB5D2-FFC3-4333-9F70-72ECF862ACED}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{37DAB5D2-FFC3-4333-9F70-72ECF862ACED}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{37DAB5D2-FFC3-4333-9F70-72ECF862ACED}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{37DAB5D2-FFC3-4333-9F70-72ECF862ACED}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
-	EndGlobalSection
-	GlobalSection(ExtensibilityGlobals) = postSolution
-		SolutionGuid = {547274AF-5DE3-4E97-AA97-38AD0AE81C22}
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{D4E58EDE-90A3-480E-AD31-5EA419BE2530} = {50743F3B-2BEF-4AF5-AEFB-BE1BD1B65EB5}
@@ -157,5 +175,11 @@ Global
 		{48AB90D2-1125-41A3-84AC-5251B3431D13} = {0C98D4EF-18BA-4AAF-AA12-D2E140F38537}
 		{E09ECA02-6559-4B70-AD22-8C93DA5ADE8A} = {0C98D4EF-18BA-4AAF-AA12-D2E140F38537}
 		{429C3970-E544-44A6-8394-C5CCDCDCF524} = {0C98D4EF-18BA-4AAF-AA12-D2E140F38537}
+		{B589E341-08B4-41C6-9E93-C6D25A101669} = {50743F3B-2BEF-4AF5-AEFB-BE1BD1B65EB5}
+		{ADD8E2AB-B63B-47A8-88ED-2BBE6F82CEB9} = {B589E341-08B4-41C6-9E93-C6D25A101669}
+		{37DAB5D2-FFC3-4333-9F70-72ECF862ACED} = {D4E58EDE-90A3-480E-AD31-5EA419BE2530}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {547274AF-5DE3-4E97-AA97-38AD0AE81C22}
 	EndGlobalSection
 EndGlobal

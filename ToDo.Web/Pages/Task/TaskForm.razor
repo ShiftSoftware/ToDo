@@ -12,6 +12,7 @@
                  @ref="FormContainer"
                  Action="Task"
                  Title="Task"
+                 TypeAuthAction="ToDo.Shared.ToDoActions.Task"
                  @bind-Key="@Key">
 
     <MudTextField ReadOnly="@ReadOnly"
@@ -19,7 +20,7 @@
                   OnlyValidateIfDirty="true"
                   Label="Name"
                   @bind-Value="TheItem.Name"
-                  For="@(() => TheItem.Name)"/>
+                  For="@(() => TheItem.Name)" />
 
     <MudTextField ReadOnly="@ReadOnly"
                   Disabled="@Disabled"
@@ -57,7 +58,8 @@
     <FileUploader Url="/file/upload"
                   ShowThumbnail="true"
                   Label="Attachments"
-                  @bind-Values="TheItem.Files"/>
+                  TypeAuthAction="ToDo.Shared.ToDoActions.UploadFiles"
+    @bind-Values="TheItem.Files" />
 
     @if (Mode == FormModes.View && !string.IsNullOrWhiteSpace(TheItem.ID))
     {

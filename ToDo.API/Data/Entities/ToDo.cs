@@ -1,12 +1,12 @@
-﻿using AutoMapper;
-using ShiftSoftware.ShiftEntity.Core;
-using ShiftSoftware.ShiftEntity.Model.Dtos;
+﻿using ShiftSoftware.ShiftEntity.Core;
+using ShiftSoftware.ShiftEntity.CosmosDbSync;
 using ToDo.Shared.DTOs.ToDo;
 using ToDo.Shared.Enums;
 
 namespace ToDo.API.Data.Entities;
 
 [TemporalShiftEntity]
+[ShiftEntitySync(typeof(ToDoDTO))]
 public class ToDo : ShiftEntity<ToDo>
 {
     public string Title { get; set; } = default!;

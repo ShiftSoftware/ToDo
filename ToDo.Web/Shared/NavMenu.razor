@@ -3,9 +3,9 @@
 @using ToDo.Web.Pages.Project;
 
 <MudNavMenu>
-    <MudNavLink Style="color: #08c62c" IconColor="Color.Inherit" Href="@($"/{nameof(ProjectList)}")" Match="NavLinkMatch.All" Icon="@Icons.Material.Outlined.Cases">Projects</MudNavLink>
-    <MudNavLink Style="color: #b30101;" IconColor="Color.Inherit" Href="@($"/{nameof(ToDoList)}")" Match="NavLinkMatch.All" Icon="@Icons.Material.Outlined.Task">To Do</MudNavLink>
-    <MudNavLink Style="color: #369bff;" IconColor="Color.Inherit" Href="@($"/{nameof(TaskList)}")" Match="NavLinkMatch.All" Icon="@Icons.Material.Outlined.Task">Task</MudNavLink>
+    <AuthorizedMudNavLink Style="color: #08c62c" IconColor="Color.Inherit" TypeAuthAction="ToDo.Shared.ToDoActions.Project" Href="@($"/{nameof(ProjectList)}")" Match="NavLinkMatch.All" Icon="@Icons.Material.Outlined.Cases">Projects</AuthorizedMudNavLink>
+    <AuthorizedMudNavLink Style="color: #b30101;" IconColor="Color.Inherit" TypeAuthAction="ToDo.Shared.ToDoActions.ToDo" Href="@($"/{nameof(ToDoList)}")" Match="NavLinkMatch.All" Icon="@Icons.Material.Outlined.Task">To Do</AuthorizedMudNavLink>
+    <AuthorizedMudNavLink Style="color: #369bff;" IconColor="Color.Inherit" TypeAuthAction="ToDo.Shared.ToDoActions.Task" Href="@($"/{nameof(TaskList)}")" Match="NavLinkMatch.All" Icon="@Icons.Material.Outlined.Task">Task</AuthorizedMudNavLink>
 </MudNavMenu>
 
 @code {
