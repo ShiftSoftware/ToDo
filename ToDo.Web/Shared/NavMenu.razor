@@ -3,9 +3,9 @@
 @using ToDo.Web.Pages.Project;
 
 <MudNavMenu>
-    <MudNavLink Href="@($"/{nameof(ProjectList)}")" Match="NavLinkMatch.All" Icon="@Icons.Material.Outlined.Cases">Projects</MudNavLink>
-    <MudNavLink Href="@($"/{nameof(ToDoList)}")" Match="NavLinkMatch.All" Icon="@Icons.Material.Outlined.Task">To Do</MudNavLink>
-    <MudNavLink Href="@($"/{nameof(TaskList)}")" Match="NavLinkMatch.All" Icon="@Icons.Material.Outlined.Task">Task</MudNavLink>
+    <MudNavLink Style="color: #08c62c" IconColor="Color.Inherit" Href="@($"/{nameof(ProjectList)}")" Match="NavLinkMatch.All" Icon="@Icons.Material.Outlined.Cases">Projects</MudNavLink>
+    <MudNavLink Style="color: #b30101;" IconColor="Color.Inherit" Href="@($"/{nameof(ToDoList)}")" Match="NavLinkMatch.All" Icon="@Icons.Material.Outlined.Task">To Do</MudNavLink>
+    <MudNavLink Style="color: #369bff;" IconColor="Color.Inherit" Href="@($"/{nameof(TaskList)}")" Match="NavLinkMatch.All" Icon="@Icons.Material.Outlined.Task">Task</MudNavLink>
 </MudNavMenu>
 
 @code {
