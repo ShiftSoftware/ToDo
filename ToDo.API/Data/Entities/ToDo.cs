@@ -6,7 +6,6 @@ using ToDo.Shared.Enums;
 namespace ToDo.API.Data.Entities;
 
 [TemporalShiftEntity]
-[ShiftEntitySync(typeof(ToDoDTO))]
 public class ToDo : ShiftEntity<ToDo>
 {
     public string Title { get; set; } = default!;
