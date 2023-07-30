@@ -32,7 +32,7 @@ var fakeUser = new TokenUserDataDTO
 builder.Services
     .AddShiftEntityCosmosDbSync(x =>
     {
-        x.ConnectionString = "Connection string";
+        x.ConnectionString = "AccountEndpoint=https://nahro.documents.azure.com:443/;AccountKey=sO8UDMIAemRPUhrJQWzhkREghutr0RXbNRgm91fgAzjdCk6mB84WWGo0C9nenUENEdEWf2ADVBO3ACDbhOjCdw==;";
         x.DefaultDatabaseName = "ToDo";
     })
     .AddLocalization()
