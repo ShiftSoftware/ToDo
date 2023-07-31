@@ -1,12 +1,6 @@
-﻿@using ShiftSoftware.ShiftBlazor.Services
-@using ShiftSoftware.ShiftIdentity.Blazor.Services
-@using ShiftSoftware.ShiftIdentity.Blazor;
-
+﻿
 @inherits ShiftMainLayout
-@inject NavigationManager navigationManager
 @inject SettingManager SettingManager
-@inject IDialogService Dialog
-@inject IIdentityStore tokenStore
 
 <MudRTLProvider RightToLeft="SettingManager.GetLanguage().RTL">
 
@@ -20,27 +14,8 @@
 
             <MudSpacer />
 
-            <MudButton StartIcon="@Icons.Material.Filled.Settings"
-                       OnClick="OpenSettings"
-                       Color="Color.Inherit">
-                Settings
-            </MudButton>
-
             <AuthorizeView>
-                <MudButton Href="/Identity/UserDataForm"
-                           Variant="Variant.Text"
-                           StartIcon="@Icons.Material.Filled.People"
-                           Color="Color.Inherit">
-                    Identity
-                </MudButton>
-
-                <MudButton OnClick="Logout"
-                           Variant="Variant.Text"
-                           StartIcon="@Icons.Material.Filled.Logout"
-                           Color="Color.Inherit">
-                    @*@localizer["Logout"]*@
-                    Logout
-                </MudButton>
+                <UserAvatar></UserAvatar>
             </AuthorizeView>
 
         </MudAppBar>
@@ -65,17 +40,5 @@
     void DrawerToggle()
     {
         _drawerOpen = !_drawerOpen;
-    }
-
-    private async Task Logout()
-    {
-        await tokenStore.RemoveTokenAsync();
-
-        navigationManager.NavigateTo("/", true);
-    }
-
-    private void OpenSettings()
-    {
-        Dialog.Show<Settings>();
     }
 }
