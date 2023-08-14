@@ -22,7 +22,7 @@
     public string? ParentTaskId { get; set; }
 
     public Dictionary<string, string> AddDialogParameters = new();
-    public Query Qry = new();
+    public Query? Qry;
 
     protected override void OnInitialized()
     {
@@ -33,7 +33,5 @@
             Qry = new Query()
                 .Where(nameof(TaskListDTO.ParentTaskId), "equal", ParentTaskId);
         }
-
-        
     }
 }

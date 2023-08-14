@@ -1,3 +1,134 @@
 ﻿@page "/"
+@attribute [Authorize]
+@using ShiftSoftware.ShiftEntity.Model.Dtos;
+@using ToDo.Shared.DTOs.Task;
+@using ToDo.Shared.DTOs.ToDo;
+@using ToDo.Web.Pages.Task;
+@using ToDo.Web.Pages._ToDo;
+@inject HttpClient Http
+@inject ODataQuery OData
+@inject ShiftModal ShiftModal
 
-<h1>Hello, world!</h1>
+<h1>Create your ToDo list now!</h1>
+
+<br />
+<br />
+
+<MudStack Row Justify="Justify.SpaceBetween" AlignItems="AlignItems.Start" Reverse>
+
+    <div class="clock">
+        <div class="week-name">
+            @Date.ToString("dddd")
+        </div>
+
+        <div class="date">
+            @Date.ToString("d MMMM yyyy")
+        </div>
+    </div>
+
+    <MudStack AlignItems="AlignItems.Start">
+
+        <MudCard Style="min-width: 450px;">
+            <MudCardHeader Style="background-color: #e0e0e0;">
+                <CardHeaderAvatar>
+                    <MudIcon Icon="@Icons.Material.Filled.Task" Size="Size.Large"/>
+                </CardHeaderAvatar>
+                <CardHeaderContent >
+                    <MudText Typo="Typo.body1" Style="font-weight: 500;">ToDo List</MudText>
+                </CardHeaderContent>
+            </MudCardHeader>
+            <MudCardContent Style="padding-block: 0;">
+                @if (Todos?.Value != null && Todos.Value.Count > 0)
+                {
+                    <MudList Clickable="true">
+                        @foreach (var todo in Todos.Value)
+                        {
+                            <MudListItem OnClick="() => OpenForm<ToDoForm>(todo.ID!)">@todo.Title</MudListItem>
+                        }
+                    </MudList>
+                }
+            </MudCardContent>
+            <MudCardActions>
+                <MudTooltip Text="View All">
+                    <MudButton StartIcon="@Icons.Material.Filled.ViewList" Href="/ToDoList">View All (@(Todos?.Count ?? 0))</MudButton>
+                </MudTooltip>
+            </MudCardActions>
+        </MudCard>
+
+        <MudCard Style="min-width: 450px;">
+            <MudCardHeader Style="background-color: #e0e0e0;">
+                <CardHeaderAvatar>
+                    <MudIcon Icon="@Icons.Material.Filled.Task" Size="Size.Large" />
+                </CardHeaderAvatar>
+                <CardHeaderContent>
+                    <MudText Typo="Typo.body1" Style="font-weight: 500;">Pending Tasks</MudText>
+                </CardHeaderContent>
+            </MudCardHeader>
+            <MudCardContent Style="padding-block: 0;">
+                @if (Tasks?.Value != null && Tasks.Value.Count > 0)
+                {
+                    <MudList Clickable="true">
+                        @foreach (var task in Tasks.Value)
+                        {
+                            <MudListItem OnClick="() => OpenForm<TaskForm>(task.ID!)">@task.Name</MudListItem>
+                        }
+                    </MudList>
+                }
+            </MudCardContent>
+            <MudCardActions>
+                <MudTooltip Text="View All">
+                    <MudButton StartIcon="@Icons.Material.Filled.ViewList" Href="/TaskList">View All (@(Tasks?.Count ?? 0))</MudButton>
+                </MudTooltip>
+            </MudCardActions>
+        </MudCard>
+    </MudStack>
+
+</MudStack>
+
+<style>
+    .clock {
+        border-left: 4px solid red;
+        padding: 8px 10px;
+        text-align: center;
+        display: inline-block;
+    }
+
+    .week-name {
+        font-size: 64px;
+        font-weight: bold;
+    }
+
+    .date {
+        font-size: 32px;
+    }
+</style>
+
+@code {
+    private DateTime Date = DateTime.Now;
+
+    private ODataDTO<ToDoListDTO>? Todos;
+    private ODataDTO<TaskListDTO>? Tasks;
+
+    protected override async System.Threading.Tasks.Task OnInitializedAsync()
+    {
+        var todoUrl = OData
+            .CreateQuery<ToDoListDTO>("ToDo")
+            .IncludeCount()
+            .Where(x => x.Status != ToDo.Shared.Enums.ToDoStatus.Completed)
+            .Take(3);
+
+        var taskUrl = OData
+            .CreateQuery<TaskListDTO>("Task")
+            .IncludeCount()
+            .Where(x => x.Status == ToDo.Shared.Enums._TaskStatus.New)
+            .Take(3);
+
+        Todos = await Http.GetFromJsonAsync<ODataDTO<ToDoListDTO>>(todoUrl.ToString());
+        Tasks = await Http.GetFromJsonAsync<ODataDTO<TaskListDTO>>(taskUrl.ToString());
+    }
+
+    public void OpenForm<T>(string id) where T : ComponentBase
+    {
+        _ = ShiftModal.Open<T>(id, ModalOpenMode.Popup);
+    }
+}
