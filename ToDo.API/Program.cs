@@ -19,6 +19,8 @@ using ToDo.Shared;
 using ToDo.Shared.DTOs.Project;
 using ShiftSoftware.ShiftEntity.CosmosDbSync.Extensions;
 using ShiftSoftware.ShiftEntity.CosmosDbSync;
+using ToDo.API;
+using Microsoft.Extensions.DependencyInjection;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -29,15 +31,21 @@ var fakeUser = new TokenUserDataDTO
     Username = "fake-user"
 };
 
+Action<DbContextOptionsBuilder> dbOptionBuilder = x =>
+{
+    x.UseSqlServer(builder.Configuration.GetConnectionString("SQLServer"));
+};
+
 builder.Services
     .AddShiftEntityCosmosDbSync(x =>
     {
-        x.ConnectionString = "AccountEndpoint=https://nahro.documents.azure.com:443/;AccountKey=sO8UDMIAemRPUhrJQWzhkREghutr0RXbNRgm91fgAzjdCk6mB84WWGo0C9nenUENEdEWf2ADVBO3ACDbhOjCdw==;";
+        x.ConnectionString = "AccountEndpoint=https://nahro.documents.azure.com:443/;AccountKey=o0hL1ia2juWc5375vWkPAgAgngN2oPydZey4izma60kV7lwVZ5yafu4WkUI2l6b13CFee2arYkIYACDbSCVGrA==;";
         x.DefaultDatabaseName = "ToDo";
+        x.AddDbContextProvider(new DbContextProvider(dbOptionBuilder));
     })
     .AddLocalization()
     .AddHttpContextAccessor()
-    .AddDbContext<DB>(x => x.UseSqlServer(builder.Configuration.GetConnectionString("SQLServer")))
+    .AddDbContext<DB>(dbOptionBuilder)
     .AddControllers()
     .AddShiftEntity(x =>
     {
@@ -89,30 +97,29 @@ builder.Services
         x.OdataEntitySet<ProjectListDTO>("Project");
         x.RegisterShiftIdentityDashboardEntitySets();
     });
-    //.AddFakeIdentityEndPoints(
-    //    new TokenSettingsModel
-    //    {
-    //        Issuer = "ToDo",
-    //        Key = "one-two-three-four-five-six-seven-eight.one-two-three-four-five-six-seven-eight",
-    //        ExpireSeconds = 60
-    //    },
-    //    fakeUser,
-    //    new ShiftSoftware.ShiftIdentity.Core.DTOs.App.AppDTO
-    //    {
-    //        AppId = "to-do-dev",
-    //        DisplayName = "ToDo Dev",
-    //        RedirectUri = "http://localhost:5028/Auth/Token"
-    //    },
-    //    "123a",
-    //    new string[] {
-    //        """
-    //            {
-    //                "ToDoActions": [1,2,3,4]
-    //            }
-    //        """
-    //    }
-    //);
-
+//.AddFakeIdentityEndPoints(
+//    new TokenSettingsModel
+//    {
+//        Issuer = "ToDo",
+//        Key = "one-two-three-four-five-six-seven-eight.one-two-three-four-five-six-seven-eight",
+//        ExpireSeconds = 60
+//    },
+//    fakeUser,
+//    new ShiftSoftware.ShiftIdentity.Core.DTOs.App.AppDTO
+//    {
+//        AppId = "to-do-dev",
+//        DisplayName = "ToDo Dev",
+//        RedirectUri = "http://localhost:5028/Auth/Token"
+//    },
+//    "123a",
+//    new string[] {
+//        """
+//            {
+//                "ToDoActions": [1,2,3,4]
+//            }
+//        """
+//    }
+//);
 builder.Services.AddSwaggerGen(c =>
 {
     c.DocInclusionPredicate(SwaggerService.DocInclusionPredicate);
