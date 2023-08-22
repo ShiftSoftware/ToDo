@@ -1,11 +1,13 @@
 ﻿using ShiftSoftware.ShiftEntity.Core;
 using ShiftSoftware.ShiftEntity.CosmosDbSync;
+using ToDo.Shared.DTOs.Project;
 using ToDo.Shared.DTOs.ToDo;
 using ToDo.Shared.Enums;
 
 namespace ToDo.API.Data.Entities;
 
 [TemporalShiftEntity]
+[ShiftEntitySync<ToDoDTO>(ContainerName = "ToDo")]
 public class ToDo : ShiftEntity<ToDo>
 {
     public string Title { get; set; } = default!;
