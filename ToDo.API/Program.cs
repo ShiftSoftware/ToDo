@@ -1,26 +1,24 @@
 using Microsoft.AspNetCore.Localization;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Azure;
+using ShiftSoftware.ShiftEntity.CosmosDbSync.Extensions;
 using ShiftSoftware.ShiftEntity.Web.Extensions;
 using ShiftSoftware.ShiftEntity.Web.Services;
-using System.Globalization;
-using ToDo.API.Data;
-using ToDo.API.Data.Repositories;
-using ToDo.Shared.DTOs.ToDo;
+using ShiftSoftware.ShiftIdentity.AspNetCore;
 using ShiftSoftware.ShiftIdentity.AspNetCore.Extensions;
+using ShiftSoftware.ShiftIdentity.AspNetCore.Models;
+using ShiftSoftware.ShiftIdentity.Core;
 using ShiftSoftware.ShiftIdentity.Core.DTOs;
 using ShiftSoftware.ShiftIdentity.Dashboard.AspNetCore.Extentsions;
 using ShiftSoftware.TypeAuth.AspNetCore.Extensions;
-using ShiftSoftware.ShiftIdentity.Core;
-using ToDo.Shared.DTOs.Task;
-using Microsoft.Extensions.Azure;
-using ShiftSoftware.ShiftIdentity.AspNetCore;
-using ShiftSoftware.ShiftIdentity.AspNetCore.Models;
+using System.Globalization;
+using ToDo.API;
+using ToDo.API.Data;
+using ToDo.API.Data.Repositories;
 using ToDo.Shared;
 using ToDo.Shared.DTOs.Project;
-using ShiftSoftware.ShiftEntity.CosmosDbSync.Extensions;
-using ShiftSoftware.ShiftEntity.CosmosDbSync;
-using ToDo.API;
-using Microsoft.Extensions.DependencyInjection;
+using ToDo.Shared.DTOs.Task;
+using ToDo.Shared.DTOs.ToDo;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -39,7 +37,7 @@ Action<DbContextOptionsBuilder> dbOptionBuilder = x =>
 builder.Services
     .AddShiftEntityCosmosDbSync(x =>
     {
-        x.ConnectionString = "AccountEndpoint=https://nahro.documents.azure.com:443/;AccountKey=o0hL1ia2juWc5375vWkPAgAgngN2oPydZey4izma60kV7lwVZ5yafu4WkUI2l6b13CFee2arYkIYACDbSCVGrA==;";
+        x.ConnectionString = "AccountEndpoint=https://nahro.documents.azure.com:443/;AccountKey=c6Kvgm8XProUrUDStShKjJxkSzeWnTpVdnqmMofwcAME14UaHtXi03Ww7c1T1vhaKKkHmMPkU2PpACDb6JeR5g==;";
         x.DefaultDatabaseName = "ToDo";
         x.AddDbContextProvider(new DbContextProvider(dbOptionBuilder));
     })
