@@ -50,7 +50,7 @@ namespace ToDo.API.Migrations
 
                     b.HasIndex("LastSyncDate");
 
-                    b.ToTable("DeletedRowLogs");
+                    b.ToTable("DeletedRowLogs", (string)null);
                 });
 
             modelBuilder.Entity("ShiftSoftware.ShiftIdentity.AspNetCore.Entities.AccessTree", b =>
@@ -818,7 +818,7 @@ namespace ToDo.API.Migrations
 
                     b.HasKey("ID");
 
-                    b.ToTable("Projects");
+                    b.ToTable("Projects", (string)null);
 
                     b.ToTable(tb => tb.IsTemporal(ttb =>
                         {
@@ -895,7 +895,7 @@ namespace ToDo.API.Migrations
 
                     b.HasIndex("ParentTaskId");
 
-                    b.ToTable("Tasks");
+                    b.ToTable("Tasks", (string)null);
 
                     b.ToTable(tb => tb.IsTemporal(ttb =>
                         {
@@ -963,7 +963,7 @@ namespace ToDo.API.Migrations
 
                     b.HasIndex("ProjectID");
 
-                    b.ToTable("ToDos");
+                    b.ToTable("ToDos", (string)null);
 
                     b.ToTable(tb => tb.IsTemporal(ttb =>
                         {

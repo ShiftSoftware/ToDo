@@ -2,6 +2,7 @@ using Microsoft.AspNetCore.Localization;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Azure;
 using ShiftSoftware.ShiftEntity.CosmosDbSync.Extensions;
+using ShiftSoftware.ShiftEntity.EFCore.SqlServer.Extensions;
 using ShiftSoftware.ShiftEntity.Web.Extensions;
 using ShiftSoftware.ShiftEntity.Web.Services;
 using ShiftSoftware.ShiftIdentity.AspNetCore;
@@ -31,7 +32,8 @@ var fakeUser = new TokenUserDataDTO
 
 Action<DbContextOptionsBuilder> dbOptionBuilder = x =>
 {
-    x.UseSqlServer(builder.Configuration.GetConnectionString("SQLServer"));
+    x.UseSqlServer(builder.Configuration.GetConnectionString("SQLServer"))
+    .UseTemporal(true);
 };
 
 builder.Services
