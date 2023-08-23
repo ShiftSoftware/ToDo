@@ -32,9 +32,9 @@ namespace ToDo.API.Data.Repositories
             return new ValueTask<Entities.Task>(entity);
         }
 
-        public async Task<Entities.Task> FindAsync(long id, DateTime? asOf = null, bool ignoreGlobalFilters = false)
+        public async Task<Entities.Task> FindAsync(long id, DateTime? asOf = null)
         {
-            return await base.FindAsync(id, asOf, ignoreGlobalFilters);
+            return await base.FindAsync(id, asOf);
         }
 
         public IQueryable<TaskListDTO> OdataList(bool ignoreGlobalFilters = false)
