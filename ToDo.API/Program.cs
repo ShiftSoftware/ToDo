@@ -2,7 +2,7 @@ using Microsoft.AspNetCore.Localization;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Azure;
 using ShiftSoftware.ShiftEntity.CosmosDbSync.Extensions;
-using ShiftSoftware.ShiftEntity.EFCore.SqlServer.Extensions;
+using ShiftSoftware.ShiftEntity.EFCore.Extensions;
 using ShiftSoftware.ShiftEntity.Web.Extensions;
 using ShiftSoftware.ShiftEntity.Web.Services;
 using ShiftSoftware.ShiftIdentity.AspNetCore;

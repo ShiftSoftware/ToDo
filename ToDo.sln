@@ -26,7 +26,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ShiftEntity.Core", "..\Shif
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ShiftEntity.Web", "..\ShiftEntity\ShiftEntity.Web\ShiftEntity.Web.csproj", "{CADF822B-84BC-4363-9B73-E54E8CB96D3F}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ShiftEntity.EFCore.SqlServer", "..\ShiftEntity\ShiftEntity.EFCore.SqlServer\ShiftEntity.EFCore.SqlServer.csproj", "{98594D26-1FF7-4DA5-B534-81F13B30B8C6}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ShiftEntity.EFCore", "..\ShiftEntity\ShiftEntity.EFCore.SqlServer\ShiftEntity.EFCore.csproj", "{98594D26-1FF7-4DA5-B534-81F13B30B8C6}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "ShiftBlazor", "ShiftBlazor", "{BC45EE74-C01B-4CCC-84D3-7CB9B25611EA}"
 EndProject
