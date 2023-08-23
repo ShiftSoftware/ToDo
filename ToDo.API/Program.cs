@@ -37,9 +37,9 @@ Action<DbContextOptionsBuilder> dbOptionBuilder = x =>
 builder.Services
     .AddShiftEntityCosmosDbSync(x =>
     {
-        x.ConnectionString = "AccountEndpoint=https://nahro.documents.azure.com:443/;AccountKey=c6Kvgm8XProUrUDStShKjJxkSzeWnTpVdnqmMofwcAME14UaHtXi03Ww7c1T1vhaKKkHmMPkU2PpACDb6JeR5g==;";
+        x.ConnectionString = "AccountEndpoint=https://nahro.documents.azure.com:443/;AccountKey=r7Phwnbot9U4yBrBvNMbf7qXL6a5MqyApWshg55elYeRMNKKyRml2LxrpSedgZXqtavdp1hk3v1kACDbBXteuw==;";
         x.DefaultDatabaseName = "ToDo";
-        x.AddDbContextProvider(new DbContextProvider(dbOptionBuilder));
+        x.AddShiftDbContext<DB>(dbOptionBuilder);
     })
     .AddLocalization()
     .AddHttpContextAccessor()
