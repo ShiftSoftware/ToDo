@@ -1,4 +1,5 @@
 ﻿@attribute [Route($"/{nameof(ToDoForm)}/{{Key?}}")]
+@using System.Text.RegularExpressions;
 @using ToDo.Shared.Enums
 @using ToDo.Shared.DTOs.ToDo
 @using ToDo.Shared.DTOs.Project
@@ -10,37 +11,32 @@
                  Action="ToDo"
                  Title="ToDo"
                  TypeAuthAction="ToDo.Shared.ToDoActions.ToDo"
-                 @bind-Key="@Key"
-                 T="ToDoDTO">
+                 @bind-Key="@Key">
 
-    <MudTextField ReadOnly="@ReadOnly"
-                  Disabled="@Disabled"
+    <MudTextFieldExtended
                   OnlyValidateIfDirty="true"
                   Label="Title"
                   @bind-Value="TheItem.Title"
-                  For="@(() => TheItem.Title)"
-                  Immediate="true" />
+                  For="@(() => TheItem.Title)"/>
 
-    <MudTextField ReadOnly="@ReadOnly"
-                  Disabled="@Disabled"
+    <MudTextFieldExtended
                   OnlyValidateIfDirty="true"
-                  Immediate="true"
                   Label="Description"
                   @bind-Value="TheItem.Description"
                   For="@(() => TheItem.Description)" />
 
-    <MudSelect ReadOnly="@ReadOnly"
-               Disabled="@Disabled"
+    <MudSelectExtended
                OnlyValidateIfDirty="true"
                T="ToDoStatus"
                Label="Status"
                AnchorOrigin="Origin.BottomCenter"
                @bind-Value="TheItem.Status"
                For="@(() => TheItem.Status)">
-        <MudSelectItem Value="@(ToDoStatus.New)" />
-        <MudSelectItem Value="@(ToDoStatus.InProgress)" />
-        <MudSelectItem Value="@(ToDoStatus.Completed)" />
-    </MudSelect>
+        @foreach (var status in Enum.GetValues<ToDoStatus>())
+        {
+            <MudSelectItem Value="@status">@Regex.Replace(status.ToString(), "([A-Z])", " $1").TrimStart()</MudSelectItem>
+        }
+    </MudSelectExtended>
 
     <ShiftAutocomplete Label="Project"
                        T="ShiftSoftware.ShiftEntity.Model.Dtos.ShiftEntitySelectDTO"

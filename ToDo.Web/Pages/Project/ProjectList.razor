@@ -1,20 +1,14 @@
 ﻿@attribute [Authorize]
-
 @attribute [Route($"/{nameof(ProjectList)}")]
 
-@using Syncfusion.Blazor.Grids
 @using ToDo.Shared.DTOs.Project
 
 <ShiftList Action="Project"
            Title="Project List"
            T="ProjectListDTO"
            ComponentType="typeof(ProjectForm)"
-           EnablePdfExport
            ShowIDColumn="true"
            TypeAuthAction="ToDo.Shared.ToDoActions.Project"
-           AutoGenerateColumns="false"
+           EnablePdfExport
            EnableCsvExcelExport>
-    <ColumnTemplate>
-        <GridColumn HeaderText="Name" Field="@nameof(ProjectListDTO.Name)" />
-    </ColumnTemplate>
 </ShiftList>

@@ -2,18 +2,17 @@
 @attribute [Route($"/{nameof(TaskList)}")]
 
 @using Syncfusion.Blazor.Data;
-@using Syncfusion.Blazor.Grids
 @using ToDo.Shared.DTOs.Task
 
 <ShiftList Action="Task"
            Title="Tasks"
            T="TaskListDTO"
            ComponentType="typeof(TaskForm)"
-           EnablePdfExport
            TypeAuthAction="ToDo.Shared.ToDoActions.Task"
            ShowIDColumn="true"
            Query="Qry"
            AddDialogParameters="AddDialogParameters"
+           EnablePdfExport
            EnableCsvExcelExport>
 </ShiftList>
 

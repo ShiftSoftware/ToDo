@@ -9,14 +9,10 @@
            Title="ToDo List"
            T="ToDoListDTO"
            ComponentType="typeof(ToDoForm)"
-           EnablePdfExport
            ShowIDColumn="true"
            TypeAuthAction="ToDo.Shared.ToDoActions.ToDo"
-           AutoGenerateColumns="false"
+           ExcludedColumns="@(new List<string> { nameof(ToDoListDTO.Status) })"
+           EnablePdfExport
            EnableCsvExcelExport>
-    <ColumnTemplate>
-        <GridColumn HeaderText="Title" Field="@nameof(ToDoListDTO.Title)" />
-        <GridColumn HeaderText="Description" Field="@nameof(ToDoListDTO.Description)" />
-        <GridColumn HeaderText="Project" Field="@nameof(ToDoListDTO.Project)" />
-    </ColumnTemplate>
+    
 </ShiftList>

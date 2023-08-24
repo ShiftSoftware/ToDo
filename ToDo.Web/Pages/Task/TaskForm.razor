@@ -25,9 +25,11 @@
                           @bind-Value="TheItem.Description"
                           For="@(() => TheItem.Description)" />
 
-    <MudDatePickerExtended @bind-Date="@TheItem.DueDate"
-                           Label="Due Date"
-                           For="() => TheItem.DueDate"></MudDatePickerExtended>
+    <MudDatePicker @bind-Date="@TheItem.DueDate"
+                   Label="Due Date"
+                   For="@(() => TheItem.DueDate)"
+                   Disabled="Disabled"
+                   ReadOnly="ReadOnly"/>
 
     <ShiftAutocomplete T="ShiftEntitySelectDTO"
                        TEntitySet="UserListDTO"

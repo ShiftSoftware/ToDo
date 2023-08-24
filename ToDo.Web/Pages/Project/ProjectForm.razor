@@ -8,11 +8,9 @@
                  Action="Project"
                  Title="Project"
                  TypeAuthAction="ToDo.Shared.ToDoActions.Project"
-                 @bind-Key="@Key"
-                 T="ToDo.Shared.DTOs.Project.ProjectDTO">
+                 @bind-Key="@Key">
 
-    <MudTextField ReadOnly="@ReadOnly"
-                  Disabled="@Disabled"
+    <MudTextFieldExtended
                   OnlyValidateIfDirty="true"
                   Label="Name"
                   @bind-Value="TheItem.Name"
