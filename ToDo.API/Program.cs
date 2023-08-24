@@ -1,24 +1,25 @@
 using Microsoft.AspNetCore.Localization;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Azure;
+using ShiftSoftware.ShiftEntity.CosmosDbSync.Extensions;
+using ShiftSoftware.ShiftEntity.EFCore.Extensions;
 using ShiftSoftware.ShiftEntity.Web.Extensions;
 using ShiftSoftware.ShiftEntity.Web.Services;
-using System.Globalization;
-using ToDo.API.Data;
-using ToDo.API.Data.Repositories;
-using ToDo.Shared.DTOs.ToDo;
+using ShiftSoftware.ShiftIdentity.AspNetCore;
 using ShiftSoftware.ShiftIdentity.AspNetCore.Extensions;
+using ShiftSoftware.ShiftIdentity.AspNetCore.Models;
+using ShiftSoftware.ShiftIdentity.Core;
 using ShiftSoftware.ShiftIdentity.Core.DTOs;
 using ShiftSoftware.ShiftIdentity.Dashboard.AspNetCore.Extentsions;
 using ShiftSoftware.TypeAuth.AspNetCore.Extensions;
-using ShiftSoftware.ShiftIdentity.Core;
-using ToDo.Shared.DTOs.Task;
-using Microsoft.Extensions.Azure;
-using ShiftSoftware.ShiftIdentity.AspNetCore;
-using ShiftSoftware.ShiftIdentity.AspNetCore.Models;
+using System.Globalization;
+using ToDo.API;
+using ToDo.API.Data;
+using ToDo.API.Data.Repositories;
 using ToDo.Shared;
 using ToDo.Shared.DTOs.Project;
-using ShiftSoftware.ShiftEntity.CosmosDbSync.Extensions;
-using ShiftSoftware.ShiftEntity.CosmosDbSync;
+using ToDo.Shared.DTOs.Task;
+using ToDo.Shared.DTOs.ToDo;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -29,15 +30,22 @@ var fakeUser = new TokenUserDataDTO
     Username = "fake-user"
 };
 
+Action<DbContextOptionsBuilder> dbOptionBuilder = x =>
+{
+    x.UseSqlServer(builder.Configuration.GetConnectionString("SQLServer"))
+    .UseTemporal(true);
+};
+
 builder.Services
     .AddShiftEntityCosmosDbSync(x =>
     {
-        x.ConnectionString = "AccountEndpoint=https://nahro.documents.azure.com:443/;AccountKey=sO8UDMIAemRPUhrJQWzhkREghutr0RXbNRgm91fgAzjdCk6mB84WWGo0C9nenUENEdEWf2ADVBO3ACDbhOjCdw==;";
+        x.ConnectionString = "AccountEndpoint=https://nahro.documents.azure.com:443/;AccountKey=r7Phwnbot9U4yBrBvNMbf7qXL6a5MqyApWshg55elYeRMNKKyRml2LxrpSedgZXqtavdp1hk3v1kACDbBXteuw==;";
         x.DefaultDatabaseName = "ToDo";
+        x.AddShiftDbContext<DB>(dbOptionBuilder);
     })
     .AddLocalization()
     .AddHttpContextAccessor()
-    .AddDbContext<DB>(x => x.UseSqlServer(builder.Configuration.GetConnectionString("SQLServer")))
+    .AddDbContext<DB>(dbOptionBuilder)
     .AddControllers()
     .AddShiftEntity(x =>
     {
@@ -89,30 +97,29 @@ builder.Services
         x.OdataEntitySet<ProjectListDTO>("Project");
         x.RegisterShiftIdentityDashboardEntitySets();
     });
-    //.AddFakeIdentityEndPoints(
-    //    new TokenSettingsModel
-    //    {
-    //        Issuer = "ToDo",
-    //        Key = "one-two-three-four-five-six-seven-eight.one-two-three-four-five-six-seven-eight",
-    //        ExpireSeconds = 60
-    //    },
-    //    fakeUser,
-    //    new ShiftSoftware.ShiftIdentity.Core.DTOs.App.AppDTO
-    //    {
-    //        AppId = "to-do-dev",
-    //        DisplayName = "ToDo Dev",
-    //        RedirectUri = "http://localhost:5028/Auth/Token"
-    //    },
-    //    "123a",
-    //    new string[] {
-    //        """
-    //            {
-    //                "ToDoActions": [1,2,3,4]
-    //            }
-    //        """
-    //    }
-    //);
-
+//.AddFakeIdentityEndPoints(
+//    new TokenSettingsModel
+//    {
+//        Issuer = "ToDo",
+//        Key = "one-two-three-four-five-six-seven-eight.one-two-three-four-five-six-seven-eight",
+//        ExpireSeconds = 60
+//    },
+//    fakeUser,
+//    new ShiftSoftware.ShiftIdentity.Core.DTOs.App.AppDTO
+//    {
+//        AppId = "to-do-dev",
+//        DisplayName = "ToDo Dev",
+//        RedirectUri = "http://localhost:5028/Auth/Token"
+//    },
+//    "123a",
+//    new string[] {
+//        """
+//            {
+//                "ToDoActions": [1,2,3,4]
+//            }
+//        """
+//    }
+//);
 builder.Services.AddSwaggerGen(c =>
 {
     c.DocInclusionPredicate(SwaggerService.DocInclusionPredicate);

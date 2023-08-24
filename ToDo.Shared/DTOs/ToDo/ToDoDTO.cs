@@ -1,9 +1,11 @@
-﻿using ShiftSoftware.ShiftEntity.Model.Dtos;
+﻿using ShiftSoftware.ShiftEntity.CosmosDbSync;
+using ShiftSoftware.ShiftEntity.Model.Dtos;
 using System.Text.Json.Serialization;
 using ToDo.Shared.Enums;
 
 namespace ToDo.Shared.DTOs.ToDo;
 
+[SyncPartitionKey(nameof(ProjectID))]
 public class ToDoDTO : ShiftEntityDTO
 {
     [_ToDoHashId]
@@ -13,6 +15,6 @@ public class ToDoDTO : ShiftEntityDTO
 
     [JsonConverter(typeof(JsonStringEnumConverter))]
     public ToDoStatus Status { get; set; } = ToDoStatus.New;
-
+    public long? ProjectID { get; set; }
     public ShiftEntitySelectDTO? Project { get; set; }
 }

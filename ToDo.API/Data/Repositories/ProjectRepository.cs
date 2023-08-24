@@ -1,7 +1,7 @@
 ﻿using AutoMapper;
 using Microsoft.EntityFrameworkCore.Metadata.Internal;
-using ShiftSoftware.EFCore.SqlServer;
 using ShiftSoftware.ShiftEntity.Core;
+using ShiftSoftware.ShiftEntity.EFCore;
 using ToDo.API.Data.Entities;
 using ToDo.Shared.DTOs.Project;
 
