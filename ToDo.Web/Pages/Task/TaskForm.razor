@@ -15,21 +15,19 @@
                  TypeAuthAction="ToDo.Shared.ToDoActions.Task"
                  @bind-Key="@Key">
 
-    <MudTextField ReadOnly="@ReadOnly"
-                  Disabled="@Disabled"
-                  OnlyValidateIfDirty="true"
-                  Label="Name"
-                  @bind-Value="TheItem.Name"
-                  For="@(() => TheItem.Name)" />
+    <MudTextFieldExtended OnlyValidateIfDirty="true"
+                          Label="Name"
+                          @bind-Value="TheItem.Name"
+                          For="@(() => TheItem.Name)" />
 
-    <MudTextField ReadOnly="@ReadOnly"
-                  Disabled="@Disabled"
-                  OnlyValidateIfDirty="true"
-                  Label="Description"
-                  @bind-Value="TheItem.Description"
-                  For="@(() => TheItem.Description)" />
+    <MudTextFieldExtended OnlyValidateIfDirty="true"
+                          Label="Description"
+                          @bind-Value="TheItem.Description"
+                          For="@(() => TheItem.Description)" />
 
-    <MudDatePicker @bind-Date="@TheItem.DueDate" Label="Due Date"></MudDatePicker>
+    <MudDatePickerExtended @bind-Date="@TheItem.DueDate"
+                           Label="Due Date"
+                           For="() => TheItem.DueDate"></MudDatePickerExtended>
 
     <ShiftAutocomplete T="ShiftEntitySelectDTO"
                        TEntitySet="UserListDTO"
@@ -37,23 +35,23 @@
                        DataTextField="@nameof(UserListDTO.FullName)"
                        DataValueField="@nameof(UserListDTO.ID)"
                        EntitySet="IdentityUser"
+                       For="() => TheItem.AssignedTo"
                        @bind-Value="@TheItem.AssignedTo">
 
     </ShiftAutocomplete>
 
-    <MudSelect ReadOnly="@ReadOnly"
-               Disabled="@Disabled"
-               OnlyValidateIfDirty="true"
+    <MudSelectExtended OnlyValidateIfDirty="true"
                T="_TaskStatus"
                Label="Status"
                AnchorOrigin="Origin.BottomCenter"
                @bind-Value="TheItem.Status"
                For="@(() => TheItem.Status)">
+
         @foreach (var status in Enum.GetValues<_TaskStatus>())
         {
             <MudSelectItem Value="@status">@Regex.Replace(status.ToString(), "([A-Z])", " $1").TrimStart()</MudSelectItem>
         }
-    </MudSelect>
+    </MudSelectExtended>
 
     <FileUploader Url="/file/upload"
                   ShowThumbnail="true"
