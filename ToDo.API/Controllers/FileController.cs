@@ -5,6 +5,7 @@ using System.Drawing;
 using ShiftSoftware.ShiftEntity.Web.Services;
 using ShiftSoftware.TypeAuth.AspNetCore;
 using ToDo.Shared;
+using ShiftSoftware.TypeAuth.AspNetCore.Services;
 
 namespace ToDo.API.Controllers
 {
@@ -13,10 +14,12 @@ namespace ToDo.API.Controllers
     public class FileController : ControllerBase
     {
         private AzureStorageService azureStorageService;
+        private readonly TypeAuthService typeAuthService;
 
-        public FileController(AzureStorageService azureStorageService)
+        public FileController(AzureStorageService azureStorageService, TypeAuthService typeAuthService)
         {
             this.azureStorageService = azureStorageService;
+            this.typeAuthService = typeAuthService;
         }
 
         [HttpPost("upload")]
@@ -24,6 +27,16 @@ namespace ToDo.API.Controllers
         public async Task<IActionResult> UploadAsync(IFormFile file)
         {
             var res = new ShiftEntityResponse<ShiftFileDTO>();
+
+            var maxUploadSize = typeAuthService.AccessValue(Shared.ToDoActions.MaxUploadSizeInMegaBytes);
+
+            if (file.Length / 1024m / 1024m > maxUploadSize)
+            {
+                res.Message = new Message { Title = "Error", Body = $"Maximum upload size of {maxUploadSize} has exceeded" };
+
+                return Ok(res);
+            }
+
             string? cloudUrl;
             string? blob;
             try

@@ -11,5 +11,6 @@ public class ToDoActions
     public readonly static ReadWriteDeleteAction Project = new ReadWriteDeleteAction("Project");
     public readonly static ReadWriteDeleteAction Task = new ReadWriteDeleteAction("Task");
 
+    public readonly static DecimalAction MaxUploadSizeInMegaBytes = new DecimalAction("Max Upload Size", null, 0, 10m);
     public readonly static ReadWriteDeleteAction UploadFiles = new ReadWriteDeleteAction("Upload Files");
 }
