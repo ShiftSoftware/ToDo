@@ -13,22 +13,16 @@ namespace ToDo.Shared.DTOs.Task
         public override string? ID { get; set; }
         [Required]
         public string Name { get; set; }
-        [Required]
         public string Description { get; set; } = string.Empty;
-        [Required]
         public _TaskStatus Status { get; set; } = _TaskStatus.New;
         [UserHashIdConverter, Required]
         public ShiftEntitySelectDTO? AssignedTo { get; set; }
-        [Required]
         public DateTime? DueDate { get; set; }
         [_TaskHashId]
         public string? ParentTaskId { get; set; }
-        [Required]
         public List<TaskListDTO>? ChildTasks { get; set; }
-        [Required]
         public List<CommentDTO>? Comments { get; set; }
-        [Required]
-        public List<ShiftFileDTO> Files { get; set; } = new();
+        public List<ShiftFileDTO>? Files { get; set; }
     }
 
     public class ProductDTOValidator : AbstractValidator<TaskDTO>
@@ -37,6 +31,9 @@ namespace ToDo.Shared.DTOs.Task
         {
             RuleFor(p => p.Description)
                 .NotEmpty().WithMessage("You must enter Product Description");
+
+            RuleFor(p => p.Files)
+                .NotEmpty().WithMessage("Must not be empty");
         }
     }
 }

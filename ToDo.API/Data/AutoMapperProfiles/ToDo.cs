@@ -11,7 +11,7 @@ public class ToDoProfile : Profile
         CreateMap<Entities.ToDo, ToDoDTO>()
             .ForMember(
                     dest => dest.Project,
-                    opt => opt.MapFrom(src => src.Project == null ? null : new ShiftEntitySelectDTO { Value = src.ProjectID.ToString()!, Text = src.Project!.Name })
+                    opt => opt.MapFrom(src => src.Project == null ? null : new ShiftEntitySelectDTO { Value = src.ProjectID.ToString()!, Text = null })
                 );
 
         CreateMap<Entities.ToDo, ToDoListDTO>()

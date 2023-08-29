@@ -13,7 +13,8 @@
                  Action="Task"
                  Title="Task"
                  TypeAuthAction="ToDo.Shared.ToDoActions.Task"
-                 @bind-Key="@Key">
+                 @bind-Key="@Key"
+                 T="TaskDTO">
 
     <MudTextFieldExtended OnlyValidateIfDirty="true"
                           Label="Name"
@@ -25,11 +26,9 @@
                           @bind-Value="TheItem.Description"
                           For="@(() => TheItem.Description)" />
 
-    <MudDatePicker @bind-Date="@TheItem.DueDate"
-                   Label="Due Date"
-                   For="@(() => TheItem.DueDate)"
-                   Disabled="Disabled"
-                   ReadOnly="ReadOnly"/>
+    <MudDatePickerExtended @bind-Date="@TheItem.DueDate"
+                           Label="Due Date"
+                           For="@(() => TheItem.DueDate)"/>
 
     <ShiftAutocomplete T="ShiftEntitySelectDTO"
                        TEntitySet="UserListDTO"
@@ -59,6 +58,7 @@
                   ShowThumbnail="true"
                   Label="Attachments"
                   TypeAuthAction="ToDo.Shared.ToDoActions.UploadFiles"
+                  For="() => TheItem.Files"
     @bind-Values="TheItem.Files" />
 
     @if (Mode == FormModes.View && !string.IsNullOrWhiteSpace(TheItem.ID))
