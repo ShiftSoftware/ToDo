@@ -3,6 +3,7 @@
 @using ToDo.Shared.Enums
 @using ToDo.Shared.DTOs.ToDo
 @using ToDo.Shared.DTOs.Project
+@using ToDo.Web.Pages.Project;
 @inherits ShiftForm<ToDoForm, ToDoDTO>
 
 <ShiftEntityForm @bind-Mode="Mode"
@@ -38,14 +39,16 @@
         }
     </MudSelectExtended>
 
-    <ShiftAutocomplete Label="Project"
-                       T="ShiftSoftware.ShiftEntity.Model.Dtos.ShiftEntitySelectDTO"
-                       @bind-Value="TheItem.Project"
-                       ToStringFunc="@(e=> e==null ? null : $"{e.Text}")"
-                       EntitySet="Project"
-                       TEntitySet="ProjectListDTO"
-                       Where="@(q => x => x.Name!.Contains(q))"
-                       DataValueField="@nameof(ProjectListDTO.ID)"
-                       DataTextField="@nameof(ProjectListDTO.Name)" />
+    <ShiftAutocompleteWithQuickAdd Label="Project"
+                                   T="ShiftSoftware.ShiftEntity.Model.Dtos.ShiftEntitySelectDTO"
+                                   @bind-Value="TheItem.Project"
+                                   ToStringFunc="@(e=> e==null ? null : $"{e.Text}")"
+                                   EntitySet="Project"
+                                   TEntitySet="ProjectListDTO"
+                                   Where="@(q => x => x.Name!.Contains(q))"
+                                   DataValueField="@nameof(ProjectListDTO.ID)"
+                                   DataTextField="@nameof(ProjectListDTO.Name)"
+                                   TQuickAdd="ProjectDTO"
+                                   QuickAddComponentType="typeof(ProjectForm)"
+                                   QuickAddParameterName="@nameof(ProjectForm.ProjectName)" />
 </ShiftEntityForm>
-

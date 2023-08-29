@@ -17,3 +17,15 @@
                   For="@(() => TheItem.Name)" />
 </ShiftEntityForm>
 
+@code {
+    [Parameter]
+    public string? ProjectName { get; set; }
+
+    protected override void OnInitialized()
+    {
+        if (!string.IsNullOrWhiteSpace(ProjectName))
+        {
+            TheItem.Name = ProjectName;
+        }
+    }
+}
