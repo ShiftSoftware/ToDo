@@ -26,7 +26,7 @@ var builder = WebApplication.CreateBuilder(args);
 var fakeUser = new TokenUserDataDTO
 {
     FullName = "Fake User",
-    ID = 1,
+    ID = "1",
     Username = "fake-user"
 };
 
