@@ -19,6 +19,16 @@ public class TaskProfile : Profile
                     opt => opt.MapFrom(src => src.AssignedToId == null ? null : new ShiftEntitySelectDTO { Value = src.AssignedToId.ToString()!, Text = null })
                 );
 
+        CreateMap<TaskDTO, Entities.Task>()
+            .ForMember(
+                dest => dest.Files,
+                opt => opt.MapFrom(src => JsonSerializer.Serialize(src.Files, new JsonSerializerOptions()))
+            )
+            .ForMember(
+                dest => dest.AssignedToId,
+                opt => opt.MapFrom(src => src.AssignedTo == null ? new Nullable<long>() : src.AssignedTo.Value.ToLong())
+            );
+
         CreateMap<Entities.Task, TaskListDTO>();
     }
 

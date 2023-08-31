@@ -23,7 +23,7 @@ namespace ToDo.API.Controllers
         [HttpGet("print/{ID}")]
         public async Task<ActionResult> Print(long ID)
         {
-            var task = await repository.FindAsync(ID);
+            var task = await repository.FindAsync(ID, null);
 
             //Data source fo Fast Report
             var data = new
