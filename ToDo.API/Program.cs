@@ -150,7 +150,19 @@ var app = builder.Build();
 
 //app.AddFakeIdentityEndPoints();
 
-await app.SeedDBAsync("OneTwo");
+await app.SeedDBAsync("OneTwo", new ShiftSoftware.ShiftIdentity.Dashboard.AspNetCore.Data.DBSeedOptions
+{
+    RegionExternalId = "1",
+    RegionShortCode = "KRG",
+
+    CompanyShortCode = "SFT",
+    CompanyExternalId = "-1",
+    CompanyAlternativeExternalId = "shift-software",
+    CompanyType = ShiftSoftware.ShiftIdentity.Core.Enums.CompanyTypes.NotSpecified,
+
+    CompanyBranchExternalId = "-11",
+    CompanyBranchShortCode = "SFT-EBL"
+});
 
 var supportedCultures = new List<CultureInfo>
 {
