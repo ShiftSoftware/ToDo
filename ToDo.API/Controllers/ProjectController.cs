@@ -11,7 +11,7 @@ namespace ToDo.API.Controllers
     {
         public ProjectController() : base(ToDoActions.Project, value =>
         {
-            var accessibleIds = value.GetValues<ProjectDTO>(ToDoActions.DataLevelAccess.Projects);
+            var accessibleIds = value.GetAccessibleIds<ProjectDTO>(ToDoActions.DataLevelAccess.Projects);
 
             return  x => accessibleIds.WildCard ? true : accessibleIds.AccessibleIds.Contains(x.ID);
         })
