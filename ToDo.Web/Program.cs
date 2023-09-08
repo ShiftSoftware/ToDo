@@ -3,12 +3,15 @@ using Microsoft.AspNetCore.Components.WebAssembly.Hosting;
 using Microsoft.Extensions.Localization;
 using ShiftSoftware.ShiftBlazor.Extensions;
 using ShiftSoftware.ShiftBlazor.Services;
+using ShiftSoftware.ShiftEntity.Model.Dtos;
 using ShiftSoftware.ShiftIdentity.Blazor.Extensions;
 using ShiftSoftware.ShiftIdentity.Blazor.Handlers;
 using ShiftSoftware.ShiftIdentity.Dashboard.Blazor.Extensions;
+using ShiftSoftware.ShiftIdentity.Dashboard.Blazor.Services;
 using ShiftSoftware.TypeAuth.Blazor.Extensions;
 using System.Globalization;
 using ToDo.Shared;
+using ToDo.Shared.DTOs.Project;
 using ToDo.Web;
 
 
@@ -54,6 +57,14 @@ builder.Services.AddShiftIdentityDashboardBlazor(x =>
     x.ShiftIdentityHostingType = ShiftSoftware.ShiftIdentity.Core.ShiftIdentityHostingTypes.Internal;
     x.LogoPath = "/img/shift-full.png";
     x.Title = "ToDo";
+    x.DynamicTypeAuthActionExpander = async () =>
+    {
+        var httpService = builder.Services.BuildServiceProvider().GetRequiredService<HttpService>();
+
+        var projects = await httpService.GetAsync<ODataDTO<ProjectListDTO>>("/odata/project");
+
+        ToDoActions.DataLevelAccess.Projects.Expand(projects.Data!.Value.Select(x => new KeyValuePair<string, string>(x.ID!, x.Name!)).ToList());
+    };
 });
 
 builder.Services.AddTypeAuth(x =>
