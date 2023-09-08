@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using ShiftSoftware.ShiftEntity.Core;
 using ShiftSoftware.ShiftEntity.EFCore;
+using System.Linq.Expressions;
 using ToDo.Shared.DTOs.ToDo;
 
 namespace ToDo.API.Data.Repositories
@@ -13,9 +14,9 @@ namespace ToDo.API.Data.Repositories
         {
         }
 
-        public override async Task<Entities.ToDo> FindAsync(long id, DateTime? asOf = null)
+        public override async Task<Entities.ToDo> FindAsync(long id, DateTime? asOf = null, Expression<Func<Entities.ToDo, bool>>? where = null)
         {
-            return await base.FindAsync(id, asOf, x => x.Include(y => y.Project));
+            return await base.FindAsync(id, asOf, where, x => x.Include(y => y.Project));
         }
     }
 }

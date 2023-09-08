@@ -14,7 +14,19 @@ namespace ToDo.API.Controllers
     {
         private DB db;
         ToDoRepository repository;
-        public ToDoController(ToDoRepository repository, DB db) : base(ToDoActions.ToDo)
+        public ToDoController(ToDoRepository repository, DB db) : base(ToDoActions.ToDo, x =>
+        {
+            x.ListingDynamicActionResolver = r =>
+            {
+                var accessibleProjectIds = r.GetAccessibleIds<ToDoListDTO>(ToDoActions.DataLevelAccess.Projects);
+
+                var loggedInUserId = r.GetUserId();
+
+                return x => (accessibleProjectIds.WildCard || !x.ProjectID.HasValue) ? true :
+                    (accessibleProjectIds.AccessibleIds.Contains(x.ProjectID.Value) || x.Project!.CreatedByUserID == loggedInUserId)
+                ;
+            };
+        })
         {
             this.db = db;
             this.repository = repository;
@@ -47,7 +59,7 @@ namespace ToDo.API.Controllers
                 })
                 .ToList();
 
-            var statuses = allTasks.Select(x => x.Status).Distinct().Select(x=> new { Name = x }).ToList();
+            var statuses = allTasks.Select(x => x.Status).Distinct().Select(x => new { Name = x }).ToList();
 
             return await new FastReportBuilder()
                 .AddFastReportFile("Reports/Task.frx")
