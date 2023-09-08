@@ -9,7 +9,12 @@ namespace ToDo.API.Controllers
     [Route("api/[controller]")]
     public class ProjectController : ShiftEntitySecureControllerAsync<ProjectRepository, Data.Entities.Project, ProjectListDTO, ProjectDTO>
     {
-        public ProjectController() : base(ToDoActions.Project)
+        public ProjectController() : base(ToDoActions.Project, value =>
+        {
+            var accessibleIds = value.GetValues<ProjectDTO>(ToDoActions.DataLevelAccess.Projects);
+
+            return  x => accessibleIds.WildCard ? true : accessibleIds.AccessibleIds.Contains(x.ID);
+        })
         {
         }
     }
