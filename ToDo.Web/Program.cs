@@ -13,6 +13,7 @@ using System.Globalization;
 using ToDo.Shared;
 using ToDo.Shared.DTOs.Project;
 using ToDo.Web;
+using ShiftSoftware.ShiftEntity.Model.Extensions;
 
 
 [assembly: RootNamespace("ToDo.Web")]
@@ -64,6 +65,8 @@ builder.Services.AddShiftIdentityDashboardBlazor(x =>
         var projects = await httpService.GetAsync<ODataDTO<ProjectListDTO>>("/odata/project");
 
         ToDoActions.DataLevelAccess.Projects.Expand(projects.Data!.Value.Select(x => new KeyValuePair<string, string>(x.ID!, x.Name!)).ToList());
+
+        ToDoActions.DataLevelAccess.Statuses.Expand(Enum.GetValues<ToDo.Shared.Enums.ToDoStatus>().Select(x => new KeyValuePair<string, string>(((int)x).ToString(), x.Describe())).ToList());
     };
 });
 

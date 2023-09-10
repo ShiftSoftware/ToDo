@@ -18,5 +18,6 @@ public class ToDoActions
     public class DataLevelAccess
     {
         public readonly static DynamicReadWriteDeleteAction Projects = new DynamicReadWriteDeleteAction("Projects");
+        public readonly static DynamicReadWriteDeleteAction Statuses = new DynamicReadWriteDeleteAction("Statuses");
     }
 }

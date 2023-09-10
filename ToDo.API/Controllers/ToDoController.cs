@@ -5,6 +5,7 @@ using ShiftSoftware.ShiftEntity.Web.Services;
 using ToDo.API.Data;
 using ToDo.API.Data.Repositories;
 using ToDo.Shared;
+using ToDo.Shared.DTOs.Project;
 using ToDo.Shared.DTOs.ToDo;
 
 namespace ToDo.API.Controllers
@@ -16,18 +17,28 @@ namespace ToDo.API.Controllers
         ToDoRepository repository;
         public ToDoController(ToDoRepository repository, DB db) : base(ToDoActions.ToDo, x =>
         {
-            x.ListingDynamicActionResolver = r =>
-            {
-                var accessibleProjectIds = r.GetAccessibleIds<ToDoListDTO>(ToDoActions.DataLevelAccess.Projects);
+            x.FilterBy(x => x.ProjectID, ToDoActions.DataLevelAccess.Projects)
+            .DecodeHashId<ProjectDTO>()
+            .IncludeNulls()
+            .IncludeCreatedByCurrentUser(x=> x.ProjectID == null ? null : x.Project!.CreatedByUserID);
 
-                var loggedInUserId = r.GetUserId();
-
-                return x => (accessibleProjectIds.WildCard || !x.ProjectID.HasValue) ? true :
-                    (accessibleProjectIds.AccessibleIds.Contains(x.ProjectID.Value) || x.Project!.CreatedByUserID == loggedInUserId)
-                ;
-            };
-        })
+            x.FilterBy(x => (int) x.Status, ToDoActions.DataLevelAccess.Statuses);
+        }
+        )
         {
+            //{
+            //    x.ListingDynamicActionResolver = r =>
+            //    {
+            //        var accessibleProjectIds = r.GetAccessibleIds<ToDoListDTO>(ToDoActions.DataLevelAccess.Projects);
+
+            //        var loggedInUserId = r.GetUserId();
+
+            //        return x => (accessibleProjectIds.WildCard || !x.ProjectID.HasValue) ? true :
+            //            (accessibleProjectIds.AccessibleIds.Contains(x.ProjectID.Value) || x.Project!.CreatedByUserID == loggedInUserId)
+            //        ;
+            //    };
+            //}
+
             this.db = db;
             this.repository = repository;
         }
