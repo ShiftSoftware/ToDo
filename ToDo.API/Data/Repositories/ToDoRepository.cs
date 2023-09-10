@@ -18,5 +18,12 @@ namespace ToDo.API.Data.Repositories
         {
             return await base.FindAsync(id, asOf, where, x => x.Include(y => y.Project));
         }
+
+        public override async ValueTask<Entities.ToDo> UpsertAsync(Entities.ToDo entity, ToDoDTO dto, ActionTypes actionType, long? userId = null)
+        {
+            entity.ReloadAfterSave = true;
+
+            return await base.UpsertAsync(entity, dto, actionType, userId);
+        }
     }
 }

@@ -2,6 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using ShiftSoftware.ShiftEntity.Web;
 using ShiftSoftware.ShiftEntity.Web.Services;
+using ShiftSoftware.TypeAuth.AspNetCore.Services;
 using ToDo.API.Data;
 using ToDo.API.Data.Repositories;
 using ToDo.Shared;
@@ -20,9 +21,25 @@ namespace ToDo.API.Controllers
             x.FilterBy(x => x.ProjectID, ToDoActions.DataLevelAccess.Projects)
             .DecodeHashId<ProjectDTO>()
             .IncludeNulls()
-            .IncludeCreatedByCurrentUser(x=> x.ProjectID == null ? null : x.Project!.CreatedByUserID);
+            .IncludeCreatedByCurrentUser(x => x.ProjectID == null ? null : x.Project!.CreatedByUserID);
 
-            x.FilterBy(x => (int) x.Status, ToDoActions.DataLevelAccess.Statuses);
+            x.FilterBy(x => (int)x.Status, ToDoActions.DataLevelAccess.Statuses);
+            
+            //{
+            //    x.DynamicActionExpressionBuilder = r =>
+            //    {
+            //        var loggedInUserId = r.GetUserId();
+
+            //        var typeAuth = r.GetRequiredService<TypeAuthService>();
+
+            //        var acceessibleIds = typeAuth.GetAccessibleItems(ToDoActions.DataLevelAccess.Projects, r.AccessPredicate);
+
+            //        var accessibleIdsLong = acceessibleIds.AccessibleIds.Select(ShiftEntityHashIds.Decode<ProjectDTO>).ToList();
+
+            //        return x => (x.ProjectID == null || acceessibleIds.WildCard) ? true :
+            //            (accessibleIdsLong.Contains(x.ProjectID.Value) || x.Project!.CreatedByUserID == loggedInUserId);
+            //    };
+            //}
         }
         )
         {
