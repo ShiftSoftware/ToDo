@@ -34,7 +34,7 @@ namespace ToDo.API.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<DateTime?>("LastSyncDate")
+                    b.Property<DateTime?>("LastReplicationDate")
                         .HasColumnType("datetime2");
 
                     b.Property<int>("PartitionKeyType")
@@ -48,7 +48,7 @@ namespace ToDo.API.Migrations
 
                     b.HasKey("ID");
 
-                    b.HasIndex("LastSyncDate");
+                    b.HasIndex("LastReplicationDate");
 
                     b.ToTable("DeletedRowLogs");
                 });
@@ -76,14 +76,14 @@ namespace ToDo.API.Migrations
                     b.Property<bool>("IsDeleted")
                         .HasColumnType("bit");
 
+                    b.Property<DateTime?>("LastReplicationDate")
+                        .HasColumnType("datetime2");
+
                     b.Property<DateTime>("LastSaveDate")
                         .HasColumnType("datetime2");
 
                     b.Property<long?>("LastSavedByUserID")
                         .HasColumnType("bigint");
-
-                    b.Property<DateTime?>("LastSyncDate")
-                        .HasColumnType("datetime2");
 
                     b.Property<string>("Name")
                         .IsRequired()
@@ -168,14 +168,14 @@ namespace ToDo.API.Migrations
                     b.Property<bool>("IsDeleted")
                         .HasColumnType("bit");
 
+                    b.Property<DateTime?>("LastReplicationDate")
+                        .HasColumnType("datetime2");
+
                     b.Property<DateTime>("LastSaveDate")
                         .HasColumnType("datetime2");
 
                     b.Property<long?>("LastSavedByUserID")
                         .HasColumnType("bigint");
-
-                    b.Property<DateTime?>("LastSyncDate")
-                        .HasColumnType("datetime2");
 
                     b.Property<DateTime>("PeriodEnd")
                         .ValueGeneratedOnAddOrUpdate()
@@ -259,14 +259,14 @@ namespace ToDo.API.Migrations
                     b.Property<bool>("IsDeleted")
                         .HasColumnType("bit");
 
+                    b.Property<DateTime?>("LastReplicationDate")
+                        .HasColumnType("datetime2");
+
                     b.Property<DateTime>("LastSaveDate")
                         .HasColumnType("datetime2");
 
                     b.Property<long?>("LastSavedByUserID")
                         .HasColumnType("bigint");
-
-                    b.Property<DateTime?>("LastSyncDate")
-                        .HasColumnType("datetime2");
 
                     b.Property<string>("LegalName")
                         .HasColumnType("nvarchar(max)");
@@ -345,14 +345,14 @@ namespace ToDo.API.Migrations
                     b.Property<bool>("IsDeleted")
                         .HasColumnType("bit");
 
+                    b.Property<DateTime?>("LastReplicationDate")
+                        .HasColumnType("datetime2");
+
                     b.Property<DateTime>("LastSaveDate")
                         .HasColumnType("datetime2");
 
                     b.Property<long?>("LastSavedByUserID")
                         .HasColumnType("bigint");
-
-                    b.Property<DateTime?>("LastSyncDate")
-                        .HasColumnType("datetime2");
 
                     b.Property<string>("Name")
                         .IsRequired()
@@ -508,14 +508,14 @@ namespace ToDo.API.Migrations
                     b.Property<bool>("IsDeleted")
                         .HasColumnType("bit");
 
+                    b.Property<DateTime?>("LastReplicationDate")
+                        .HasColumnType("datetime2");
+
                     b.Property<DateTime>("LastSaveDate")
                         .HasColumnType("datetime2");
 
                     b.Property<long?>("LastSavedByUserID")
                         .HasColumnType("bigint");
-
-                    b.Property<DateTime?>("LastSyncDate")
-                        .HasColumnType("datetime2");
 
                     b.Property<string>("Name")
                         .IsRequired()
@@ -579,14 +579,14 @@ namespace ToDo.API.Migrations
                     b.Property<bool>("IsDeleted")
                         .HasColumnType("bit");
 
+                    b.Property<DateTime?>("LastReplicationDate")
+                        .HasColumnType("datetime2");
+
                     b.Property<DateTime>("LastSaveDate")
                         .HasColumnType("datetime2");
 
                     b.Property<long?>("LastSavedByUserID")
                         .HasColumnType("bigint");
-
-                    b.Property<DateTime?>("LastSyncDate")
-                        .HasColumnType("datetime2");
 
                     b.Property<string>("Name")
                         .IsRequired()
@@ -647,14 +647,14 @@ namespace ToDo.API.Migrations
                     b.Property<bool>("IsDeleted")
                         .HasColumnType("bit");
 
+                    b.Property<DateTime?>("LastReplicationDate")
+                        .HasColumnType("datetime2");
+
                     b.Property<DateTime>("LastSaveDate")
                         .HasColumnType("datetime2");
 
                     b.Property<long?>("LastSavedByUserID")
                         .HasColumnType("bigint");
-
-                    b.Property<DateTime?>("LastSyncDate")
-                        .HasColumnType("datetime2");
 
                     b.Property<string>("Name")
                         .IsRequired()
@@ -736,14 +736,14 @@ namespace ToDo.API.Migrations
                     b.Property<bool>("IsSuperAdmin")
                         .HasColumnType("bit");
 
+                    b.Property<DateTime?>("LastReplicationDate")
+                        .HasColumnType("datetime2");
+
                     b.Property<DateTime>("LastSaveDate")
                         .HasColumnType("datetime2");
 
                     b.Property<long?>("LastSavedByUserID")
                         .HasColumnType("bigint");
-
-                    b.Property<DateTime?>("LastSyncDate")
-                        .HasColumnType("datetime2");
 
                     b.Property<DateTime?>("LockDownUntil")
                         .HasColumnType("datetime2");
@@ -877,14 +877,14 @@ namespace ToDo.API.Migrations
                     b.Property<bool>("IsDeleted")
                         .HasColumnType("bit");
 
+                    b.Property<DateTime?>("LastReplicationDate")
+                        .HasColumnType("datetime2");
+
                     b.Property<DateTime>("LastSaveDate")
                         .HasColumnType("datetime2");
 
                     b.Property<long?>("LastSavedByUserID")
                         .HasColumnType("bigint");
-
-                    b.Property<DateTime?>("LastSyncDate")
-                        .HasColumnType("datetime2");
 
                     b.Property<string>("Name")
                         .IsRequired()
@@ -955,14 +955,14 @@ namespace ToDo.API.Migrations
                     b.Property<bool>("IsDeleted")
                         .HasColumnType("bit");
 
+                    b.Property<DateTime?>("LastReplicationDate")
+                        .HasColumnType("datetime2");
+
                     b.Property<DateTime>("LastSaveDate")
                         .HasColumnType("datetime2");
 
                     b.Property<long?>("LastSavedByUserID")
                         .HasColumnType("bigint");
-
-                    b.Property<DateTime?>("LastSyncDate")
-                        .HasColumnType("datetime2");
 
                     b.Property<string>("Name")
                         .IsRequired()
@@ -1032,14 +1032,14 @@ namespace ToDo.API.Migrations
                     b.Property<bool>("IsDeleted")
                         .HasColumnType("bit");
 
+                    b.Property<DateTime?>("LastReplicationDate")
+                        .HasColumnType("datetime2");
+
                     b.Property<DateTime>("LastSaveDate")
                         .HasColumnType("datetime2");
 
                     b.Property<long?>("LastSavedByUserID")
                         .HasColumnType("bigint");
-
-                    b.Property<DateTime?>("LastSyncDate")
-                        .HasColumnType("datetime2");
 
                     b.Property<DateTime>("PeriodEnd")
                         .ValueGeneratedOnAddOrUpdate()
