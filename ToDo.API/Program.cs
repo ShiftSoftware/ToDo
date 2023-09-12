@@ -1,7 +1,7 @@
 using Microsoft.AspNetCore.Localization;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Azure;
-using ShiftSoftware.ShiftEntity.CosmosDbSync.Extensions;
+using ShiftSoftware.ShiftEntity.CosmosDbReplication.Extensions;
 using ShiftSoftware.ShiftEntity.EFCore.Extensions;
 using ShiftSoftware.ShiftEntity.Web.Extensions;
 using ShiftSoftware.ShiftEntity.Web.Services;
@@ -37,7 +37,7 @@ Action<DbContextOptionsBuilder> dbOptionBuilder = x =>
 };
 
 builder.Services
-    .AddShiftEntityCosmosDbSync(x =>
+    .AddShiftEntityCosmosDbReplication(x =>
     {
         x.ConnectionString = "AccountEndpoint=https://nahro.documents.azure.com:443/;AccountKey=r7Phwnbot9U4yBrBvNMbf7qXL6a5MqyApWshg55elYeRMNKKyRml2LxrpSedgZXqtavdp1hk3v1kACDbBXteuw==;";
         x.DefaultDatabaseName = "ToDo";

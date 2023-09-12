@@ -1,6 +1,6 @@
 ﻿using Microsoft.Azure.Functions.Extensions.DependencyInjection;
 using Microsoft.Owin;
-using ShiftSoftware.ShiftEntity.CosmosDbSync.Extensions;
+using ShiftSoftware.ShiftEntity.CosmosDbReplication.Extensions;
 
 [assembly: OwinStartup(typeof(ToDo.Functions.Startup))]
 
@@ -10,7 +10,7 @@ namespace ToDo.Functions
     {
         public override void Configure(IFunctionsHostBuilder builder)
         {
-            builder.Services.AddShiftEntityCosmosDbSync(x => { x.ConnectionString = ""; x.DefaultDatabaseName = ""; });
+            builder.Services.AddShiftEntityCosmosDbReplication(x => { x.ConnectionString = ""; x.DefaultDatabaseName = ""; });
 
             //builder.Services.AddOptions<CSVSettings>()
             //    .Configure<IConfiguration>((settings, configuration) =>

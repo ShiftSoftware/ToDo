@@ -14,7 +14,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\ShiftEntity\ShiftEntity.CosmosDbSync\ShiftEntity.CosmosDbSync.csproj" />
+    <ProjectReference Include="..\..\ShiftEntity\ShiftEntity.CosmosDbReplication\ShiftEntity.CosmosDbReplication.csproj" />
     <ProjectReference Include="..\..\ShiftEntity\ShiftEntity.Model\ShiftEntity.Model.csproj" Condition="Exists('..\..\ShiftEntity\ShiftEntity.Model\ShiftEntity.Model.csproj') And '$(ImportShiftFrameworkProjects)'=='true'" />
     <ProjectReference Include="..\..\TypeAuth\TypeAuth.Core\TypeAuth.Core.csproj" Condition="Exists('..\..\TypeAuth\TypeAuth.Core\TypeAuth.Core.csproj') And '$(ImportShiftFrameworkProjects)'=='true'" />
   </ItemGroup>

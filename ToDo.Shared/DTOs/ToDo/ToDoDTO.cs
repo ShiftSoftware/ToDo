@@ -1,11 +1,11 @@
-﻿using ShiftSoftware.ShiftEntity.CosmosDbSync;
+﻿using ShiftSoftware.ShiftEntity.CosmosDbReplication;
 using ShiftSoftware.ShiftEntity.Model.Dtos;
 using System.Text.Json.Serialization;
 using ToDo.Shared.Enums;
 
 namespace ToDo.Shared.DTOs.ToDo;
 
-[SyncPartitionKey(nameof(ProjectID))]
+[ReplicationPartitionKey(nameof(ProjectID))]
 public class ToDoDTO : ShiftEntityDTO
 {
     [_ToDoHashId]

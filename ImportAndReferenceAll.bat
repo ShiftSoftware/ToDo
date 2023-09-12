@@ -2,7 +2,7 @@ dotnet sln add --solution-folder ShiftFramework\ShiftEntity ..\ShiftEntity\Shift
 dotnet sln add --solution-folder ShiftFramework\ShiftEntity ..\ShiftEntity\ShiftEntity.Core\ShiftEntity.Core.csproj
 dotnet sln add --solution-folder ShiftFramework\ShiftEntity ..\ShiftEntity\ShiftEntity.Web\ShiftEntity.Web.csproj
 dotnet sln add --solution-folder ShiftFramework\ShiftEntity ..\ShiftEntity\ShiftEntity.EFCore\ShiftEntity.EFCore.csproj
-dotnet sln add --solution-folder ShiftFramework\ShiftEntity ..\ShiftEntity\ShiftEntity.CosmosDbSync\ShiftEntity.CosmosDbSync.csproj
+dotnet sln add --solution-folder ShiftFramework\ShiftEntity ..\ShiftEntity\ShiftEntity.CosmosDbReplication\ShiftEntity.CosmosDbReplication.csproj
 
 dotnet sln add --solution-folder ShiftFramework\ShiftBlazor ..\ShiftBlazor\ShiftBlazor\ShiftBlazor.csproj
 dotnet sln add --solution-folder ShiftFramework\ShiftBlazor ..\ShiftBlazor\ShiftBlazor.Tests\ShiftBlazor.Tests.csproj
