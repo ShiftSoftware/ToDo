@@ -1,5 +1,5 @@
-﻿using ShiftSoftware.ShiftEntity.CosmosDbReplication;
-using ShiftSoftware.ShiftEntity.Model.Dtos;
+﻿using ShiftSoftware.ShiftEntity.Model.Dtos;
+using ShiftSoftware.ShiftEntity.Model.Replication;
 using System.Text.Json.Serialization;
 using ToDo.Shared.Enums;
 
