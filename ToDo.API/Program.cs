@@ -32,16 +32,16 @@ var fakeUser = new TokenUserDataDTO
 
 Action<DbContextOptionsBuilder> dbOptionBuilder = x =>
 {
-    x.UseSqlServer(builder.Configuration.GetConnectionString("SQLServer"))
+    x.UseSqlServer(builder.Configuration.GetConnectionString("SQLServer")!)
     .UseTemporal(true);
 };
 
-if(builder.Environment.EnvironmentName != "Test")
+if (builder.Configuration.GetValue<bool>("CosmosDb:Enabled"))
 {
     builder.Services.AddShiftEntityCosmosDbReplication(x =>
      {
-         x.ConnectionString = "AccountEndpoint=https://tiq-shared.documents.azure.com:443/;AccountKey=dklZJIqVttEJXGslPkXGu9Idwqd1DmJMTYHigsfFlKBMPXPRu4petE1Tu9WpPJJczcb1wlHGibGuACDb8TKrQQ==;";
-         x.DefaultDatabaseName = "test";
+         x.ConnectionString = builder.Configuration.GetValue<string>("CosmosDb:ConnectionString");
+         x.DefaultDatabaseName = builder.Configuration.GetValue<string>("CosmosDb:DefaultDatabaseName");
          x.AddShiftDbContext<DB>(dbOptionBuilder);
      });
 }
