@@ -1,5 +1,4 @@
 ﻿using ShiftSoftware.ShiftFrameworkTestingTools;
-using ToDo.API.Data;
 using ToDo.Shared.DTOs.ToDo;
 using ToDo.Shared.Enums;
 
@@ -20,7 +19,7 @@ public class Basic : BasicTest<ToDoDTO, ToDoListDTO>
 
     }
 
-    public static ToDoDTO GenerateSampleDTO(DateTime? lastSaveDate = null)
+    public static ToDoDTO GenerateSampleDTO(ToDoDTO? existingDto = null)
     {
         var dto = new ToDoDTO
         {
@@ -29,8 +28,11 @@ public class Basic : BasicTest<ToDoDTO, ToDoListDTO>
             Status = status
         };
 
-        if (lastSaveDate is not null)
-            dto.LastSaveDate = lastSaveDate.Value;
+        if (existingDto is not null)
+        {
+            dto.LastSaveDate = existingDto.LastSaveDate;
+            dto.ID = existingDto.ID;
+        }
 
         return dto;
     }
@@ -76,7 +78,7 @@ public class Basic : BasicTest<ToDoDTO, ToDoListDTO>
     [Fact(DisplayName = "05. Put"), TestPriority(5)]
     public async Task _05_Put()
     {
-        var dto = GenerateSampleDTO(CreatedItem.LastSaveDate);
+        var dto = GenerateSampleDTO(CreatedItem);
 
         dto.Title = $"{title} - Updated";
         dto.Description = $"{description} - Updated";
@@ -91,12 +93,12 @@ public class Basic : BasicTest<ToDoDTO, ToDoListDTO>
         );
     }
 
-    [Fact(DisplayName = "07. Get Revisions"), TestPriority(6)]
-    public async Task _07_GetRevisions()
+    [Fact(DisplayName = "06. Get Revisions"), TestPriority(6)]
+    public async Task _06_GetRevisions()
     {
         var revisions = await base.RevisionList(CreatedItem.ID!);
 
-        Assert.True(revisions.Count > 0);
+        Assert.True(revisions!.Count > 0);
     }
 
     [Fact(DisplayName = "07. Delete"), TestPriority(7)]
@@ -104,6 +106,6 @@ public class Basic : BasicTest<ToDoDTO, ToDoListDTO>
     {
         var item = await base.Delete(CreatedItem.ID!);
 
-        Assert.True(item.IsDeleted);
+        Assert.True(item!.IsDeleted);
     }
 }

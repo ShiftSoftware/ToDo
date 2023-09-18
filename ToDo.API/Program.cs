@@ -36,13 +36,17 @@ Action<DbContextOptionsBuilder> dbOptionBuilder = x =>
     .UseTemporal(true);
 };
 
+if(builder.Environment.EnvironmentName != "Test")
+{
+    builder.Services.AddShiftEntityCosmosDbReplication(x =>
+     {
+         x.ConnectionString = "AccountEndpoint=https://tiq-shared.documents.azure.com:443/;AccountKey=dklZJIqVttEJXGslPkXGu9Idwqd1DmJMTYHigsfFlKBMPXPRu4petE1Tu9WpPJJczcb1wlHGibGuACDb8TKrQQ==;";
+         x.DefaultDatabaseName = "test";
+         x.AddShiftDbContext<DB>(dbOptionBuilder);
+     });
+}
+
 builder.Services
-    .AddShiftEntityCosmosDbReplication(x =>
-    {
-        x.ConnectionString = "AccountEndpoint=https://nahro.documents.azure.com:443/;AccountKey=r7Phwnbot9U4yBrBvNMbf7qXL6a5MqyApWshg55elYeRMNKKyRml2LxrpSedgZXqtavdp1hk3v1kACDbBXteuw==;";
-        x.DefaultDatabaseName = "ToDo";
-        x.AddShiftDbContext<DB>(dbOptionBuilder);
-    })
     .AddLocalization()
     .AddHttpContextAccessor()
     .AddDbContext<DB>(dbOptionBuilder)
@@ -150,19 +154,23 @@ var app = builder.Build();
 
 //app.AddFakeIdentityEndPoints();
 
-await app.SeedDBAsync("OneTwo", new ShiftSoftware.ShiftIdentity.Dashboard.AspNetCore.Data.DBSeedOptions
+if (app.Environment.EnvironmentName != "Test")
 {
-    RegionExternalId = "1",
-    RegionShortCode = "KRG",
+    await app.SeedDBAsync("OneTwo", new ShiftSoftware.ShiftIdentity.Dashboard.AspNetCore.Data.DBSeedOptions
+    {
+        RegionExternalId = "1",
+        RegionShortCode = "KRG",
 
-    CompanyShortCode = "SFT",
-    CompanyExternalId = "-1",
-    CompanyAlternativeExternalId = "shift-software",
-    CompanyType = ShiftSoftware.ShiftIdentity.Core.Enums.CompanyTypes.NotSpecified,
+        CompanyShortCode = "SFT",
+        CompanyExternalId = "-1",
+        CompanyAlternativeExternalId = "shift-software",
+        CompanyType = ShiftSoftware.ShiftIdentity.Core.Enums.CompanyTypes.NotSpecified,
 
-    CompanyBranchExternalId = "-11",
-    CompanyBranchShortCode = "SFT-EBL"
-});
+        CompanyBranchExternalId = "-11",
+        CompanyBranchShortCode = "SFT-EBL"
+    });
+
+}
 
 var supportedCultures = new List<CultureInfo>
 {
