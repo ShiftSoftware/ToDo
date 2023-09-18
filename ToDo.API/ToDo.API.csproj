@@ -26,9 +26,9 @@
 			<IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
 		</PackageReference>
 		<PackageReference Include="Microsoft.Extensions.Azure" Version="1.6.3" />
-		<PackageReference Include="ShiftSoftware.ShiftEntity.EFCore" Version="2023-09-14" />
-		<PackageReference Include="ShiftSoftware.ShiftEntity.Web" Version="2023-09-14" />
-		<PackageReference Include="ShiftSoftware.ShiftIdentity.Dashboard.AspNetCore" Version="2023-09-14" />
+		<PackageReference Include="ShiftSoftware.ShiftEntity.EFCore" Version="$(ShiftFrameworkVersion)" />
+		<PackageReference Include="ShiftSoftware.ShiftEntity.Web" Version="$(ShiftFrameworkVersion)" />
+		<PackageReference Include="ShiftSoftware.ShiftIdentity.Dashboard.AspNetCore" Version="$(ShiftFrameworkVersion)" />
 		<PackageReference Include="Swashbuckle.AspNetCore" Version="6.5.0" />
 	</ItemGroup>
 

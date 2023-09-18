@@ -9,9 +9,9 @@
 
 	<ItemGroup>
 		<PackageReference Include="FluentValidation" Version="11.7.1" />
-		<PackageReference Include="ShiftSoftware.ShiftEntity.Model" Version="2023-09-14" />
-		<PackageReference Include="ShiftSoftware.ShiftEntity.CosmosDbReplication" Version="2023-09-14" />
-		<PackageReference Include="ShiftSoftware.TypeAuth.Core" Version="2023-09-14" />
+		<PackageReference Include="ShiftSoftware.ShiftEntity.Model" Version="$(ShiftFrameworkVersion)" />
+		<PackageReference Include="ShiftSoftware.ShiftEntity.CosmosDbReplication" Version="$(ShiftFrameworkVersion)" />
+		<PackageReference Include="ShiftSoftware.TypeAuth.Core" Version="$(ShiftFrameworkVersion)" />
 	</ItemGroup>
 
 	<ItemGroup>

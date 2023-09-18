@@ -16,7 +16,7 @@
 		<PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="7.0.0" />
 		<PackageReference Include="Microsoft.NET.Sdk.Functions" Version="4.1.1" />
 		<PackageReference Include="Microsoft.Owin" Version="4.2.2" />
-		<PackageReference Include="ShiftSoftware.ShiftEntity.CosmosDbReplication" Version="2023.9.14" />
+		<PackageReference Include="ShiftSoftware.ShiftEntity.CosmosDbReplication" Version="$(ShiftFrameworkVersion)" />
 	</ItemGroup>
 	<ItemGroup>
 		<ProjectReference Include="..\..\ShiftEntity\ShiftEntity.CosmosDbReplication\ShiftEntity.CosmosDbReplication.csproj" Condition="Exists('..\..\ShiftEntity\ShiftEntity.CosmosDbReplication\ShiftEntity.CosmosDbReplication.csproj') And '$(ImportShiftFrameworkProjects)'=='true'" />
