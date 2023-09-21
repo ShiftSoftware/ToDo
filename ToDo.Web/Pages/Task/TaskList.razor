@@ -2,35 +2,39 @@
 @attribute [Route($"/{nameof(TaskList)}")]
 
 @using Syncfusion.Blazor.Data;
+@using System.Linq.Expressions;
 @using ToDo.Shared.DTOs.Task
 
-<ShiftList Action="Task"
+<ShiftList EntitySet="Task"
            Title="Tasks"
            T="TaskListDTO"
            ComponentType="typeof(TaskForm)"
            TypeAuthAction="ToDo.Shared.ToDoActions.Task"
            ShowIDColumn="true"
-           Query="Qry"
-           AddDialogParameters="AddDialogParameters"
-           EnablePdfExport
-           EnableCsvExcelExport>
+           Dense="true"
+           EnableExport
+           Where="Where"
+           AddDialogParameters="AddDialogParameters">
+
+     <PropertyColumn Property="x => x.Name" />
+     <PropertyColumn Property="x => x.Status" />
+     <PropertyColumn Property="x => x.ParentTaskId" />
 </ShiftList>
 
-@code {
+ @code {
     [Parameter]
     public string? ParentTaskId { get; set; }
 
     public Dictionary<string, string> AddDialogParameters = new();
-    public Query? Qry;
+
+    public Expression<Func<TaskListDTO, bool>>? Where = null;
 
     protected override void OnInitialized()
     {
         if (!string.IsNullOrWhiteSpace(ParentTaskId))
         {
             AddDialogParameters = new() { { nameof(TaskForm.ParentTaskId), ParentTaskId } };
-
-            Qry = new Query()
-                .Where(nameof(TaskListDTO.ParentTaskId), "equal", ParentTaskId);
+            Where = x => x.ParentTaskId == ParentTaskId;
         }
     }
 }

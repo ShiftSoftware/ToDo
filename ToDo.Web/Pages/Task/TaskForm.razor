@@ -42,11 +42,11 @@
     </ShiftAutocomplete>
 
     <MudSelectExtended OnlyValidateIfDirty="true"
-               T="_TaskStatus"
-               Label="Status"
-               AnchorOrigin="Origin.BottomCenter"
-               @bind-Value="TheItem.Status"
-               For="@(() => TheItem.Status)">
+                       T="_TaskStatus"
+                       Label="Status"
+                       AnchorOrigin="Origin.BottomCenter"
+                       @bind-Value="TheItem.Status"
+                       For="@(() => TheItem.Status)">
 
         @foreach (var status in Enum.GetValues<_TaskStatus>())
         {
@@ -59,7 +59,7 @@
                   Label="Attachments"
                   TypeAuthAction="ToDo.Shared.ToDoActions.UploadFiles"
                   For="() => TheItem.Files"
-    @bind-Values="TheItem.Files" />
+                  @bind-Values="TheItem.Files" />
 
     @if (Mode == FormModes.View && !string.IsNullOrWhiteSpace(TheItem.ID))
     {
