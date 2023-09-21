@@ -5,7 +5,7 @@ using System.Drawing;
 using ShiftSoftware.ShiftEntity.Web.Services;
 using ShiftSoftware.TypeAuth.AspNetCore;
 using ToDo.Shared;
-using ShiftSoftware.TypeAuth.AspNetCore.Services;
+using ShiftSoftware.TypeAuth.Core;
 
 namespace ToDo.API.Controllers
 {
@@ -14,9 +14,9 @@ namespace ToDo.API.Controllers
     public class FileController : ControllerBase
     {
         private AzureStorageService azureStorageService;
-        private readonly TypeAuthService typeAuthService;
+        private readonly ITypeAuthService typeAuthService;
 
-        public FileController(AzureStorageService azureStorageService, TypeAuthService typeAuthService)
+        public FileController(AzureStorageService azureStorageService, ITypeAuthService typeAuthService)
         {
             this.azureStorageService = azureStorageService;
             this.typeAuthService = typeAuthService;
