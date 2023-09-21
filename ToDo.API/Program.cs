@@ -1,7 +1,7 @@
 using Microsoft.AspNetCore.Localization;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Azure;
-using ShiftSoftware.ShiftEntity.CosmosDbSync.Extensions;
+using ShiftSoftware.ShiftEntity.CosmosDbReplication.Extensions;
 using ShiftSoftware.ShiftEntity.EFCore.Extensions;
 using ShiftSoftware.ShiftEntity.Web.Extensions;
 using ShiftSoftware.ShiftEntity.Web.Services;
@@ -32,17 +32,21 @@ var fakeUser = new TokenUserDataDTO
 
 Action<DbContextOptionsBuilder> dbOptionBuilder = x =>
 {
-    x.UseSqlServer(builder.Configuration.GetConnectionString("SQLServer"))
+    x.UseSqlServer(builder.Configuration.GetConnectionString("SQLServer")!)
     .UseTemporal(true);
 };
 
+if (builder.Configuration.GetValue<bool>("CosmosDb:Enabled"))
+{
+    builder.Services.AddShiftEntityCosmosDbReplication(x =>
+     {
+         x.ConnectionString = builder.Configuration.GetValue<string>("CosmosDb:ConnectionString");
+         x.DefaultDatabaseName = builder.Configuration.GetValue<string>("CosmosDb:DefaultDatabaseName");
+         x.AddShiftDbContext<DB>(dbOptionBuilder);
+     });
+}
+
 builder.Services
-    .AddShiftEntityCosmosDbSync(x =>
-    {
-        x.ConnectionString = "AccountEndpoint=https://nahro.documents.azure.com:443/;AccountKey=r7Phwnbot9U4yBrBvNMbf7qXL6a5MqyApWshg55elYeRMNKKyRml2LxrpSedgZXqtavdp1hk3v1kACDbBXteuw==;";
-        x.DefaultDatabaseName = "ToDo";
-        x.AddShiftDbContext<DB>(dbOptionBuilder);
-    })
     .AddLocalization()
     .AddHttpContextAccessor()
     .AddDbContext<DB>(dbOptionBuilder)
@@ -150,7 +154,23 @@ var app = builder.Build();
 
 //app.AddFakeIdentityEndPoints();
 
-await app.SeedDBAsync("OneTwo");
+if (app.Environment.EnvironmentName != "Test")
+{
+    await app.SeedDBAsync("OneTwo", new ShiftSoftware.ShiftIdentity.Dashboard.AspNetCore.Data.DBSeedOptions
+    {
+        RegionExternalId = "1",
+        RegionShortCode = "KRG",
+
+        CompanyShortCode = "SFT",
+        CompanyExternalId = "-1",
+        CompanyAlternativeExternalId = "shift-software",
+        CompanyType = ShiftSoftware.ShiftIdentity.Core.Enums.CompanyTypes.NotSpecified,
+
+        CompanyBranchExternalId = "-11",
+        CompanyBranchShortCode = "SFT-EBL"
+    });
+
+}
 
 var supportedCultures = new List<CultureInfo>
 {

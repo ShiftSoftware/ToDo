@@ -2,9 +2,11 @@
 using Microsoft.EntityFrameworkCore;
 using ShiftSoftware.ShiftEntity.Web;
 using ShiftSoftware.ShiftEntity.Web.Services;
+using ShiftSoftware.TypeAuth.AspNetCore.Services;
 using ToDo.API.Data;
 using ToDo.API.Data.Repositories;
 using ToDo.Shared;
+using ToDo.Shared.DTOs.Project;
 using ToDo.Shared.DTOs.ToDo;
 
 namespace ToDo.API.Controllers
@@ -14,8 +16,46 @@ namespace ToDo.API.Controllers
     {
         private DB db;
         ToDoRepository repository;
-        public ToDoController(ToDoRepository repository, DB db) : base(ToDoActions.ToDo)
+        public ToDoController(ToDoRepository repository, DB db) : base(ToDoActions.ToDo, x =>
         {
+            x.FilterBy(x => x.ProjectID, ToDoActions.DataLevelAccess.Projects)
+            .DecodeHashId<ProjectDTO>()
+            .IncludeNulls()
+            .IncludeCreatedByCurrentUser(x => x.ProjectID == null ? null : x.Project!.CreatedByUserID);
+
+            x.FilterBy(x => (int)x.Status, ToDoActions.DataLevelAccess.Statuses);
+            
+            //{
+            //    x.DynamicActionExpressionBuilder = r =>
+            //    {
+            //        var loggedInUserId = r.GetUserId();
+
+            //        var typeAuth = r.GetRequiredService<TypeAuthService>();
+
+            //        var acceessibleIds = typeAuth.GetAccessibleItems(ToDoActions.DataLevelAccess.Projects, r.AccessPredicate);
+
+            //        var accessibleIdsLong = acceessibleIds.AccessibleIds.Select(ShiftEntityHashIds.Decode<ProjectDTO>).ToList();
+
+            //        return x => (x.ProjectID == null || acceessibleIds.WildCard) ? true :
+            //            (accessibleIdsLong.Contains(x.ProjectID.Value) || x.Project!.CreatedByUserID == loggedInUserId);
+            //    };
+            //}
+        }
+        )
+        {
+            //{
+            //    x.ListingDynamicActionResolver = r =>
+            //    {
+            //        var accessibleProjectIds = r.GetAccessibleIds<ToDoListDTO>(ToDoActions.DataLevelAccess.Projects);
+
+            //        var loggedInUserId = r.GetUserId();
+
+            //        return x => (accessibleProjectIds.WildCard || !x.ProjectID.HasValue) ? true :
+            //            (accessibleProjectIds.AccessibleIds.Contains(x.ProjectID.Value) || x.Project!.CreatedByUserID == loggedInUserId)
+            //        ;
+            //    };
+            //}
+
             this.db = db;
             this.repository = repository;
         }
@@ -23,7 +63,7 @@ namespace ToDo.API.Controllers
         [HttpGet("print/{ID}")]
         public async Task<ActionResult> Print(long ID)
         {
-            var task = await repository.FindAsync(ID);
+            var task = await repository.FindAsync(ID, null);
 
             //Data source fo Fast Report
             var data = new
@@ -47,7 +87,7 @@ namespace ToDo.API.Controllers
                 })
                 .ToList();
 
-            var statuses = allTasks.Select(x => x.Status).Distinct().Select(x=> new { Name = x }).ToList();
+            var statuses = allTasks.Select(x => x.Status).Distinct().Select(x => new { Name = x }).ToList();
 
             return await new FastReportBuilder()
                 .AddFastReportFile("Reports/Task.frx")

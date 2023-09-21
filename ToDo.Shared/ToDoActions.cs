@@ -13,4 +13,11 @@ public class ToDoActions
 
     public readonly static DecimalAction MaxUploadSizeInMegaBytes = new DecimalAction("Max Upload Size", null, 0, 10m);
     public readonly static ReadWriteDeleteAction UploadFiles = new ReadWriteDeleteAction("Upload Files");
+
+    [ActionTree("Data Level Access", "Data Level or Row-Level Access")]
+    public class DataLevelAccess
+    {
+        public readonly static DynamicReadWriteDeleteAction Projects = new DynamicReadWriteDeleteAction("Projects");
+        public readonly static DynamicReadWriteDeleteAction Statuses = new DynamicReadWriteDeleteAction("Statuses");
+    }
 }

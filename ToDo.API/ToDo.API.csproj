@@ -13,8 +13,8 @@
 		<ProjectReference Include="..\ToDo.Web\ToDo.Web.csproj" />
 
 		<ProjectReference Include="..\..\ShiftEntity\ShiftEntity.Web\ShiftEntity.Web.csproj" Condition="Exists('..\..\ShiftEntity\ShiftEntity.Web\ShiftEntity.Web.csproj') And '$(ImportShiftFrameworkProjects)'=='true'" />
-		<ProjectReference Include="..\..\ShiftEntity\ShiftEntity.EFCore.SqlServer\ShiftEntity.EFCore.csproj" Condition="Exists('..\..\ShiftEntity\ShiftEntity.EFCore.SqlServer\ShiftEntity.EFCore.SqlServer.csproj') And '$(ImportShiftFrameworkProjects)'=='true'" />
-		<ProjectReference Include="..\..\ShiftEntity\ShiftEntity.CosmosDbSync\ShiftEntity.CosmosDbSync.csproj" Condition="Exists('..\..\ShiftEntity\ShiftEntity.CosmosDbSync\ShiftEntity.CosmosDbSync.csproj') And '$(ImportShiftFrameworkProjects)'=='true'" />
+		<ProjectReference Include="..\..\ShiftEntity\ShiftEntity.EFCore\ShiftEntity.EFCore.csproj" Condition="Exists('..\..\ShiftEntity\ShiftEntity.EFCore\ShiftEntity.EFCore.csproj') And '$(ImportShiftFrameworkProjects)'=='true'" />
+		<ProjectReference Include="..\..\ShiftEntity\ShiftEntity.CosmosDbReplication\ShiftEntity.CosmosDbReplication.csproj" Condition="Exists('..\..\ShiftEntity\ShiftEntity.CosmosDbReplication\ShiftEntity.CosmosDbReplication.csproj') And '$(ImportShiftFrameworkProjects)'=='true'" />
 		<ProjectReference Include="..\..\ShiftIdentity\ShiftIdentity.Dashboard.AspNetCore\ShiftIdentity.Dashboard.AspNetCore.csproj" Condition="Exists('..\..\ShiftIdentity\ShiftIdentity.Dashboard.AspNetCore\ShiftIdentity.Dashboard.AspNetCore.csproj') And '$(ImportShiftFrameworkProjects)'=='true'" />
 	</ItemGroup>
 
@@ -26,9 +26,9 @@
 			<IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
 		</PackageReference>
 		<PackageReference Include="Microsoft.Extensions.Azure" Version="1.6.3" />
-		<PackageReference Include="ShiftSoftware.ShiftEntity.EFCore.SqlServer" Version="1.6.11" />
-		<PackageReference Include="ShiftSoftware.ShiftEntity.Web" Version="1.6.11" />
-		<PackageReference Include="ShiftSoftware.ShiftIdentity.Dashboard.AspNetCore" Version="1.6.9" />
+		<PackageReference Include="ShiftSoftware.ShiftEntity.EFCore" Version="$(ShiftFrameworkVersion)" />
+		<PackageReference Include="ShiftSoftware.ShiftEntity.Web" Version="$(ShiftFrameworkVersion)" />
+		<PackageReference Include="ShiftSoftware.ShiftIdentity.Dashboard.AspNetCore" Version="$(ShiftFrameworkVersion)" />
 		<PackageReference Include="Swashbuckle.AspNetCore" Version="6.5.0" />
 	</ItemGroup>
 

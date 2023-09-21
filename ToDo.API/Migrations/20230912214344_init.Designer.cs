@@ -12,8 +12,8 @@ using ToDo.API.Data;
 namespace ToDo.API.Migrations
 {
     [DbContext(typeof(DB))]
-    [Migration("20230718160551_AddAssignedTo")]
-    partial class AddAssignedTo
+    [Migration("20230912214344_init")]
+    partial class init
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -24,7 +24,7 @@ namespace ToDo.API.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder, 1L, 1);
 
-            modelBuilder.Entity("ShiftSoftware.ShiftIdentity.AspNetCore.Entities.AccessTree", b =>
+            modelBuilder.Entity("ShiftSoftware.ShiftEntity.EFCore.Entities.DeletedRowLog", b =>
                 {
                     b.Property<long>("ID")
                         .ValueGeneratedOnAdd()
@@ -32,8 +32,42 @@ namespace ToDo.API.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<long>("ID"), 1L, 1);
 
-                    b.Property<bool>("BuiltIn")
-                        .HasColumnType("bit");
+                    b.Property<string>("EntityName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime?>("LastReplicationDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("PartitionKeyType")
+                        .HasColumnType("int");
+
+                    b.Property<string>("PartitionKeyValue")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<long>("RowID")
+                        .HasColumnType("bigint");
+
+                    b.HasKey("ID");
+
+                    b.HasIndex("LastReplicationDate");
+
+                    b.ToTable("DeletedRowLogs");
+                });
+
+            modelBuilder.Entity("ShiftSoftware.ShiftIdentity.Core.Entities.AccessTree", b =>
+                {
+                    b.Property<long>("ID")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bigint");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<long>("ID"), 1L, 1);
+
+                    b.Property<long?>("CompanyBranchID")
+                        .HasColumnType("bigint");
+
+                    b.Property<long?>("CompanyID")
+                        .HasColumnType("bigint");
 
                     b.Property<DateTime>("CreateDate")
                         .HasColumnType("datetime2");
@@ -43,6 +77,9 @@ namespace ToDo.API.Migrations
 
                     b.Property<bool>("IsDeleted")
                         .HasColumnType("bit");
+
+                    b.Property<DateTime?>("LastReplicationDate")
+                        .HasColumnType("datetime2");
 
                     b.Property<DateTime>("LastSaveDate")
                         .HasColumnType("datetime2");
@@ -64,6 +101,9 @@ namespace ToDo.API.Migrations
                         .ValueGeneratedOnAddOrUpdate()
                         .HasColumnType("datetime2")
                         .HasColumnName("PeriodStart");
+
+                    b.Property<long?>("RegionID")
+                        .HasColumnType("bigint");
 
                     b.Property<string>("Tree")
                         .IsRequired()
@@ -89,7 +129,7 @@ namespace ToDo.API.Migrations
                     ));
                 });
 
-            modelBuilder.Entity("ShiftSoftware.ShiftIdentity.AspNetCore.Entities.App", b =>
+            modelBuilder.Entity("ShiftSoftware.ShiftIdentity.Core.Entities.App", b =>
                 {
                     b.Property<long>("ID")
                         .ValueGeneratedOnAdd()
@@ -105,6 +145,12 @@ namespace ToDo.API.Migrations
                     b.Property<string>("AppSecret")
                         .HasMaxLength(255)
                         .HasColumnType("nvarchar(255)");
+
+                    b.Property<long?>("CompanyBranchID")
+                        .HasColumnType("bigint");
+
+                    b.Property<long?>("CompanyID")
+                        .HasColumnType("bigint");
 
                     b.Property<DateTime>("CreateDate")
                         .HasColumnType("datetime2");
@@ -123,6 +169,9 @@ namespace ToDo.API.Migrations
 
                     b.Property<bool>("IsDeleted")
                         .HasColumnType("bit");
+
+                    b.Property<DateTime?>("LastReplicationDate")
+                        .HasColumnType("datetime2");
 
                     b.Property<DateTime>("LastSaveDate")
                         .HasColumnType("datetime2");
@@ -145,6 +194,9 @@ namespace ToDo.API.Migrations
                         .HasMaxLength(4000)
                         .HasColumnType("nvarchar(4000)");
 
+                    b.Property<long?>("RegionID")
+                        .HasColumnType("bigint");
+
                     b.HasKey("ID");
 
                     b.HasIndex("AppId")
@@ -165,7 +217,7 @@ namespace ToDo.API.Migrations
                     ));
                 });
 
-            modelBuilder.Entity("ShiftSoftware.ShiftIdentity.AspNetCore.Entities.Company", b =>
+            modelBuilder.Entity("ShiftSoftware.ShiftIdentity.Core.Entities.Company", b =>
                 {
                     b.Property<long>("ID")
                         .ValueGeneratedOnAdd()
@@ -175,6 +227,15 @@ namespace ToDo.API.Migrations
 
                     b.Property<string>("AlternativeExternalId")
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("BuiltIn")
+                        .HasColumnType("bit");
+
+                    b.Property<long?>("CompanyBranchID")
+                        .HasColumnType("bigint");
+
+                    b.Property<long?>("CompanyID")
+                        .HasColumnType("bigint");
 
                     b.Property<int>("CompanyType")
                         .HasColumnType("int");
@@ -199,6 +260,9 @@ namespace ToDo.API.Migrations
 
                     b.Property<bool>("IsDeleted")
                         .HasColumnType("bit");
+
+                    b.Property<DateTime?>("LastReplicationDate")
+                        .HasColumnType("datetime2");
 
                     b.Property<DateTime>("LastSaveDate")
                         .HasColumnType("datetime2");
@@ -226,6 +290,9 @@ namespace ToDo.API.Migrations
                         .HasColumnType("datetime2")
                         .HasColumnName("PeriodStart");
 
+                    b.Property<long?>("RegionID")
+                        .HasColumnType("bigint");
+
                     b.Property<string>("ShortCode")
                         .HasColumnType("nvarchar(max)");
 
@@ -245,7 +312,7 @@ namespace ToDo.API.Migrations
                     ));
                 });
 
-            modelBuilder.Entity("ShiftSoftware.ShiftIdentity.AspNetCore.Entities.CompanyBranch", b =>
+            modelBuilder.Entity("ShiftSoftware.ShiftIdentity.Core.Entities.CompanyBranch", b =>
                 {
                     b.Property<long>("ID")
                         .ValueGeneratedOnAdd()
@@ -255,6 +322,12 @@ namespace ToDo.API.Migrations
 
                     b.Property<string>("Address")
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("BuiltIn")
+                        .HasColumnType("bit");
+
+                    b.Property<long?>("CompanyBranchID")
+                        .HasColumnType("bigint");
 
                     b.Property<long>("CompanyID")
                         .HasColumnType("bigint");
@@ -273,6 +346,9 @@ namespace ToDo.API.Migrations
 
                     b.Property<bool>("IsDeleted")
                         .HasColumnType("bit");
+
+                    b.Property<DateTime?>("LastReplicationDate")
+                        .HasColumnType("datetime2");
 
                     b.Property<DateTime>("LastSaveDate")
                         .HasColumnType("datetime2");
@@ -323,7 +399,7 @@ namespace ToDo.API.Migrations
                     ));
                 });
 
-            modelBuilder.Entity("ShiftSoftware.ShiftIdentity.AspNetCore.Entities.CompanyBranchDepartment", b =>
+            modelBuilder.Entity("ShiftSoftware.ShiftIdentity.Core.Entities.CompanyBranchDepartment", b =>
                 {
                     b.Property<long>("ID")
                         .ValueGeneratedOnAdd()
@@ -367,7 +443,7 @@ namespace ToDo.API.Migrations
                     ));
                 });
 
-            modelBuilder.Entity("ShiftSoftware.ShiftIdentity.AspNetCore.Entities.CompanyBranchService", b =>
+            modelBuilder.Entity("ShiftSoftware.ShiftIdentity.Core.Entities.CompanyBranchService", b =>
                 {
                     b.Property<long>("ID")
                         .ValueGeneratedOnAdd()
@@ -411,13 +487,19 @@ namespace ToDo.API.Migrations
                     ));
                 });
 
-            modelBuilder.Entity("ShiftSoftware.ShiftIdentity.AspNetCore.Entities.Department", b =>
+            modelBuilder.Entity("ShiftSoftware.ShiftIdentity.Core.Entities.Department", b =>
                 {
                     b.Property<long>("ID")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("bigint");
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<long>("ID"), 1L, 1);
+
+                    b.Property<long?>("CompanyBranchID")
+                        .HasColumnType("bigint");
+
+                    b.Property<long?>("CompanyID")
+                        .HasColumnType("bigint");
 
                     b.Property<DateTime>("CreateDate")
                         .HasColumnType("datetime2");
@@ -427,6 +509,9 @@ namespace ToDo.API.Migrations
 
                     b.Property<bool>("IsDeleted")
                         .HasColumnType("bit");
+
+                    b.Property<DateTime?>("LastReplicationDate")
+                        .HasColumnType("datetime2");
 
                     b.Property<DateTime>("LastSaveDate")
                         .HasColumnType("datetime2");
@@ -447,6 +532,9 @@ namespace ToDo.API.Migrations
                         .ValueGeneratedOnAddOrUpdate()
                         .HasColumnType("datetime2")
                         .HasColumnName("PeriodStart");
+
+                    b.Property<long?>("RegionID")
+                        .HasColumnType("bigint");
 
                     b.HasKey("ID");
 
@@ -464,13 +552,22 @@ namespace ToDo.API.Migrations
                     ));
                 });
 
-            modelBuilder.Entity("ShiftSoftware.ShiftIdentity.AspNetCore.Entities.Region", b =>
+            modelBuilder.Entity("ShiftSoftware.ShiftIdentity.Core.Entities.Region", b =>
                 {
                     b.Property<long>("ID")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("bigint");
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<long>("ID"), 1L, 1);
+
+                    b.Property<bool>("BuiltIn")
+                        .HasColumnType("bit");
+
+                    b.Property<long?>("CompanyBranchID")
+                        .HasColumnType("bigint");
+
+                    b.Property<long?>("CompanyID")
+                        .HasColumnType("bigint");
 
                     b.Property<DateTime>("CreateDate")
                         .HasColumnType("datetime2");
@@ -483,6 +580,9 @@ namespace ToDo.API.Migrations
 
                     b.Property<bool>("IsDeleted")
                         .HasColumnType("bit");
+
+                    b.Property<DateTime?>("LastReplicationDate")
+                        .HasColumnType("datetime2");
 
                     b.Property<DateTime>("LastSaveDate")
                         .HasColumnType("datetime2");
@@ -503,6 +603,9 @@ namespace ToDo.API.Migrations
                         .ValueGeneratedOnAddOrUpdate()
                         .HasColumnType("datetime2")
                         .HasColumnName("PeriodStart");
+
+                    b.Property<long?>("RegionID")
+                        .HasColumnType("bigint");
 
                     b.Property<string>("ShortCode")
                         .HasColumnType("nvarchar(max)");
@@ -523,13 +626,19 @@ namespace ToDo.API.Migrations
                     ));
                 });
 
-            modelBuilder.Entity("ShiftSoftware.ShiftIdentity.AspNetCore.Entities.Service", b =>
+            modelBuilder.Entity("ShiftSoftware.ShiftIdentity.Core.Entities.Service", b =>
                 {
                     b.Property<long>("ID")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("bigint");
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<long>("ID"), 1L, 1);
+
+                    b.Property<long?>("CompanyBranchID")
+                        .HasColumnType("bigint");
+
+                    b.Property<long?>("CompanyID")
+                        .HasColumnType("bigint");
 
                     b.Property<DateTime>("CreateDate")
                         .HasColumnType("datetime2");
@@ -539,6 +648,9 @@ namespace ToDo.API.Migrations
 
                     b.Property<bool>("IsDeleted")
                         .HasColumnType("bit");
+
+                    b.Property<DateTime?>("LastReplicationDate")
+                        .HasColumnType("datetime2");
 
                     b.Property<DateTime>("LastSaveDate")
                         .HasColumnType("datetime2");
@@ -560,6 +672,9 @@ namespace ToDo.API.Migrations
                         .HasColumnType("datetime2")
                         .HasColumnName("PeriodStart");
 
+                    b.Property<long?>("RegionID")
+                        .HasColumnType("bigint");
+
                     b.HasKey("ID");
 
                     b.ToTable("Services", "ShiftIdentity");
@@ -576,7 +691,7 @@ namespace ToDo.API.Migrations
                     ));
                 });
 
-            modelBuilder.Entity("ShiftSoftware.ShiftIdentity.AspNetCore.Entities.User", b =>
+            modelBuilder.Entity("ShiftSoftware.ShiftIdentity.Core.Entities.User", b =>
                 {
                     b.Property<long>("ID")
                         .ValueGeneratedOnAdd()
@@ -592,6 +707,12 @@ namespace ToDo.API.Migrations
 
                     b.Property<bool>("BuiltIn")
                         .HasColumnType("bit");
+
+                    b.Property<long>("CompanyBranchID")
+                        .HasColumnType("bigint");
+
+                    b.Property<long>("CompanyID")
+                        .HasColumnType("bigint");
 
                     b.Property<DateTime>("CreateDate")
                         .HasColumnType("datetime2");
@@ -616,6 +737,9 @@ namespace ToDo.API.Migrations
 
                     b.Property<bool>("IsSuperAdmin")
                         .HasColumnType("bit");
+
+                    b.Property<DateTime?>("LastReplicationDate")
+                        .HasColumnType("datetime2");
 
                     b.Property<DateTime>("LastSaveDate")
                         .HasColumnType("datetime2");
@@ -647,6 +771,9 @@ namespace ToDo.API.Migrations
                         .HasMaxLength(30)
                         .HasColumnType("nvarchar(30)");
 
+                    b.Property<long>("RegionID")
+                        .HasColumnType("bigint");
+
                     b.Property<bool>("RequireChangePassword")
                         .HasColumnType("bit");
 
@@ -660,6 +787,12 @@ namespace ToDo.API.Migrations
                         .HasColumnType("nvarchar(255)");
 
                     b.HasKey("ID");
+
+                    b.HasIndex("CompanyBranchID");
+
+                    b.HasIndex("CompanyID");
+
+                    b.HasIndex("RegionID");
 
                     b.HasIndex("Username")
                         .IsUnique()
@@ -679,7 +812,7 @@ namespace ToDo.API.Migrations
                     ));
                 });
 
-            modelBuilder.Entity("ShiftSoftware.ShiftIdentity.AspNetCore.Entities.UserAccessTree", b =>
+            modelBuilder.Entity("ShiftSoftware.ShiftIdentity.Core.Entities.UserAccessTree", b =>
                 {
                     b.Property<long>("ID")
                         .ValueGeneratedOnAdd()
@@ -731,6 +864,12 @@ namespace ToDo.API.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<long>("ID"), 1L, 1);
 
+                    b.Property<long?>("CompanyBranchID")
+                        .HasColumnType("bigint");
+
+                    b.Property<long?>("CompanyID")
+                        .HasColumnType("bigint");
+
                     b.Property<DateTime>("CreateDate")
                         .HasColumnType("datetime2");
 
@@ -739,6 +878,9 @@ namespace ToDo.API.Migrations
 
                     b.Property<bool>("IsDeleted")
                         .HasColumnType("bit");
+
+                    b.Property<DateTime?>("LastReplicationDate")
+                        .HasColumnType("datetime2");
 
                     b.Property<DateTime>("LastSaveDate")
                         .HasColumnType("datetime2");
@@ -759,6 +901,9 @@ namespace ToDo.API.Migrations
                         .ValueGeneratedOnAddOrUpdate()
                         .HasColumnType("datetime2")
                         .HasColumnName("PeriodStart");
+
+                    b.Property<long?>("RegionID")
+                        .HasColumnType("bigint");
 
                     b.HasKey("ID");
 
@@ -787,8 +932,11 @@ namespace ToDo.API.Migrations
                     b.Property<long?>("AssignedToId")
                         .HasColumnType("bigint");
 
-                    b.Property<string>("AssignedToName")
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<long?>("CompanyBranchID")
+                        .HasColumnType("bigint");
+
+                    b.Property<long?>("CompanyID")
+                        .HasColumnType("bigint");
 
                     b.Property<DateTime>("CreateDate")
                         .HasColumnType("datetime2");
@@ -808,6 +956,9 @@ namespace ToDo.API.Migrations
 
                     b.Property<bool>("IsDeleted")
                         .HasColumnType("bit");
+
+                    b.Property<DateTime?>("LastReplicationDate")
+                        .HasColumnType("datetime2");
 
                     b.Property<DateTime>("LastSaveDate")
                         .HasColumnType("datetime2");
@@ -831,6 +982,9 @@ namespace ToDo.API.Migrations
                         .ValueGeneratedOnAddOrUpdate()
                         .HasColumnType("datetime2")
                         .HasColumnName("PeriodStart");
+
+                    b.Property<long?>("RegionID")
+                        .HasColumnType("bigint");
 
                     b.Property<int>("Status")
                         .HasColumnType("int");
@@ -861,6 +1015,12 @@ namespace ToDo.API.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<long>("ID"), 1L, 1);
 
+                    b.Property<long?>("CompanyBranchID")
+                        .HasColumnType("bigint");
+
+                    b.Property<long?>("CompanyID")
+                        .HasColumnType("bigint");
+
                     b.Property<DateTime>("CreateDate")
                         .HasColumnType("datetime2");
 
@@ -873,6 +1033,9 @@ namespace ToDo.API.Migrations
 
                     b.Property<bool>("IsDeleted")
                         .HasColumnType("bit");
+
+                    b.Property<DateTime?>("LastReplicationDate")
+                        .HasColumnType("datetime2");
 
                     b.Property<DateTime>("LastSaveDate")
                         .HasColumnType("datetime2");
@@ -891,6 +1054,9 @@ namespace ToDo.API.Migrations
                         .HasColumnName("PeriodStart");
 
                     b.Property<long?>("ProjectID")
+                        .HasColumnType("bigint");
+
+                    b.Property<long?>("RegionID")
                         .HasColumnType("bigint");
 
                     b.Property<int>("Status")
@@ -918,15 +1084,15 @@ namespace ToDo.API.Migrations
                     ));
                 });
 
-            modelBuilder.Entity("ShiftSoftware.ShiftIdentity.AspNetCore.Entities.CompanyBranch", b =>
+            modelBuilder.Entity("ShiftSoftware.ShiftIdentity.Core.Entities.CompanyBranch", b =>
                 {
-                    b.HasOne("ShiftSoftware.ShiftIdentity.AspNetCore.Entities.Company", "Company")
+                    b.HasOne("ShiftSoftware.ShiftIdentity.Core.Entities.Company", "Company")
                         .WithMany("CompanyBranches")
                         .HasForeignKey("CompanyID")
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
-                    b.HasOne("ShiftSoftware.ShiftIdentity.AspNetCore.Entities.Region", "Region")
+                    b.HasOne("ShiftSoftware.ShiftIdentity.Core.Entities.Region", "Region")
                         .WithMany("CompanyBranches")
                         .HasForeignKey("RegionID")
                         .OnDelete(DeleteBehavior.Restrict)
@@ -937,15 +1103,15 @@ namespace ToDo.API.Migrations
                     b.Navigation("Region");
                 });
 
-            modelBuilder.Entity("ShiftSoftware.ShiftIdentity.AspNetCore.Entities.CompanyBranchDepartment", b =>
+            modelBuilder.Entity("ShiftSoftware.ShiftIdentity.Core.Entities.CompanyBranchDepartment", b =>
                 {
-                    b.HasOne("ShiftSoftware.ShiftIdentity.AspNetCore.Entities.CompanyBranch", "CompanyBranch")
+                    b.HasOne("ShiftSoftware.ShiftIdentity.Core.Entities.CompanyBranch", "CompanyBranch")
                         .WithMany("CompanyBranchDepartments")
                         .HasForeignKey("CompanyBranchID")
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
-                    b.HasOne("ShiftSoftware.ShiftIdentity.AspNetCore.Entities.Department", "Department")
+                    b.HasOne("ShiftSoftware.ShiftIdentity.Core.Entities.Department", "Department")
                         .WithMany()
                         .HasForeignKey("DepartmentID")
                         .OnDelete(DeleteBehavior.Restrict)
@@ -956,15 +1122,15 @@ namespace ToDo.API.Migrations
                     b.Navigation("Department");
                 });
 
-            modelBuilder.Entity("ShiftSoftware.ShiftIdentity.AspNetCore.Entities.CompanyBranchService", b =>
+            modelBuilder.Entity("ShiftSoftware.ShiftIdentity.Core.Entities.CompanyBranchService", b =>
                 {
-                    b.HasOne("ShiftSoftware.ShiftIdentity.AspNetCore.Entities.CompanyBranch", "CompanyBranch")
+                    b.HasOne("ShiftSoftware.ShiftIdentity.Core.Entities.CompanyBranch", "CompanyBranch")
                         .WithMany("CompanyBranchServices")
                         .HasForeignKey("CompanyBranchID")
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
-                    b.HasOne("ShiftSoftware.ShiftIdentity.AspNetCore.Entities.Service", "Service")
+                    b.HasOne("ShiftSoftware.ShiftIdentity.Core.Entities.Service", "Service")
                         .WithMany()
                         .HasForeignKey("ServiceID")
                         .OnDelete(DeleteBehavior.Restrict)
@@ -975,15 +1141,42 @@ namespace ToDo.API.Migrations
                     b.Navigation("Service");
                 });
 
-            modelBuilder.Entity("ShiftSoftware.ShiftIdentity.AspNetCore.Entities.UserAccessTree", b =>
+            modelBuilder.Entity("ShiftSoftware.ShiftIdentity.Core.Entities.User", b =>
                 {
-                    b.HasOne("ShiftSoftware.ShiftIdentity.AspNetCore.Entities.AccessTree", "AccessTree")
+                    b.HasOne("ShiftSoftware.ShiftIdentity.Core.Entities.CompanyBranch", "CompanyBranch")
+                        .WithMany()
+                        .HasForeignKey("CompanyBranchID")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.HasOne("ShiftSoftware.ShiftIdentity.Core.Entities.Company", "Company")
+                        .WithMany()
+                        .HasForeignKey("CompanyID")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.HasOne("ShiftSoftware.ShiftIdentity.Core.Entities.Region", "Region")
+                        .WithMany()
+                        .HasForeignKey("RegionID")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.Navigation("Company");
+
+                    b.Navigation("CompanyBranch");
+
+                    b.Navigation("Region");
+                });
+
+            modelBuilder.Entity("ShiftSoftware.ShiftIdentity.Core.Entities.UserAccessTree", b =>
+                {
+                    b.HasOne("ShiftSoftware.ShiftIdentity.Core.Entities.AccessTree", "AccessTree")
                         .WithMany()
                         .HasForeignKey("AccessTreeID")
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
-                    b.HasOne("ShiftSoftware.ShiftIdentity.AspNetCore.Entities.User", "User")
+                    b.HasOne("ShiftSoftware.ShiftIdentity.Core.Entities.User", "User")
                         .WithMany("AccessTrees")
                         .HasForeignKey("UserID")
                         .OnDelete(DeleteBehavior.Restrict)
@@ -1012,24 +1205,24 @@ namespace ToDo.API.Migrations
                     b.Navigation("Project");
                 });
 
-            modelBuilder.Entity("ShiftSoftware.ShiftIdentity.AspNetCore.Entities.Company", b =>
+            modelBuilder.Entity("ShiftSoftware.ShiftIdentity.Core.Entities.Company", b =>
                 {
                     b.Navigation("CompanyBranches");
                 });
 
-            modelBuilder.Entity("ShiftSoftware.ShiftIdentity.AspNetCore.Entities.CompanyBranch", b =>
+            modelBuilder.Entity("ShiftSoftware.ShiftIdentity.Core.Entities.CompanyBranch", b =>
                 {
                     b.Navigation("CompanyBranchDepartments");
 
                     b.Navigation("CompanyBranchServices");
                 });
 
-            modelBuilder.Entity("ShiftSoftware.ShiftIdentity.AspNetCore.Entities.Region", b =>
+            modelBuilder.Entity("ShiftSoftware.ShiftIdentity.Core.Entities.Region", b =>
                 {
                     b.Navigation("CompanyBranches");
                 });
 
-            modelBuilder.Entity("ShiftSoftware.ShiftIdentity.AspNetCore.Entities.User", b =>
+            modelBuilder.Entity("ShiftSoftware.ShiftIdentity.Core.Entities.User", b =>
                 {
                     b.Navigation("AccessTrees");
                 });
