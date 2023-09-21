@@ -4,15 +4,23 @@
 
 @using Syncfusion.Blazor.Grids
 @using ToDo.Shared.DTOs.ToDo
+@using ShiftSoftware.ShiftEntity.Model.Extensions
 
-<ShiftList Action="ToDo"
+<ShiftList EntitySet="ToDo"
            Title="ToDo List"
            T="ToDoListDTO"
+           Dense
            ComponentType="typeof(ToDoForm)"
            ShowIDColumn="true"
            TypeAuthAction="ToDo.Shared.ToDoActions.ToDo"
-           ExcludedColumns="@(new List<string> { })"
-           EnablePdfExport
-           EnableCsvExcelExport>
-    
+           EnableExport>
+    <PropertyColumn Property="x => x.Title" Title="Title" />
+    <PropertyColumn Property="x => x.Description" Title="Description" />
+    <PropertyColumn Property="x => x.Project" Title="Project" />
+
+    <TemplateColumn Title="Status">
+        <CellTemplate>
+            <span>@context.Item!.Status!.Describe()</span>
+        </CellTemplate>
+    </TemplateColumn>
 </ShiftList>

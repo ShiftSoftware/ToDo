@@ -1,19 +1,27 @@
 ﻿@attribute [Authorize]
 @attribute [Route($"/{nameof(TaskList)}")]
 
-@using Syncfusion.Blazor.Data;
+@using Syncfusion.Blazor.Data
 @using ToDo.Shared.DTOs.Task
+@using ShiftSoftware.ShiftEntity.Model.Extensions
 
-<ShiftList Action="Task"
+<ShiftList EntitySet="Task"
            Title="Tasks"
            T="TaskListDTO"
+           Dense
            ComponentType="typeof(TaskForm)"
            TypeAuthAction="ToDo.Shared.ToDoActions.Task"
            ShowIDColumn="true"
-           Query="Qry"
            AddDialogParameters="AddDialogParameters"
-           EnablePdfExport
-           EnableCsvExcelExport>
+           EnableExport>
+
+    <PropertyColumn Property="x => x.Name" Title="Name" />
+
+    <TemplateColumn Title="Status">
+        <CellTemplate>
+            <span>@context.Item!.Status!.Describe()</span>
+        </CellTemplate>
+    </TemplateColumn>
 </ShiftList>
 
 @code {

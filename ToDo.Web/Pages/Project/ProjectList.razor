@@ -3,12 +3,14 @@
 
 @using ToDo.Shared.DTOs.Project
 
-<ShiftList Action="Project"
+<ShiftList EntitySet="Project"
            Title="Project List"
            T="ProjectListDTO"
+           Dense
            ComponentType="typeof(ProjectForm)"
            ShowIDColumn="true"
            TypeAuthAction="ToDo.Shared.ToDoActions.Project"
-           EnablePdfExport
-           EnableCsvExcelExport>
+           EnableExport
+           >
+    <PropertyColumn Property="x => x.Name" Title="Name" />
 </ShiftList>
