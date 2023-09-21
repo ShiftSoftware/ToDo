@@ -2,7 +2,7 @@
 using ShiftSoftware.ShiftEntity.Model.Replication;
 using ToDo.Shared.DTOs.Project;
 
-namespace ToDo.API.Data.Entities
+namespace ToDo.Data.Entities
 {
     [TemporalShiftEntity]
     [ShiftEntityReplication<ProjectDTO>(ContainerName = "Projects")]

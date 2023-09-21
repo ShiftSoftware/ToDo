@@ -2,7 +2,7 @@
 using ToDo.Shared.DTOs.ToDo;
 using ShiftSoftware.ShiftEntity.Model.Dtos;
 
-namespace ToDo.API.Data.AutoMapperProfiles;
+namespace ToDo.Data.AutoMapperProfiles;
 
 public class ToDoProfile : Profile
 {
@@ -18,7 +18,7 @@ public class ToDoProfile : Profile
             .ForMember(dest => dest.Project, opt => opt.Ignore())
             .ForMember(
                     dest => dest.ProjectID,
-                    opt => opt.MapFrom(src => src.Project == null ? new Nullable<long>() : src.Project.Value.ToLong())
+                    opt => opt.MapFrom(src => src.Project == null ? new long?() : src.Project.Value.ToLong())
                 );
 
         CreateMap<Entities.ToDo, ToDoListDTO>()

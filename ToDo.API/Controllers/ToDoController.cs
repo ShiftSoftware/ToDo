@@ -2,9 +2,8 @@
 using Microsoft.EntityFrameworkCore;
 using ShiftSoftware.ShiftEntity.Web;
 using ShiftSoftware.ShiftEntity.Web.Services;
-using ShiftSoftware.TypeAuth.AspNetCore.Services;
-using ToDo.API.Data;
-using ToDo.API.Data.Repositories;
+using ToDo.Data;
+using ToDo.Data.Repositories;
 using ToDo.Shared;
 using ToDo.Shared.DTOs.Project;
 using ToDo.Shared.DTOs.ToDo;

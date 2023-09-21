@@ -3,7 +3,7 @@ using ShiftSoftware.ShiftEntity.Model.Replication;
 using ToDo.Shared.DTOs.ToDo;
 using ToDo.Shared.Enums;
 
-namespace ToDo.API.Data.Entities;
+namespace ToDo.Data.Entities;
 
 [TemporalShiftEntity]
 [ShiftEntityReplication<ToDoDTO>(ContainerName = "ToDo")]

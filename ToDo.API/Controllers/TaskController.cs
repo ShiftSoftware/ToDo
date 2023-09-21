@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using ShiftSoftware.ShiftEntity.Web;
-using ToDo.API.Data;
-using ToDo.API.Data.Repositories;
+using ToDo.Data;
+using ToDo.Data.Repositories;
 using ToDo.Shared;
 using ToDo.Shared.DTOs.Task;
 

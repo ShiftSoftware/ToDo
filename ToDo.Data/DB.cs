@@ -1,7 +1,8 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using ShiftSoftware.ShiftIdentity.Dashboard.AspNetCore.Data;
+using ToDo.Data.Entities;
 
-namespace ToDo.API.Data
+namespace ToDo.Data
 {
     public class DB : ShiftIdentityDB
     {
@@ -12,6 +13,6 @@ namespace ToDo.API.Data
         public DbSet<Entities.ToDo> ToDos { get; set; }
         public DbSet<Entities.Task> Tasks { get; set; }
 
-        public DbSet <Entities.Project> Projects { get; set; }
+        public DbSet<Project> Projects { get; set; }
     }
 }

@@ -1,9 +1,10 @@
 ﻿using AutoMapper;
 using ShiftSoftware.ShiftEntity.Core;
 using ShiftSoftware.ShiftEntity.EFCore;
+using ToDo.Data;
 using ToDo.Shared.DTOs.ToDo;
 
-namespace ToDo.API.Data.Repositories
+namespace ToDo.Data.Repositories
 {
     public class ToDoRepository :
         ShiftRepository<DB, Entities.ToDo, ToDoListDTO, ToDoDTO, ToDoDTO>,

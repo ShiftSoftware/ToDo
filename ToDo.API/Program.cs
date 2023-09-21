@@ -13,9 +13,8 @@ using ShiftSoftware.ShiftIdentity.Core.DTOs;
 using ShiftSoftware.ShiftIdentity.Dashboard.AspNetCore.Extentsions;
 using ShiftSoftware.TypeAuth.AspNetCore.Extensions;
 using System.Globalization;
-using ToDo.API;
-using ToDo.API.Data;
-using ToDo.API.Data.Repositories;
+using ToDo.Data;
+using ToDo.Data.Repositories;
 using ToDo.Shared;
 using ToDo.Shared.DTOs.Project;
 using ToDo.Shared.DTOs.Task;
@@ -54,7 +53,7 @@ builder.Services
     .AddShiftEntity(x =>
     {
         x.WrapValidationErrorResponseWithShiftEntityResponse(true);
-        x.AddAutoMapper(typeof(ToDo.API.WebMarker).Assembly);
+        x.AddAutoMapper(typeof(ToDo.Data.Marker).Assembly);
 
         x.HashId.RegisterHashId(builder.Configuration.GetValue<bool>("Settings:HashIdSettings:AcceptUnencodedIds"));
         x.HashId.RegisterIdentityHashId("one-two", 5);

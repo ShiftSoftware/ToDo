@@ -3,19 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
-using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
-using ToDo.API.Data;
+using ToDo.Data;
 
 #nullable disable
 
-namespace ToDo.API.Migrations
+namespace ToDo.Data.Migrations
 {
     [DbContext(typeof(DB))]
-    [Migration("20230912214344_init")]
-    partial class init
+    partial class DBModelSnapshot : ModelSnapshot
     {
-        protected override void BuildTargetModel(ModelBuilder modelBuilder)
+        protected override void BuildModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -856,7 +854,7 @@ namespace ToDo.API.Migrations
                     ));
                 });
 
-            modelBuilder.Entity("ToDo.API.Data.Entities.Project", b =>
+            modelBuilder.Entity("ToDo.Data.Entities.Project", b =>
                 {
                     b.Property<long>("ID")
                         .ValueGeneratedOnAdd()
@@ -921,7 +919,7 @@ namespace ToDo.API.Migrations
                     ));
                 });
 
-            modelBuilder.Entity("ToDo.API.Data.Entities.Task", b =>
+            modelBuilder.Entity("ToDo.Data.Entities.Task", b =>
                 {
                     b.Property<long>("ID")
                         .ValueGeneratedOnAdd()
@@ -1007,7 +1005,7 @@ namespace ToDo.API.Migrations
                     ));
                 });
 
-            modelBuilder.Entity("ToDo.API.Data.Entities.ToDo", b =>
+            modelBuilder.Entity("ToDo.Data.Entities.ToDo", b =>
                 {
                     b.Property<long>("ID")
                         .ValueGeneratedOnAdd()
@@ -1187,18 +1185,18 @@ namespace ToDo.API.Migrations
                     b.Navigation("User");
                 });
 
-            modelBuilder.Entity("ToDo.API.Data.Entities.Task", b =>
+            modelBuilder.Entity("ToDo.Data.Entities.Task", b =>
                 {
-                    b.HasOne("ToDo.API.Data.Entities.Task", "ParentTask")
+                    b.HasOne("ToDo.Data.Entities.Task", "ParentTask")
                         .WithMany("ChildTasks")
                         .HasForeignKey("ParentTaskId");
 
                     b.Navigation("ParentTask");
                 });
 
-            modelBuilder.Entity("ToDo.API.Data.Entities.ToDo", b =>
+            modelBuilder.Entity("ToDo.Data.Entities.ToDo", b =>
                 {
-                    b.HasOne("ToDo.API.Data.Entities.Project", "Project")
+                    b.HasOne("ToDo.Data.Entities.Project", "Project")
                         .WithMany()
                         .HasForeignKey("ProjectID");
 
@@ -1227,7 +1225,7 @@ namespace ToDo.API.Migrations
                     b.Navigation("AccessTrees");
                 });
 
-            modelBuilder.Entity("ToDo.API.Data.Entities.Task", b =>
+            modelBuilder.Entity("ToDo.Data.Entities.Task", b =>
                 {
                     b.Navigation("ChildTasks");
                 });

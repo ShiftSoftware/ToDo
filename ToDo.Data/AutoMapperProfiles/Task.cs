@@ -3,7 +3,7 @@ using ShiftSoftware.ShiftEntity.Model.Dtos;
 using System.Text.Json;
 using ToDo.Shared.DTOs.Task;
 
-namespace ToDo.API.Data.AutoMapperProfiles;
+namespace ToDo.Data.AutoMapperProfiles;
 
 public class TaskProfile : Profile
 {
@@ -26,7 +26,7 @@ public class TaskProfile : Profile
             )
             .ForMember(
                 dest => dest.AssignedToId,
-                opt => opt.MapFrom(src => src.AssignedTo == null ? new Nullable<long>() : src.AssignedTo.Value.ToLong())
+                opt => opt.MapFrom(src => src.AssignedTo == null ? new long?() : src.AssignedTo.Value.ToLong())
             );
 
         CreateMap<Entities.Task, TaskListDTO>();

@@ -5,7 +5,7 @@ using System.Text.Json;
 using ToDo.Shared.DTOs.Task;
 using ToDo.Shared.Enums;
 
-namespace ToDo.API.Data.Entities;
+namespace ToDo.Data.Entities;
 
 [TemporalShiftEntity]
 public class Task : ShiftEntity<Task>

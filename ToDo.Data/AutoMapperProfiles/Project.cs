@@ -1,8 +1,8 @@
 ﻿using AutoMapper;
-using ToDo.API.Data.Entities;
+using ToDo.Data.Entities;
 using ToDo.Shared.DTOs.Project;
 
-namespace ToDo.API.Data.AutoMapperProfiles;
+namespace ToDo.Data.AutoMapperProfiles;
 
 public class ProjectProfile : Profile
 {
