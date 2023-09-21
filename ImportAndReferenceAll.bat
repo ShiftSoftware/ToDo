@@ -5,7 +5,6 @@ dotnet sln add --solution-folder ShiftFramework\ShiftEntity ..\ShiftEntity\Shift
 dotnet sln add --solution-folder ShiftFramework\ShiftEntity ..\ShiftEntity\ShiftEntity.CosmosDbReplication\ShiftEntity.CosmosDbReplication.csproj
 
 dotnet sln add --solution-folder ShiftFramework\ShiftBlazor ..\ShiftBlazor\ShiftBlazor\ShiftBlazor.csproj
-dotnet sln add --solution-folder ShiftFramework\ShiftBlazor ..\ShiftBlazor\ShiftBlazor.Tests\ShiftBlazor.Tests.csproj
 
 dotnet sln add --solution-folder ShiftFramework\TypeAuth ..\TypeAuth\TypeAuth.Core\TypeAuth.Core.csproj
 dotnet sln add --solution-folder ShiftFramework\TypeAuth ..\TypeAuth\TypeAuth.Blazor\TypeAuth.Blazor.csproj
