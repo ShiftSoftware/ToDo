@@ -1,6 +1,7 @@
 using Microsoft.AspNetCore.Localization;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Azure;
+using ShiftSoftware.ShiftEntity.Core.Services;
 using ShiftSoftware.ShiftEntity.CosmosDbReplication.Extensions;
 using ShiftSoftware.ShiftEntity.EFCore.Extensions;
 using ShiftSoftware.ShiftEntity.Web.Extensions;

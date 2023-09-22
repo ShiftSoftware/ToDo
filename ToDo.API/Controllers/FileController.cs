@@ -2,10 +2,11 @@
 using ShiftSoftware.ShiftEntity.Model;
 using ShiftSoftware.ShiftEntity.Model.Dtos;
 using System.Drawing;
-using ShiftSoftware.ShiftEntity.Web.Services;
 using ShiftSoftware.TypeAuth.AspNetCore;
 using ToDo.Shared;
 using ShiftSoftware.TypeAuth.Core;
+using ShiftSoftware.ShiftEntity.Core.Services;
+using ShiftSoftware.ShiftEntity.Web.Extensions;
 
 namespace ToDo.API.Controllers
 {
