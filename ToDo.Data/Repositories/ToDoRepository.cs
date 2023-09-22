@@ -1,14 +1,10 @@
 ﻿using AutoMapper;
-using ShiftSoftware.ShiftEntity.Core;
 using ShiftSoftware.ShiftEntity.EFCore;
-using ToDo.Data;
 using ToDo.Shared.DTOs.ToDo;
 
 namespace ToDo.Data.Repositories
 {
-    public class ToDoRepository :
-        ShiftRepository<DB, Entities.ToDo, ToDoListDTO, ToDoDTO, ToDoDTO>,
-        IShiftRepositoryAsync<Entities.ToDo, ToDoListDTO, ToDoDTO>
+    public class ToDoRepository : ShiftRepository<DB, Entities.ToDo, ToDoListDTO, ToDoDTO, ToDoDTO>
     {
         public ToDoRepository(DB db, IMapper mapper) : base(db, db.ToDos, mapper, x =>
             x.IncludeRelatedEntitiesWithFindAsync(y => y.Include(z => z.Project))
