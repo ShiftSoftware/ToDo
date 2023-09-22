@@ -155,7 +155,7 @@ var app = builder.Build();
 
 if (app.Environment.EnvironmentName != "Test")
 {
-    await app.SeedDBAsync("OneTwo", new ShiftSoftware.ShiftIdentity.Dashboard.AspNetCore.Data.DBSeedOptions
+    await app.SeedDBAsync("OneTwo", new ShiftSoftware.ShiftIdentity.Data.DBSeedOptions
     {
         RegionExternalId = "1",
         RegionShortCode = "KRG",

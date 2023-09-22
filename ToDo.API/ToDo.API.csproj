@@ -18,8 +18,7 @@
 		<ProjectReference Include="..\..\ShiftIdentity\ShiftIdentity.Dashboard.AspNetCore\ShiftIdentity.Dashboard.AspNetCore.csproj" Condition="Exists('..\..\ShiftIdentity\ShiftIdentity.Dashboard.AspNetCore\ShiftIdentity.Dashboard.AspNetCore.csproj') And '$(ImportShiftFrameworkProjects)'=='true'" />
 	</ItemGroup>
 
-	<ItemGroup>
-		<PackageReference Include="Azure.Storage.Queues" Version="12.15.0" />
+	<ItemGroup>		
 		<PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly.Server" Version="7.0.7" />
 		<PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="6.0.20">
 			<PrivateAssets>all</PrivateAssets>

@@ -1,5 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using ShiftSoftware.ShiftIdentity.Dashboard.AspNetCore.Data;
+using ShiftSoftware.ShiftIdentity.Data;
 using ToDo.Data.Entities;
 
 namespace ToDo.Data

@@ -12,6 +12,7 @@ dotnet sln add --solution-folder ShiftFramework\TypeAuth ..\TypeAuth\TypeAuth.As
 
 
 dotnet sln add --solution-folder ShiftFramework\ShiftIdentity ..\ShiftIdentity\ShiftIdentity.Core\ShiftIdentity.Core.csproj
+dotnet sln add --solution-folder ShiftFramework\ShiftIdentity ..\ShiftIdentity\ShiftIdentity.Data\ShiftIdentity.Data.csproj
 dotnet sln add --solution-folder ShiftFramework\ShiftIdentity ..\ShiftIdentity\ShiftIdentity.AspNetCore\ShiftIdentity.AspNetCore.csproj
 dotnet sln add --solution-folder ShiftFramework\ShiftIdentity ..\ShiftIdentity\ShiftIdentity.Blazor\ShiftIdentity.Blazor.csproj
 dotnet sln add --solution-folder ShiftFramework\ShiftIdentity ..\ShiftIdentity\ShiftIdentity.Dashboard.AspNetCore\ShiftIdentity.Dashboard.AspNetCore.csproj
