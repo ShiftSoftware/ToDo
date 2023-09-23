@@ -16,6 +16,7 @@
            EnableExport>
 
     <PropertyColumn Property="x => x.Name" Title="Name" />
+    <PropertyColumn Property="@(x => x.DueDate == null ? null : x.DueDate.Value.ToString("yyyy-MM-dd hh:mm tt"))" Title="Due Date" />
 
     <TemplateColumn Title="Status">
         <CellTemplate>

@@ -26,9 +26,12 @@
                           @bind-Value="TheItem.Description"
                           For="@(() => TheItem.Description)" />
 
-    <MudDatePickerExtended @bind-Date="@TheItem.DueDate"
-                           Label="Due Date"
-                           For="@(() => TheItem.DueDate)"/>
+    <ShiftDateTimePicker @bind-DateTime="@TheItem.DueDate"
+                         For="@(() => TheItem.DueDate)"
+                         DateLabel="Date"
+                         TimeLabel="Time" />
+
+    @TheItem.DueDate
 
     <ShiftAutocomplete T="ShiftEntitySelectDTO"
                        TEntitySet="UserListDTO"

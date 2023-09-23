@@ -16,6 +16,9 @@ namespace ToDo.Shared.DTOs.Task
         public string Name { get; set; }
         [JsonConverter(typeof(JsonStringEnumConverter))]
         public _TaskStatus Status { get; set; }
+
+        public DateTime? DueDate { get; set; }
+
         public object? AssignedTo { get; set; }
         [_TaskHashId]
         public string? ParentTaskId { get; set; }
