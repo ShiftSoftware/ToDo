@@ -5,7 +5,7 @@ using ToDo.Shared.DTOs.Task;
 
 namespace ToDo.Data.Repositories;
 
-public class TaskRepository : ShiftRepository<DB, Entities.Task, TaskListDTO, TaskDTO, TaskDTO>
+public class TaskRepository : ShiftRepository<DB, Entities.Task, TaskListDTO, TaskDTO>
 {
     private AzureStorageService azureStorageService;
 

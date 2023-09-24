@@ -4,7 +4,7 @@ using ToDo.Shared.DTOs.ToDo;
 
 namespace ToDo.Data.Repositories
 {
-    public class ToDoRepository : ShiftRepository<DB, Entities.ToDo, ToDoListDTO, ToDoDTO, ToDoDTO>
+    public class ToDoRepository : ShiftRepository<DB, Entities.ToDo, ToDoListDTO, ToDoDTO>
     {
         public ToDoRepository(DB db, IMapper mapper) : base(db, db.ToDos, mapper, x =>
             x.IncludeRelatedEntitiesWithFindAsync(y => y.Include(z => z.Project))
